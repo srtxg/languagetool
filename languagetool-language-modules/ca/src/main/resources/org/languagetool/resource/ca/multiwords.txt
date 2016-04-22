@@ -1,4 +1,5 @@
 #Catalan multiwords file used for chunking
+'Ndrangheta	    _GN_FS
 All Blacks	_GN_MP
 Arizona Cardinals	_GN_MP
 Atlanta Falcons	_GN_MP
@@ -94,11 +95,13 @@ Beit Hanoun	NPCNG00
 Belo Horizonte	NPCNG00
 Ben Jawad	NPCNG00
 Beni Suef	NPCNG00
+Boca Juniors	_GN_MS
 Bosanska Krajina	NPCNG00
 Bosanski Brod	NPCNG00
 Burger King	NPCNO00
 Bío Bío	NPCNG00
 Cagayan de Oro	NPCNG00
+Canet lo Roig	NPCNG00
 Cape Coast	NPCNG00
 Cargados Carajos	NPCNG00
 Carson City	NPCNG00
@@ -166,9 +169,12 @@ Hradec Králové	NPCNG00
 Huang He	NPCNG00
 Ille i Vilaine	NPCNG00
 In Amenas	NPCNG00
+Internet Explorer	_GN_MS
+Internet Archive	_GN_MS
 Jefferson City	NPCNG00
 José María	NPMSSP0
 José Luis	NPMSSP0
+Joventut de Badalona	_GN_MS
 Juan José	NPMSSP0
 Kafr Kanna	NPCNG00
 Kansas City	NPCNG00
@@ -225,6 +231,7 @@ María José	NPFSSP0
 Marktl am Inn	NPCNG00
 Mato Grosso	NPCNG00
 Mazar-e Sharif	NPCNG00
+Miguel de Unamuno	_GN_MS
 Minas Gerais	NPCNG00
 Montego Bay	NPCNG00
 Nagorno Karabakh	NPCNG00
@@ -606,6 +613,7 @@ camp a través	LOC_ADV
 campe qui puga	LOC_ADV
 campi qui pugui	LOC_ADV
 camps a través	LOC_ADV
+captatio benevolentiae	_GN_FS
 cara a cara	LOC_ADV
 carpe diem	_GN_MS
 carril bici	_GN_MS
@@ -748,6 +756,7 @@ després de	LOC_PREP
 deus ex machina	_GN_MN
 deçà i dellà d'	LOC_PREP
 deçà i dellà de	LOC_PREP
+dies irae	_GN_MS
 dia i nit	LOC_ADV
 dia sí dia no	LOC_ADV
 dolce vita	_GN_FS
@@ -1020,6 +1029,8 @@ sine qua non	LOC_ADJ
 sobre manera	LOC_ADV
 sota capa d'	LOC_PREP
 sota capa de	LOC_PREP
+spaghetti western	_GN_MS
+spaghetti westerns	_GN_MP
 statu quo	_GN_MS
 stricto sensu	LOC_ADV
 sui generis	LOC_ADJ
@@ -1048,6 +1059,7 @@ totes soles	LOC_ADV
 tots sols	LOC_ADV
 tour de force	_GN_MS
 trompe-l'oeil	_GN_MS
+trompe-l'œil	_GN_MS
 ultra mesura	LOC_ADV
 un per un	LOC_ADV
 un poc	LOC_ADV

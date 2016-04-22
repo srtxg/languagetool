@@ -57,7 +57,7 @@ abstract class Server {
    * Start the server.
    */
   public void run() {
-    final String hostName = host != null ? host : "localhost";
+    String hostName = host != null ? host : "localhost";
     System.out.println("Starting LanguageTool " + JLanguageTool.VERSION +
             " (build date: " + JLanguageTool.BUILD_DATE + ") server on " + getProtocol() + "://" + hostName + ":" + port  + "...");
     server.start();
@@ -90,8 +90,8 @@ abstract class Server {
 
   @Nullable
   protected RequestLimiter getRequestLimiterOrNull(HTTPServerConfig config) {
-    final int requestLimit = config.getRequestLimit();
-    final int requestLimitPeriodInSeconds = config.getRequestLimitPeriodInSeconds();
+    int requestLimit = config.getRequestLimit();
+    int requestLimitPeriodInSeconds = config.getRequestLimitPeriodInSeconds();
     if (requestLimit > 0 || requestLimitPeriodInSeconds > 0) {
       return new RequestLimiter(requestLimit, requestLimitPeriodInSeconds);
     }
@@ -117,7 +117,7 @@ abstract class Server {
   }
   
   protected static void printCommonOptions() {
-    System.out.println("  --port, -p     port to bind to, defaults to " + DEFAULT_PORT + " if not specified");
+    System.out.println("  --port, -p PRT port to bind to, defaults to " + DEFAULT_PORT + " if not specified");
     System.out.println("  --public       allow this server process to be connected from anywhere; if not set,");
     System.out.println("                 it can only be connected from the computer it was started on");
     System.out.println("  --allow-origin ORIGIN  set the Access-Control-Allow-Origin header in the HTTP response,");
@@ -129,9 +129,25 @@ abstract class Server {
   protected ThreadPoolExecutor getExecutorService(LinkedBlockingQueue<Runnable> workQueue, HTTPServerConfig config) {
     int threadPoolSize = config.getMaxCheckThreads();
     System.out.println("Setting up thread pool with " + threadPoolSize + " threads");
-    return new ThreadPoolExecutor(threadPoolSize, threadPoolSize,
-            0L, TimeUnit.MILLISECONDS,
-            workQueue);
+    return new StoppingThreadPoolExecutor(threadPoolSize, workQueue);
   }
 
+  static class StoppingThreadPoolExecutor extends ThreadPoolExecutor {
+    
+    StoppingThreadPoolExecutor(int threadPoolSize, LinkedBlockingQueue<Runnable> workQueue) {
+      super(threadPoolSize, threadPoolSize, 0L, TimeUnit.MILLISECONDS, workQueue);
+    }
+
+    @Override
+    protected void afterExecute(Runnable r, Throwable t) {
+      super.afterExecute(r, t);
+      if (t != null && t instanceof OutOfMemoryError) {
+        // we prefer to stop instead of being in an unstable state:
+        //noinspection CallToPrintStackTrace
+        t.printStackTrace();
+        System.exit(1);
+      }
+    }
+  }
+  
 }

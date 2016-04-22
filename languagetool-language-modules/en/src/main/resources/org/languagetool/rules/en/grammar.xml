@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <?xml-stylesheet type="text/xsl" href="../../../../../../../../../languagetool-core/src/main/resources/org/languagetool/rules/print.xsl" ?>
 <?xml-stylesheet type="text/css" href="../../../../../../../../../languagetool-core/src/main/resources/org/languagetool/rules/rules.css"
         title="Easy editing stylesheet" ?>
@@ -260,7 +260,7 @@ USA
         <rule id="CONFUSION_OF_OUR_OUT" name="confusion of our/out">
             <pattern>
                 <token>we</token>
-                <token postag="VBD|VB|VBP" postag_regexp="yes"><exception>take</exception></token>
+                <token postag="VBD|VB|VBP" postag_regexp="yes"><exception regexp="yes">take|find|go|went</exception></token>
                 <marker>
                     <token>out</token>
                 </marker>
@@ -426,7 +426,8 @@ USA
             <example correction="way">What is the fastest <marker>was</marker> to learn Spanish?</example>
             <example correction="way">What is the easiest <marker>was</marker> to learn Spanish?</example>
         </rule>
-        <rule id="ET_AL" name="et al (et al.)">
+        <rulegroup id="ET_AL" name="et al (et al.)">
+        <rule>
             <pattern>
                 <marker>
                     <token>et</token>
@@ -438,6 +439,20 @@ USA
             <short>Possible typo</short>
             <example correction="et al.">Thelen <marker>et al</marker> 2001</example>
         </rule>
+        <rule>
+            <pattern>
+                <marker>
+                    <token>et</token>
+                    <token>.</token>
+                    <token>al</token>
+                    <token>.</token>
+                </marker>              
+            </pattern>
+            <message>Misplaced dot: <suggestion>\1 \3\4</suggestion></message>
+            <short>Possible typo</short>
+            <example correction="et al.">Thelen <marker>et. al.</marker> 2001</example>
+        </rule>
+        </rulegroup>
         <rule id="ARE_STILL_THE_SOME" name="are still the some (same)">
             <pattern>
                 <token regexp="yes">are|is|was|were</token>
@@ -620,6 +635,11 @@ USA
                 <example correction="form">Fill in the <marker>from</marker> as shown below.</example>
             </rule>
             <rule>
+                <antipattern>
+                    <token>in</token>
+                    <token>book</token>
+                    <token>form</token>
+                </antipattern>
                 <pattern>
                     <token postag="NN.*" postag_regexp="yes"><exception postag="JJ"/></token>
                     <marker>
@@ -653,7 +673,7 @@ USA
         </rule>
         <rule id="HE_THE" name="he (the)">
             <pattern>
-                <token postag="IN"><exception regexp="yes">as|while|before|until|ago|than|after</exception></token>
+                <token postag="IN"><exception regexp="yes">as|while|before|until|ago|than|after|since</exception></token>
                 <token>he</token>
                 <token postag="NN.*" postag_regexp="yes"/>
             </pattern>
@@ -996,13 +1016,94 @@ USA
                 <token>s</token>
                 <token postag="NN.*" postag_regexp="yes"/>
             </pattern>
-            <message>The apostrophe is probably in the wrong place here. Did you mean <suggestion>\1 \2\4' \5</suggestion>?</message>
+            <message>The apostrophe is probably in the wrong place here. Did you mean <suggestion>\1 \2\4\3 \5</suggestion>?</message>
             <url>http://www.quickanddirtytips.com/education/grammar/two-weeks-notice</url>
             <short>Possible typo</short>
             <example>He'll be sailing around the world in two weeks' time.</example>
             <example correction="two weeks' time">"he'll be sailing around the world in <marker>two week's time</marker>.</example>
             <example>It was ready in a week's time.</example>
         </rule>
+        <rulegroup id="CD_APOSTROPHE_S" name="Spurious apostrophe in plural forms">        
+        <rule>
+        <antipattern>
+          <token postag="CD"/>
+          <marker>
+          <token postag="NN.*" postag_regexp="yes"><exception postag="NNS"/></token>
+          </marker>
+          <token regexp="yes">&apos;</token>
+          <token>s</token>
+          <token postag="NNS"></token>
+        </antipattern>
+        <pattern>
+          <token spacebefore="yes" postag="CD">
+                    <exception regexp="yes">one|thou|zero|1</exception>
+                    <exception regexp="yes">1[789]\d\d</exception><!-- exclude, might be year -->
+                    <exception regexp="yes">20[0123]\d</exception><!-- exclude, might be year -->
+                    <exception postag="NNP"/><exception scope="previous" postag="DT|PRP\$|POS" postag_regexp="yes"/>
+                    <exception regexp="yes" scope="previous">&months;|season|category|size|\$\d+</exception>
+                    <exception spacebefore="no" scope="previous">.</exception>
+                    <exception scope="previous">×</exception>
+                </token>
+          <marker>
+          <token postag='NN.*' postag_regexp='yes' regexp="yes">^[\p{L}&amp;&amp;[^aeiuo]]+$<exception postag="NNS"/></token>
+          <token regexp="yes">&apos;</token>
+          <token>s</token>
+          </marker>
+         </pattern>
+         <message>Incorrect plural form; it does not need any apostrophe. Did you mean <suggestion><match no="2"/>s</suggestion>?</message>
+         <url>http://www.onlinegrammar.com.au/apostrophes-2/</url>
+         <short>Spurious apostrophe</short>
+         <example>1933 World's Fair</example>
+         <example>He is puzzled as to why three women's names were there.</example>
+         <example>A total of 387 schools, 7 teacher's houses, and several vocational buildings had been built.</example>
+         <example correction="CDs">I have 5 <marker>CD's</marker>.</example>
+        </rule>
+        <rule>
+        <antipattern>
+        <marker>
+        <token>s</token>        
+        </marker>        
+        <token postag="RB"/>
+        <token postag="VBG"/>
+        </antipattern>
+        <antipattern>
+        <token regexp="yes">some|both|no|any</token>
+        <marker>
+        <token postag="NN.*" postag_regexp="yes"></token>
+        <token regexp="yes">&apos;</token>
+        <token>s</token>
+        </marker>
+        <token postag="NN.*" postag_regexp="yes"/>
+        </antipattern>
+        <antipattern>
+        <token regexp="yes">some|both|no|any</token>
+        <marker>
+        <token postag="NN.*" postag_regexp="yes"></token>
+        <token regexp="yes">&apos;</token>
+        <token>s</token>
+        </marker>
+        <token postag="JJ"/>
+        <token postag="NN.*" postag_regexp="yes"/>
+        </antipattern>
+        <pattern>
+        <token regexp="yes">many|several|few|both|all|enough|more|fewer|some|any|no|th[eo]se</token>
+          <marker>
+          <token postag='NN.*' postag_regexp='yes'><exception postag="NNS"/></token>
+          <token regexp="yes">&apos;</token>
+          <token>s</token>
+          </marker>
+          <token><exception postag="NNS|VBG" postag_regexp="yes"/></token>
+         </pattern>
+         <message>Incorrect plural form; it does not need any apostrophe. Did you mean <suggestion><match no="2"/>s</suggestion>?</message>
+         <url>http://www.onlinegrammar.com.au/apostrophes-2/</url>
+         <short>Spurious apostrophe</short>
+         <example correction="CDs">I have many <marker>CD's</marker>.</example>        
+         <example>And several days ago, we all went to this gorgeous ranch where some millionaire's going to build a golf course.</example>
+         <example>Any technology that deals in meta-meta-models is going to be a hard sell, no matter how many analyst's reports have been written.</example>
+         <example>Some guy's probably making money on this.</example>
+         <example>The first people in space who had never been a member of any country's armed forces were both Konstantin Feoktistov and Boris Yegorov aboard Voskhod 1.</example>
+        </rule>
+        </rulegroup>
         <rule id="TOT_HE" name="tot he (to the)">
             <pattern>
                 <token>tot</token>
@@ -1819,7 +1920,10 @@ USA
                         <token spacebefore="no" regexp="yes">['’]</token>
                         <token>s</token>
                     </marker>
-                    <token postag="NN(S|(:UN?))?" postag_regexp="yes"><exception postag_regexp="yes" postag="JJ|VBN|CC|DT|IN|MD|POS|PP|RB|WDT|WP|WRB"/></token>
+                    <token postag="NN(S|(:UN?))?" postag_regexp="yes">
+                        <exception postag_regexp="yes" postag="JJ|VBN|CC|DT|IN|MD|POS|PP|RB|WDT|WP|WRB"/>
+                        <exception>his</exception>
+                    </token>
                 </pattern>
                 <message>Did you mean <suggestion>its</suggestion> (possessive pronoun) instead of 'it's' (=it is)?</message>
                 <short>Possible typo</short>
@@ -2069,6 +2173,13 @@ USA
             </rule>
             <!-- it's .*/JJ .*/NNS|NN::word=its \1 \2::pivots=it's,its -->
             <rule id="ITS_JJ_NNSNN" name="its JJ NN (possessive)">
+                <antipattern case_sensitive="yes">
+                    <token>It</token>
+                    <token regexp="yes">['’]</token>
+                    <token>s</token>
+                    <token>bad</token>
+                    <token>manners</token>
+                </antipattern>
                 <pattern>
                     <token>it</token>
                     <token spacebefore="no" regexp="yes">['’]</token>
@@ -2366,7 +2477,7 @@ USA
                     <token postag="NN|NN:.*" postag_regexp="yes" regexp="yes">\p{Ll}{2,}<exception regexp="yes">today|yesterday|tomorrow|now|in|are</exception><exception postag="VBG|VB|VBP|VBD|VBN|RB|MD|IN|JJ.*|CC|PRP|NNP.*" postag_regexp="yes"/></token>
                     <token><exception regexp="yes">\p{Punct}</exception></token>
                 </pattern>
-                <message>Possible typo: apostrophe is missing. Did you mean <suggestion><match no="3"/>'</suggestion> or <suggestion><match suppress_misspelled="yes" no="3" postag="NN(P)?S" postag_regexp="yes" postag_replace="NN$1(:U.?)?" setpos="no"/>'s</suggestion>?</message>
+                <message>Apostrophe might be missing. Did you mean <suggestion><match no="3"/>'</suggestion> or <suggestion><match suppress_misspelled="yes" no="3" postag="NN(P)?S" postag_regexp="yes" postag_replace="NN$1(:U.?)?" setpos="no"/>'s</suggestion>?</message>
                 <short>Possible typo</short>
                 <example>This is a transcript of the president's speech.</example>
                 <example>Publishers today are at loss...</example>
@@ -3032,7 +3143,10 @@ USA
         <rule id="VB_A_WHILE" name="VB a while (awhile)">
             <pattern>
                 <marker>
-                    <token postag="VB"><exception postag="VB.*" postag_regexp="yes" negate_pos="yes"/></token>
+                    <token postag="VB">
+                        <exception postag="VB.*" postag_regexp="yes" negate_pos="yes"/>
+                        <exception>take</exception>
+                    </token>
                     <token>a</token>
                     <token>while</token>
                 </marker>
@@ -5160,7 +5274,22 @@ USA
             <example correction="A soccer player kicks"><marker>A soccer players kicks</marker> a ball and scores a goal</example>
         </rule>
         -->
+        <rule id="SINGULAR_VERB_AFTER_THESE_OR_THOSE" name="Singular verb after 'these' or 'those'">
+         <pattern>
+          <token regexp='yes'>th[eo]se<exception scope="previous">of</exception></token>
+          <token postag='VBZ'></token>
+         </pattern>
+         <message>This verb is singular. Did you mean: <suggestion>This <match no="2"/></suggestion> or <suggestion><match no="1"/> <match no="2" postag="VBP"/></suggestion>?</message>
+         <short>Grammar error</short>
+         <example correction='This includes|These include'><marker>These includes</marker> the razor eyeglass and the ring and the compass.</example>
+         <example>The most common of these is dot 5, which combines with the first letter of words.</example>
+        </rule>
         <rule id="THIS_NNS_VB" name="this + plural noun + verb (these)">
+            <antipattern>
+                <token>This</token>
+                <token postag='VB.*' postag_regexp='yes'/>
+                <token postag="JJ"/>
+            </antipattern>
             <pattern>
                 <token postag="SENT_START"/>
                 <marker>
@@ -5171,6 +5300,7 @@ USA
             </pattern>
             <message>Did you mean <suggestion>these</suggestion>?</message>
             <example correction='These'><marker>This</marker> images are beautiful.</example>
+            <example>This tastes pretty good to me.</example>
         </rule>
         <rule id="PEOPLE_VBZ" name="people + 3rd person verb">
             <pattern>
@@ -5718,11 +5848,11 @@ USA
             <pattern>
                 <token regexp='yes'>a|an|the</token>
                 <token postag='VB|VBP' postag_regexp='yes'>
-                    <exception regexp="yes">commit|remix</exception>
+                    <exception regexp="yes">commit|remix|long-running </exception>
                     <exception postag='VB|VBP|SENT_END|PARA_END' postag_regexp='yes' negate_pos='yes'/>
                 </token>
             </pattern>
-            <message>Probably a wrong construction: a/the + infinitive</message>
+            <message>Maybe a wrong construction: a/the + infinitive</message>
             <example correction=""><marker>a compete</marker> catastrophe.</example>
             <example correction=""><marker>a compete</marker></example>
             <example>a complete catastrophe</example>
@@ -5964,7 +6094,10 @@ USA
                 <token>it</token>
                 <token min="0" max="1" postag="RB"/>
                 <marker>
-                    <token postag="VBP?" postag_regexp="yes"><exception postag_regexp="yes" postag="VBD|R[BP]|IN"/></token>
+                    <token postag="VBP?" postag_regexp="yes">
+                        <exception postag_regexp="yes" postag="VBD|R[BP]|IN"/>
+                        <exception>true</exception>
+                    </token>
                 </marker>
             </pattern>
             <message>Did you mean <suggestion><match no="4" postag="VBZ"/></suggestion>?</message>
@@ -6083,6 +6216,12 @@ USA
                 <example>Although they can <marker>sometimes</marker> be found</example>
             </rule>
             <rule>
+                <antipattern>
+                    <token>as</token>
+                    <token>it</token>
+                    <token regexp="yes">always|hardly|never|often|rarely|seldom|sometimes|usually</token>
+                    <token regexp="yes">is|was</token>
+                </antipattern>
                 <pattern>
                     <token postag="PRP"/>
                     <marker>
@@ -6093,6 +6232,7 @@ USA
                 <message>The adverb '\2' is usually put after the verb '\3'.</message>
                 <suggestion>\3 \2</suggestion>
                 <example correction="am sometimes">I am here and I <marker>sometimes am</marker> happy.</example>
+                <example>When it's valid (as it usually is), there's no problem.</example>
             </rule>
             <rule>
                 <pattern>
@@ -6538,12 +6678,13 @@ USA
             <pattern>
                 <marker>
                     <token postag="SENT_START"/>
-                    <token regexp="yes">each|every</token>
+                    <token regexp="yes">each|every|n?either</token>
                 </marker>
                 <token postag="NNS"/>
                 <token postag="VB.*" postag_regexp="yes"><exception postag="NNS"/></token>
             </pattern>
-            <message>'Each' and 'every' are used with singular. Did you mean <suggestion>all</suggestion>?</message>
+            <message>'Each', 'every', 'either' and 'neither' are used with singular. Did you mean <suggestion>all</suggestion>?</message>
+            <url>http://www.grammaring.com/determiners-with-countable-and-uncountable-nouns-some-any-no-many-much-few-little-etc</url>
             <short>Grammatical problem</short>
             <example correction="All"><marker>Each</marker> children are happy.</example>
             <example><marker>Each</marker> children's services are available...</example>
@@ -7036,7 +7177,7 @@ USA
             <rule>
                 <pattern>
                     <token postag="SENT_START"/>
-                    <token postag="NN|NNP|NN:.*" postag_regexp="yes"><exception regexp="yes">A|In|I|No|Most|Here</exception><exception postag="JJ|MD|NNS|CC|WRB|IN|VB" postag_regexp="yes"/></token>
+                    <token postag="NN|NNP|NN:.*" postag_regexp="yes"><exception regexp="yes">A|An|In|I|No|Most|Here</exception><exception postag="JJ|MD|NNS|NNPS|CC|WRB|IN|VB" postag_regexp="yes"/></token>
                     <marker>
                         <token chunk="B-VP" postag="VB|VBP" postag_regexp="yes"><exception postag="VBZ|VBN|VBD|VBG|IN|RB" postag_regexp="yes"/></token>
                     </marker>
@@ -7052,6 +7193,14 @@ USA
                 <example>Most have four limbs except for caecilians.</example>
             </rule>
             <rule>
+                <antipattern>
+                    <token postag="RB"/>
+                    <token postag="VB.*" postag_regexp="yes"/>
+                </antipattern>
+                <antipattern>
+                    <token postag="NN|NN:.*" postag_regexp="yes"/>
+                    <token>that</token>
+                </antipattern>
                 <pattern>
                     <token postag="SENT_START"/>
                     <token postag="DT"><exception regexp="yes">these|those</exception></token>
@@ -7068,6 +7217,8 @@ USA
                 <example>Those wanting are the Canines.</example>
                 <example>The rest are arriving later.</example>
                 <example>The committee are all against it.</example>
+                <example>An evening glow often promises good weather.</example>
+                <example>An export pipeline that transports Caspian oil.</example>
                 <!-- example type="incorrect">The city is popular, and this marketing <marker>are</marker> bad for you.</example -->
             </rule>
             <rule>
@@ -7983,7 +8134,7 @@ USA
                         <token postag="VBG"/>
                     </marker>
                 </pattern>
-                <message>This verb is used with infinitive: <suggestion>to <match no="2" postag="VB"/></suggestion>.</message>
+                <message>If this is used as a verb, it usually requires the infinitive: <suggestion>to <match no="2" postag="VB"/></suggestion>.</message>
                 <short>Grammatical problem</short>
                 <example>He didn't deserve to lose his job.</example>
                 <example correction="to spend">We cannot afford <marker>spending</marker> the whole month in Alps.</example>
@@ -7996,7 +8147,7 @@ USA
                         <token postag="VBG"/>
                     </marker>
                 </pattern>
-                <message>This verb is used with infinitive: <suggestion>to <match no="3" postag="VB"/></suggestion>.</message>
+                <message>If this is used as a verb, it usually requires the infinitive: <suggestion>to <match no="3" postag="VB"/></suggestion>.</message>
                 <short>Grammatical problem</short>
                 <example correction="to spend">We cannot afford not <marker>spending</marker> the whole month in Alps.</example>
             </rule>
@@ -8306,15 +8457,23 @@ USA
                     <marker>
                         <token>this</token>
                     </marker>
-                    <token postag="NNS"><exception postag="VBZ|NN|JJ.*" postag_regexp="yes"/><exception>data</exception></token>
+                    <token postag="NNS"><exception postag="VBZ|NN|NN:UN|NN:U|JJ.*" postag_regexp="yes"/><exception>data</exception></token>
                     <token><exception postag="NNP?|NN:.*" postag_regexp="yes"/></token>
                 </pattern>
                 <message>Did you mean <suggestion>these</suggestion>?</message>
                 <short>Grammatical problem</short>
                 <example correction="These"><marker>This</marker> errors are easy to fix.</example>
                 <example>This forms a sharp contract with...</example>
+                <example>I cannot lift this stone.</example>
+                <example>This fish is big.</example>
             </rule>
             <rule>
+                <antipattern>
+                    <token regexp="yes">these|those</token>
+                    <token postag="NN.*" postag_regexp="yes"/>
+                    <token postag="NN.*" postag_regexp="yes"/>
+                    <token postag="NN.*" postag_regexp="yes"/>
+                </antipattern>
                 <pattern>
                     <marker>
                         <token regexp="yes">these|those</token>
@@ -8330,6 +8489,7 @@ USA
                 <example>This forms a sharp contract with...</example>
                 <example>These eleven authors are right.</example>
                 <example>Those illustrated are reminiscent of a circus top.</example>
+                <example>These food storage workers are called repletes.</example>
             </rule>
             <rule>
                 <pattern>
@@ -8516,13 +8676,17 @@ USA
                 </antipattern>
                 <antipattern>
                     <token>did</token>
-                    <token>experiments</token>
+                    <token regexp="yes">experiments|wonders</token>
                 </antipattern>
                 <pattern>
                     <token><exception scope="previous" regexp="yes">than|what</exception><exception regexp="yes">free|tha[nt]|who|which|whom|a|the</exception></token>
                     <token skip="1" regexp="yes" postag="MD|VBD" postag_regexp="yes">did|will|could|can|should|would|does|ll</token>
                     <marker>
-                        <token postag="VB[DGZ]" postag_regexp="yes"><exception postag="VBP|NNP" postag_regexp="yes"/><exception inflected="yes">be</exception><exception scope="previous" negate_pos="yes" postag_regexp="yes" regexp="yes" postag="MD|RB|VBD"/></token>
+                        <token postag="VB[DGZ]" postag_regexp="yes">
+                            <exception postag="VBP|NNP" postag_regexp="yes"/>
+                            <exception inflected="yes">be</exception>
+                            <exception scope="previous" negate_pos="yes" postag_regexp="yes" regexp="yes" postag="MD|RB|VBD"/>
+                        </token>
                     </marker>
                 </pattern>
                 <message>The verb '<match no="2"/>' requires the base form of the verb: <suggestion><match no="3" postag="VB"/></suggestion></message>
@@ -8672,6 +8836,13 @@ USA
             </rule>
         </rulegroup>
         <rule id="USE_TO_VERB" name="Missing past tense for 'used to...'">
+            <antipattern>
+                <token>didn</token>
+                <token regexp="yes">['’]</token>
+                <token>t</token>
+                <token>use</token>
+                <token>to</token>
+            </antipattern>
             <pattern>
                 <token><exception postag="MD"/></token>
                 <marker>
@@ -8682,6 +8853,7 @@ USA
             </pattern>
             <message>Did you mean <suggestion>used</suggestion>?</message>
             <example>It can be used to save lives</example>
+            <example>Tom didn't use to drink so much.</example>
             <example correction="used">He <marker>use</marker> to believe this.</example>
             <example correction="used">Aethera <marker>use</marker> to use this.</example>
         </rule>
@@ -9060,6 +9232,8 @@ USA
                 <message>Possible grammatical error. You used a past participle without using any required verb ('be' or 'have'). Did you mean <suggestion><match no="3" postag="VBD" postag_regexp="yes"/></suggestion>?</message>
                 <example correction="did">He <marker>done</marker> it.</example>
                 <example>It was done by him.</example>
+            		<example>"Haven't you seen it?"</example>
+		            <example>“Haven't you seen it?”</example>
             </rule>
             <rule>
                 <pattern>
@@ -9545,7 +9719,29 @@ USA
             <example>I have got <marker>lots of wine</marker>.</example>
         </rule>
         <rule id="CD_NN" name="Possible agreement error: numeral + singular countable noun">
-            <antipattern>
+          <antipattern case_sensitive="yes">
+          <marker>
+              <token regexp="yes">\d+<exception regexp="yes">[01]</exception></token>
+              <token postag="NNP"/>            
+              <token regexp="yes">Ave|Avenue|Street|Terrace|Square|St|Circle|Drive</token>
+           </marker>            
+          </antipattern>    
+          <antipattern>
+            <token regexp="yes">\d+0</token>
+            <token>decade</token>
+          </antipattern>
+          <antipattern>
+            <token regexp="yes">\d+</token>
+            <token>to</token>
+            <token regexp="yes">\d+</token>
+            <token>vote</token>
+          </antipattern>      
+         <antipattern>
+            <token regexp="yes">s?he|you|I|we|they|it</token>
+            <token inflected="yes">be</token>
+            <token postag="CD"/>
+          </antipattern>
+          <antipattern>
                 <token>top</token>
                 <token postag="CD"/>
                 <token>hit</token>
@@ -9596,6 +9792,14 @@ USA
                 <token regexp="yes">['’]</token>
                 <token>s</token>
                 <token postag="NN.*" postag_regexp="yes"/>
+            </antipattern>
+            <antipattern> <!-- another mistake -->
+            <marker>
+            <token postag="CD"/>            
+            <token postag="NNP"/>
+            </marker>
+            <token regexp="yes">&apos;</token>
+            <token>s</token>
             </antipattern>
             <pattern>
                 <token spacebefore="yes" postag="CD">
@@ -9671,6 +9875,49 @@ USA
             <example>Since then the corporate headquarters have moved to New York City at 1 Park Avenue in Manhattan, before moving to the Financial District to the former JP Morgan Chase headquarters at 4 New York Plaza.</example>
             <example>It's ten past six.</example>
             <example>The price of rice rose by three percent.</example>
+        </rule>        
+        <rule id="INCORRECT_POSSESSIVE_FORM_AFTER_A_NUMBER" name="Incorrect possessive form after a number">
+        <antipattern> <!-- separate rule: CD_WEEK -->
+               <token postag="CD"><exception regexp="yes">one|1</exception></token>
+                <marker>
+                <token regexp="yes">week|month|hour</token>
+                </marker>
+                <token regexp="yes">['’]</token>
+                <token>s</token>
+                <token postag="NN.*" postag_regexp="yes"/>
+        </antipattern>
+        <antipattern>
+          <token postag="CD"/>
+          <marker>
+          <token postag="NN.*" postag_regexp="yes"><exception postag="NNS"/></token>
+          </marker>
+          <token regexp="yes">&apos;</token>
+          <token>s</token>
+          <token postag="NNS"></token>
+        </antipattern>
+         <pattern>
+          <token spacebefore="yes" postag="CD">
+                    <exception regexp="yes">one|thou|zero|1</exception>
+                    <exception regexp="yes">1[789]\d\d</exception><!-- exclude, might be year -->
+                    <exception regexp="yes">20[0123]\d</exception><!-- exclude, might be year -->
+                    <exception postag="NNP"/><exception scope="previous" postag="DT|PRP\$|POS" postag_regexp="yes"/>
+                    <exception regexp="yes" scope="previous">&months;|season|category|size|\$\d+</exception>
+                    <exception spacebefore="no" scope="previous">.</exception>
+                    <exception scope="previous">×</exception>
+                </token>
+          <marker>
+          <token postag='NN.*' postag_regexp='yes'><exception postag="NNS"/><exception regexp="yes">^[\p{L}&amp;&amp;[^aeiuo]]+$</exception></token>
+          <token regexp="yes">&apos;</token>
+          <token>s</token>
+          </marker>
+         </pattern>
+         <message>Incorrect singular possessive form after the number (\1). Did you mean <suggestion><match no="2"/>s</suggestion> or <suggestion><match no="2"/>s'</suggestion>?</message>
+         <short>Agreement error</short>
+         <example correction="days|days'">At the time, Guider was working just two <marker>day's</marker> drive from Narooma, in a Canberra suburb.</example>         
+         <example>1933 World's Fair</example>
+         <example>He is puzzled as to why three women's names were there.</example>
+         <example>A total of 387 schools, 7 teacher's houses, and several vocational buildings had been built.</example>
+         <example>I have 5 CD's.</example>
         </rule>
         <rule id="CD_DOZENS_OF" name="Plural form of numbers in 'two dozens of' (two dozen)">
             <pattern>
@@ -9694,6 +9941,11 @@ USA
             <example>At a peak of 6 <!--note: non-breaking space --><marker>million</marker>.</example>
         </rule>
         <rule id="MUCH_COUNTABLE" name="'much' + countable noun, e.g. 'much (many) children'">
+            <antipattern>
+                <token>how</token>
+                <token>much</token>
+                <token postag="VB.*" postag_regexp="yes"/>
+            </antipattern>
             <pattern>
                 <marker>
                     <token>much</token>
@@ -9703,12 +9955,23 @@ USA
             <message>Use <suggestion>many</suggestion> with countable nouns.</message>
             <short>Grammatical problem with countable noun</short>
             <example correction="many">There are <marker>much</marker> children.</example>
+            <example>How much does it cost?</example>
         </rule>
         <rule id="MANY_NN" name="Possible agreement error: 'many/several/few' + singular countable noun">
+            <antipattern case_sensitive="yes">
+                <token>Many</token>
+                <token postag="VBP"/>
+            </antipattern>
             <antipattern>
                 <token>many</token>
                 <token>regard</token>
                 <token regexp="yes">him|her|it|this|them|his|its</token>
+            </antipattern>
+            <antipattern>
+                <token>a</token>
+                <token>few</token>
+                <token/>
+                <token>as</token>
             </antipattern>
             <pattern>
                 <marker>
@@ -9724,6 +9987,7 @@ USA
             <example>I have <marker>much wine</marker>.</example>
             <example correction="many ways">... which is right in <marker>many way</marker>.</example>
             <example>The state legislature gerrymandered the few Birmingham legislative seats.</example>
+            <example>A few work as technical writers, others don't.</example>
         </rule>
         <rulegroup id="DT_JJ_NO_NOUN" name="Missing noun after an adjective">
             <rule>
@@ -10357,144 +10621,6 @@ USA
     <!-- Miscellaneous -->
     <!-- ====================================================================== -->
     <category id="MISC" name="Miscellaneous">
-    <rule id="COPYRIGHT" name="(c) instead of ©" type="typographical">
-    <antipattern>
-        <token>(</token>        
-        <token>a</token>
-        <token skip="-1">)</token>        
-        <token>b<exception scope="previous" negate="yes">(</exception></token>
-        <token skip="-1">)</token>
-        <marker>        
-        <token>c<exception scope="previous" negate="yes">(</exception></token>
-        <token>)</token>
-        </marker>
-		</antipattern>    
-      <pattern>
-      <marker>
-        <token>(</token>        
-        <token>c</token>
-        <token>)</token>
-        </marker>
-        <token regexp="yes">\d{4}|\p{Lu}\p{Ll}+</token>
-      </pattern>
-      <message>This notation is nonstandard, use this symbol instead: <suggestion>©</suggestion></message>
-      <short>Nonstandard notation of ©</short>
-      <example correction="©">Copyright <marker>(C)</marker> Joanna Bator, 2012</example>
-      <example correction="©">Copyright <marker>(C)</marker> 2010 The Estate of Ezra Pound</example>
-      <example>This is a list: (a) item, (b) 2 items, (c) 2014 items.</example>
-		</rule>
-        <rulegroup type="locale-violation" id="CURRENCY" name="Position of currency symbols: '100$' ($100)">
-            <rule>
-                <pattern>
-                    <token regexp="yes">\d+[$€£¥\u8371]</token>
-                </pattern>
-                <message>The currency mark is usually put at the beginning of the number: <suggestion><match no="1" regexp_match="(\d+)([$€£¥\u8371])" regexp_replace="$2$1"/></suggestion>.</message>
-                <short>Put currency at the beginning</short>
-                <example correction="$100">You owe me <marker>100$</marker>.</example>
-            </rule>
-            <rule>
-                <pattern>
-                    <token regexp="yes">\d+</token>
-                    <token regexp="yes">[$€£¥\u8371]</token>
-                </pattern>
-                <message>The currency mark is usually put at the beginning of the number: <suggestion>\2\1</suggestion>.</message>
-                <short>Put currency at the beginning</short>
-                <example correction="$100">You owe me <marker>100 $</marker>.</example>
-            </rule>
-        </rulegroup>
-        <rule type="whitespace" id="CURRENCY_SPACE" name="Whitespace after currency symbols: '$ 100' ($100)">
-            <pattern>
-                <token regexp="yes">[$€£¥\u8371]</token>
-                <token regexp="yes" spacebefore="yes">\d+</token>
-            </pattern>
-            <message>The currency mark is usually written without any whitespace: <suggestion>\1\2</suggestion>.</message>
-            <short>Remove whitespace</short>
-            <example correction="$100">You owe me <marker>$ 100</marker>.</example>
-        </rule>
-        <rulegroup id="EN_QUOTES" name="Smart quotes (“”)">
-            <rule>
-                <pattern>
-                    <token postag="``"/>
-                </pattern>
-                <message>Use a smart opening quote here: <suggestion>“</suggestion>.</message>
-                <url>https://en.wikipedia.org/wiki/Smart_quote#Electronic_documents</url>
-                <short>Use smart quotes</short>
-                <example correction="“">This is a (<marker>&quot;</marker>test&quot;).</example>
-                <example correction="“"><marker>&quot;</marker>Test&quot;!</example>
-                <example>“Test”!</example>
-                <example correction="“">This is another <marker>&quot;</marker>test&quot;.</example>
-            </rule>
-            <rule>
-                <antipattern> <!-- don't beautify inches -->
-                    <token postag_regexp="yes" postag="''|SENT_START" skip="-1"><exception scope="next" postag="``"/></token>
-                    <token regexp="yes">\d{1,2}(?:[-\.]\d{1,2})?</token>
-                    <marker><token postag="''"/></marker>
-                </antipattern>
-                <pattern>
-                    <token postag="''"/>
-                </pattern>
-                <message>Use a smart closing quote here: <suggestion>”</suggestion>.</message>
-                <url>https://en.wikipedia.org/wiki/Smart_quote#Electronic_documents</url>
-                <short>Use smart quotes</short>
-                <example correction="”">This is a (&quot;test<marker>&quot;</marker>)</example>
-                <example correction="”">Use a quote &quot;here<marker>&quot;</marker> to say something.</example>
-                <example correction="”">This is another &quot;test<marker>&quot;</marker>.</example>
-                <example correction="”">Achilles is mentioned in the song &quot;57821<marker>&quot;</marker>, by Janelle Monáe ft.</example>
-                <example>“Test”!</example>
-                <example>Economy class seats have a seat pitch of 31-33&quot;</example>
-                <example correction="”">American baseball player nicknamed &quot;The Animal<marker>&quot;</marker></example>
-            </rule>
-            <rule>
-                <pattern>
-                    <token>`</token>
-                    <token spacebefore="no">`</token>
-                </pattern>
-                <message>Use a smart opening quote here: <suggestion>“</suggestion>.</message>
-                <url>https://en.wikipedia.org/wiki/Smart_quote#Electronic_documents</url>
-                <short>Use smart quotes</short>
-                <example correction="“"><marker>``</marker>Test”.</example>
-            </rule>
-            <rule>
-                <pattern>
-                    <token>„</token>
-                </pattern>
-                <message>Possibly wrong smart opening quote: <suggestion>“</suggestion>.</message>
-                <url>https://en.wikipedia.org/wiki/„</url>
-                <example correction="“"><marker>„</marker>Test”.</example>
-            </rule>
-        </rulegroup>
-        <rule default="off" id="ELLIPSIS" name="Smart ellipsis (…)">
-            <pattern>
-                <token>.</token>
-                <token>.</token>
-                <token>.</token>
-            </pattern>
-            <message>Use typographical ellipsis character here instead: <suggestion>…</suggestion>.</message>
-            <example correction="…">This is important <marker>. . .</marker> as far as I know.</example>
-            <example>This is important – as far as I know.</example>
-            <example correction="…">This is important<marker>...</marker> as far as I know.</example>
-        </rule>
-        <rulegroup id="WRONG_APOSTROPHE" name="Wrong apostrophe character">
-            <rule>
-                <pattern>
-                    <token regexp="yes">ain|aren|can|couldn|didn|doesn|don|hadn|hasn|haven|isn|mayn|mightn|mustn|needn|oughtn|shan|shouldn|wasn|weren|won|wouldn</token>
-                    <token regexp="yes">[´`]</token>
-                    <token>t</token>
-                </pattern>
-                <message>You used an accent character instead of an apostrophe. Please use either <suggestion>\1'\3</suggestion> or <suggestion>\1’\3</suggestion>.</message>
-                <short>Accent character misused as apostrophe</short>
-                <example correction="shouldn't|shouldn’t">You <marker>shouldn´t</marker> do it!</example>
-            </rule>
-            <rule>
-                <pattern>
-                    <token regexp="yes">ain|aren|can|couldn|didn|doesn|don|hadn|hasn|haven|isn|mayn|mightn|mustn|needn|oughtn|shan|shouldn|wasn|weren|won|wouldn</token>
-                    <token regexp="yes">[;:"]</token>
-                    <token>t</token>
-                </pattern>
-                <message>Did you mean <suggestion>\1'\3</suggestion> or <suggestion>\1’\3</suggestion>?</message>
-                <example correction="shouldn't|shouldn’t">You <marker>shouldn;t</marker> do it!</example>
-            </rule>
-        </rulegroup>
         <rule id="CONTRACTED_FORM_NOT" name="shouldn't not (shouldn't)">
             <pattern>
                 <token regexp="yes">ain|aren|can|couldn|didn|doesn|don|hadn|hasn|haven|isn|mayn|mightn|mustn|needn|oughtn|shan|shouldn|wasn|weren|won|wouldn</token>
@@ -10787,6 +10913,39 @@ USA
     <!-- Punctuation Errors -->
     <!-- ====================================================================== -->
     <category id="PUNCTUATION" name="Punctuation Errors" type="typographical">
+        <rule id="MISSING_COMMA_AFTER_INTRODUCTORY_PHRASE" name="Missing comma after introductory phrase">
+        <antipattern>
+        <marker>
+        <token>at</token>
+        <token>least</token>
+        </marker>
+        </antipattern>
+         <pattern>
+          <token postag='SENT_START'></token>
+          <token postag='IN'></token>
+          <marker>
+          <token postag='NN.*' postag_regexp='yes'></token>
+          <token regexp="yes" case_sensitive="yes">I|you|s?he|it|we|they</token> <!-- not PRP: exclude 'me', 'himself...' -->
+          </marker>
+         </pattern>
+         <message>The comma is probably missing here: <suggestion><match no="3"/>, <match no="4"/></suggestion>.</message>
+         <url>http://englishplus.com/grammar/00000074.htm</url>
+         <short>Missing comma</short>
+         <example correction='years, I'>For <marker>years I</marker> have been travelling.</example>         
+         <example>At least they believed me.</example>
+         <example>To see you is always a great pleasure.</example>
+        </rule>
+        <rule id="COMMA_AFTER_A_MONTH" name="Comma after a month">
+         <pattern>
+          <token regexp='yes'>&months;</token>
+          <token>,</token>
+          <token regexp='yes'>\d{3,}</token>
+         </pattern>
+         <message>When specifying a month and year, the comma is unnecessary: <suggestion><match no="1"/> <match no="3"/></suggestion>.</message>
+         <url>http://www.thepunctuationguide.com/comma.html#dates</url>
+         <short>Spurious comma</short>
+         <example correction='February 1995'><marker>February, 1995</marker></example> 
+        </rule>
         <rule id="APOS_ARE" name="extraneous apostrophes before 'are'">
             <pattern>
                 <marker>
@@ -10798,7 +10957,7 @@ USA
             </pattern>
             <message>Did you mean the plural instead of the possessive?</message>
             <suggestion>\1\3</suggestion>
-            <short>extraneous apostrophe</short>
+            <short>Extraneous apostrophe</short>
             <example correction="cars">The <marker>car's</marker> are cheap.</example>
         </rule>
         <rule id="STATE_OF_THE_ART" name="state of the art (state-of-the-art)">
@@ -11586,6 +11745,11 @@ USA
         </rulegroup>
         <rulegroup id="YOUR" name="your (you're)">
             <rule>
+                <antipattern>
+                    <token>your</token>
+                    <token postag="VBG"/>
+                    <token postag="RB"/>
+                </antipattern>
                 <pattern>
                     <token><exception postag="IN|VB.*" postag_regexp="yes"/><exception>t</exception></token>
                     <marker>
@@ -11599,6 +11763,7 @@ USA
                 <example correction="you're|you are">Let's see if <marker>your</marker> using multiple search servers.</example>
                 <example>Your singing puts professional singers to shame.</example>
                 <example>Your loving friend</example>
+                <example>Your timing really sucks.</example>
             </rule>
             <rule>
                 <pattern>
@@ -12487,6 +12652,17 @@ USA
             <example correction="Public"><marker>Pubic</marker> Affairs is a term for the formal offices of the branches of the US Department of Defense.</example>
             <example><marker>Pubic</marker> hair is the hair in the frontal genital area of adolescent and adult humans.</example>
         </rule>
+        <rule id="CONFUSION_OF_CORRAL_CORAL" name="corral (coral)">
+            <pattern>
+                <marker>
+                    <token>corral</token>
+                </marker>
+                <token regexp='yes'>polyps?|reefs?|islands?|necklaces?|lipsticks?</token>
+            </pattern>
+            <message>Did you mean <suggestion>coral</suggestion>?</message>
+            <example correction="Coral"><marker>Corral</marker> reefs are diverse underwater ecosystems.</example>
+            <example correction="coral">She likes <marker>corral</marker> lipsticks.</example>
+        </rule>
         <rule id="CALENDER" name="calender (calendar)">
             <pattern>
                 <token>calender</token>
@@ -12514,14 +12690,107 @@ USA
             <example correction="which">Which position is right and <marker>witch</marker> is wrong</example>
         </rule>
         <rule id="THEY_WHERE" name="where (were)">
+            <antipattern>
+                <marker>
+                  <token>there</token>
+                  <token>where</token>
+                </marker>
+                <token postag="PRP"/>
+            </antipattern>
+            <antipattern>
+                <marker>
+                  <token>there</token>
+                  <token>where</token>
+                </marker>
+                <token>there</token>
+                <token regexp="yes">is|are|were|was</token>
+            </antipattern>
+            <antipattern>
+              <token postag="PRP"/>
+              <marker>
+                  <token>there</token>
+                  <token>where</token>
+              </marker>
+            </antipattern>
+            <antipattern>
+              <token>there</token>
+              <token regexp="yes">were|are</token>
+              <token postag="JJ.*" postag_regexp="yes"/>
+              <token postag="NNS"/>
+              <marker>
+                  <token>there</token>
+                  <token>where</token>
+              </marker>
+            </antipattern>
+            <antipattern>
+              <token>there</token>
+              <token regexp="yes">was|is</token>
+              <token postag="DT"></token>
+              <token postag="JJ.*" postag_regexp="yes"/>
+              <token postag="NN|NN:.*" postag_regexp="yes"/>
+              <marker>
+                  <token>there</token>
+                  <token>where</token>
+              </marker>
+            </antipattern>
+            <antipattern>
+              <token>there</token>
+              <token regexp="yes">was|is</token>
+              <token postag="DT"></token>              
+              <token postag="NN|NN:.*" postag_regexp="yes"/>
+              <marker>
+                  <token>there</token>
+                  <token>where</token>
+              </marker>
+            </antipattern>
+            <antipattern>
+              <token>to</token>
+              <token>be</token>
+              <marker>
+                  <token>there</token>
+                  <token>where</token>
+              </marker>
+            </antipattern>
+            <antipattern>
+              <token>take</token>
+              <token postag="PRP"/>
+              <marker>
+                  <token>there</token>
+                  <token>where</token>
+              </marker>              
+            </antipattern>
+            <antipattern>              
+              <token regexp="yes">out|over|in|up</token>
+              <marker>
+                  <token>there</token>
+                  <token>where</token>
+              </marker>              
+            </antipattern>
+            <antipattern>
+              <token inflected="yes" regexp="yes">be|head|hold</token>
+              <marker>
+                  <token>there</token>
+                  <token>where</token>
+              </marker>
+            </antipattern>
             <pattern>
-                <token regexp='yes'>they|we</token>
+                <token regexp='yes'>they|we|there</token>
                 <marker>
                     <token>where</token>
                 </marker>
             </pattern>
             <message>Did you mean <suggestion>were</suggestion>, the simple past of "to be"?</message>
             <example correction="were">It seems unlikely that they <marker>where</marker> going to achieve it.</example>
+            <example correction="were">There <marker>where</marker> major delays because of weather.</example>
+            <example>And it was from there where I drove back to camp.</example>
+            <example>Yet, are we there where our founding fathers wanted us to be?</example>
+            <example>There were public showers there where homeless people could get cleaned up.</example>
+            <example>Montreal is just happy to be there where losing is no option.</example>
+            <example>Take me there where the sky is shimmering of a flourishing shuffling.</example>
+            <example>Tell me why, I can't be there where you are...</example>
+            <example>And how many other businesses are there where the retailer has no control over price?</example>
+            <example>There was a long time there where my feelings for him was hella twisted.</example>
+            <example>Additionally, there was a couple there where a woman had her entire arm adorned with a huge elaborate tatoo.</example>
         </rule>
         <rulegroup id="ALTER_BOY" name="confusion of alter/altar">
             <rule>
@@ -12811,6 +13080,7 @@ USA
             <example>But Baptist beliefs can vary.</example>
             <example correction="believe">We <marker>belief</marker> that this is wrong.</example>
             <example correction="believes">He <marker>beliefs</marker> that this is wrong.</example>
+            <example>Joan of Arc refused to renounce her belief that the voice she heard was from God.</example>
         </rule>
         <rulegroup id="PROVE_PROOF" name="prove (proof)">
             <rule>
@@ -12959,7 +13229,9 @@ USA
                     <token spacebefore="no" regexp="yes">['’]</token>
                     <token>re</token>
                 </marker>
-                <token postag="NN|NN:U|NN:UN|NNPS|NNS" postag_regexp="yes"><exception postag="JJ"/><exception regexp="yes">one|still|right</exception></token>
+                <token postag="NN|NN:U|NN:UN|NNPS|NNS" postag_regexp="yes">
+                    <exception postag="JJ"/>
+                    <exception regexp="yes">one|still|right|in</exception></token>
                 <token><exception>enough</exception></token>
             </pattern>
             <message>Did you mean <suggestion>your</suggestion>?</message>
@@ -12974,6 +13246,7 @@ USA
             <example> You're man enough to let her play, she's experimental and confident enough to do it.</example>
             <example correction="Your"><marker>You're</marker> optimization is a good example.</example>
             <example>You're Arthur Willis.</example>
+            <example>You're in better shape than I am.</example>
         </rule>
         <rulegroup id="ACCEPT_EXCEPT" name="accept/except">
             <rule>
@@ -13337,12 +13610,53 @@ USA
             <short>Commonly confused word</short>
             <example correction="nice">I wish you a <marker>niece</marker> holiday.</example>
         </rule>
+        <rule id="SLIGHT_OF_HAND" name="slight (sleight) of hand">
+            <pattern>
+                <marker>
+                    <token regexp="yes">slight|slights</token>
+                </marker>
+                <token>of</token>
+                <token>hand</token>
+            </pattern>
+            <message>Did you mean <suggestion><match no="1" postag_regexp="yes" postag="NN(S)|NN:UN" postag_replace="NN$1">sleight</match></suggestion>?</message>
+            <url>http://public.wsu.edu/~brians/errors/slight.html</url>
+            <short>Commonly confused word</short>
+            <example correction="sleight">This is where the <marker>slight</marker> of hand comes in.</example>
+            <example correction="sleights">At the show, we saw many marvellous <marker>slights</marker> of hand.</example>
+            <example correction="Sleights"><marker>Slights</marker> of hand are a clever trick.</example>
+            <example><marker>Sleight</marker> of hand is also known as prestidigitation.</example>
+        </rule>
     </category>
 
     <!-- ====================================================================== -->
     <!-- Nonstandard Phrases -->
     <!-- ====================================================================== -->
     <category id="NONSTANDARD_PHRASES" name="Nonstandard Phrases" type="misspelling">
+      <rule id="FROM_X_Y" name="from X - Y (from X to Y)">
+       <pattern>
+        <token>from</token>
+        <token regexp='yes'>\d+</token>
+        <token><exception regexp="yes">to|until|through</exception><exception regexp="yes">[:,]</exception></token>
+        <token regexp='yes'>\d+</token>
+       </pattern>
+       <message>Nonstandard phrase. Did you mean: <suggestion><match no="1"/> <match no="2"/> to <match no="4"/></suggestion>?</message>
+       <short>Nonstandard phrase</short>
+       <example correction='From 12 to 17'><marker>From 12 – 17</marker> February 2016</example>       
+       <example>Ferries commence service from 7:00 am.</example>
+       <example>He partnered with Stephen T. Logan from 1841 until 1844.</example>
+       <example>Algiers lost from 30,000 to 50,000 inhabitants to the plague in 1620–21.</example>
+       <example>The population has grown from 5,000 in 1900.</example>
+      </rule>
+      <rule id="MONTH_OF_XXXX" name="February of 2005 (February 2005)">
+       <pattern>
+        <token regexp='yes'>&months;</token>
+        <token>of</token>
+        <token regexp='yes'>\d{3,}</token>
+       </pattern>
+       <message>When specifying a month and year, 'of' is unnecessary: <suggestion><match no="1"/> <match no="3"/></suggestion>.</message>
+       <short>Nonstandard date</short>
+       <example correction='February 1995'><marker>February of 1995</marker></example>       
+    </rule>
       <rule id="THE_QUESTION_WH" name="the question what (the question of what)">
       <pattern>
       <token>the</token>
@@ -13558,6 +13872,104 @@ USA
     <!-- Redundant Phrases -->
     <!-- ====================================================================== -->
     <category id="REDUNDANCY" name="Redundant Phrases" type="style">
+    <rulegroup id="FORMER_ALUMNUS" name="former alumnus (alumnus)">
+    <rule>
+     <pattern>
+      <token>a</token>
+      <token>former</token>
+      <token>alumnus</token>
+     </pattern>
+     <message>This phrase is redundant. Consider writing <suggestion>an <match no="3"/></suggestion>.</message>
+     <url>https://www.amherst.edu/news/communications/styleguide</url>
+     <short>Redundant phrase</short>
+     <example correction='an alumnus'>As the wife of <marker>a former alumnus</marker> of UCLA, I am appalled at recent events that have occurred and seemingly encouraged by the administration.</example>    
+    </rule>
+    <rule>
+     <pattern>
+      <token><exception>a</exception></token>
+      <marker>
+      <token>former</token>
+      <token>alumnus</token>
+      </marker>
+     </pattern>
+     <message>This phrase is redundant. Consider writing <suggestion><match no="3"/></suggestion>.</message>
+     <url>https://www.amherst.edu/news/communications/styleguide</url>
+     <short>Redundant phrase</short>
+     <example correction='alumnus'>The <marker>former alumnus</marker> adviser of Alpha Lambda Chapter was elected as congressman-at- large in Ohio.</example>     
+    </rule>
+    </rulegroup>
+        <rulegroup id="SWORN_AFFIDAVIT" name="sworn affidavit (affidavit)">
+        <rule>
+         <pattern>
+          <token>a</token>
+          <token>sworn</token>
+          <token>affidavit</token>
+         </pattern>
+         <message>This phrase is redundant. Consider using <suggestion>an <match no="3"/></suggestion></message>
+         <url>http://wordinfo.info/unit/4246/page:21</url>
+         <short>Redundant phrase</short>
+         <example correction='An affidavit'><marker>A sworn affidavit</marker> is a written statement made by someone under oath to tell the truth about something.</example>         
+        </rule>
+        <rule>
+         <pattern>
+          <token><exception>a</exception></token>
+          <marker>
+          <token>sworn</token>
+          <token>affidavit</token>
+          </marker>
+         </pattern>
+         <message>This phrase is redundant. Consider using <suggestion><match no="3"/></suggestion></message>
+         <url>http://wordinfo.info/unit/4246/page:21</url>
+         <short>Redundant phrase</short>
+         <example correction='affidavit'>His <marker>sworn affidavit</marker> was deposited in the post office mailbox.</example>         
+        </rule>
+        </rulegroup>
+        <rule id="DIRECTLY_ANTITHETICAL" name="directly antithetical (antithetical)">
+         <pattern>
+          <token>directly</token>
+          <token>antithetical</token>
+         </pattern>
+         <message>This phrase verges on redundancy. Consider writing <suggestion><match no="2"/></suggestion>.</message>
+         <short>Redundant phrase</short>
+         <example correction='antithetical'>The two events this week were <marker>directly antithetical</marker> to the University's values for these reasons.</example>
+         <example>The two events this week were antithetical to the University's values for these reasons.</example>
+        </rule>
+        <rule id="APPROXIMATELY_ABOUT" name="approximately about">
+         <pattern>
+          <marker>
+          <token>approximately</token>
+          <token>about</token>
+          </marker>
+          <token postag='CD'></token>
+         </pattern>
+         <message>This phrase is redundant. Consider using <suggestion><match no="1"/></suggestion>.</message>
+         <short>Redundant phrase</short>
+         <example correction='approximately'>Americans feel full of energy and healthy <marker>approximately about</marker> 19 days per month.</example>
+         <example>Americans feel full of energy and healthy approximately 19 days per month.</example>
+         <example>In reasoning about a complex system, humans reason approximately about its behavior.</example>
+        </rule>
+        <rulegroup id="ASSOCIATE_TOGETHER" name="associate together (associate)">
+        <rule>
+         <pattern>
+          <token inflected='yes'>associate</token>
+          <token>together</token>
+          <token>in</token>
+          <token>groups</token>
+         </pattern>
+         <message>This phrase is redundant. Consider writing <suggestion><match no="1"/></suggestion>.</message>
+         <short>Redundant phrase</short>
+         <example correction='associate'>Hippos <marker>associate together in groups</marker>.</example>
+        </rule>
+        <rule>
+         <pattern>
+          <token inflected='yes'>associate</token>
+          <token>together</token>
+         </pattern>
+         <message>This phrase is redundant. Consider writing <suggestion><match no="1"/></suggestion>.</message>
+         <short>Redundant phrase</short>
+         <example correction='associated'>Poets and choregi having been <marker>associated together</marker> in pairs, there still remained the selection and appointment of the actors.</example>
+        </rule>
+        </rulegroup>
         <rule id="SUFFICIENT_ENOUGH" name="sufficient enough -> sufficient">
             <pattern>
                 <token>sufficient</token>
@@ -13755,7 +14167,9 @@ USA
                 <example>He doesn't know where I am in the morning.</example>
             </rule>
             <rule>
-                <pattern case_sensitive="yes">
+                <pattern>
+                <token regexp="yes">1?\d</token>
+                <marker>
                     <token>A</token>
                     <token>.</token>
                     <token>M</token>
@@ -13763,6 +14177,7 @@ USA
                     <token>in</token>
                     <token>the</token>
                     <token>morning</token>
+                </marker>
                 </pattern>
                 <message>Consider using <suggestion>A.M.</suggestion></message>
                 <short>Redundant phrase</short>
@@ -13794,7 +14209,9 @@ USA
                 <example>It's 5 PM.</example>
             </rule>
             <rule>
-                <pattern case_sensitive="yes">
+                <pattern>
+                <token regexp="yes">1?\d</token>
+                    <marker>
                     <token>P</token>
                     <token>.</token>
                     <token>M</token>
@@ -13802,6 +14219,7 @@ USA
                     <token>in</token>
                     <token>the</token>
                     <token regexp="yes">evening|afternoon</token>
+                    </marker>
                 </pattern>
                 <message>Consider using <suggestion>P.M.</suggestion></message>
                 <short>Redundant phrase</short>
@@ -13809,13 +14227,16 @@ USA
                 <example>It's 5 P.M.</example>
             </rule>
             <rule>
-                <pattern case_sensitive="yes">
+                <pattern>
+                <token regexp="yes">1?\d</token>
+                <marker>
                     <token>P</token>
                     <token>.</token>
                     <token>M</token>
                     <token>.</token>
                     <token>at</token>
                     <token>night</token>
+                </marker>
                 </pattern>
                 <message>Consider using <suggestion>P.M.</suggestion></message>
                 <short>Redundant phrase</short>
@@ -13862,6 +14283,16 @@ USA
             <example correction="Bonus"><marker>Added bonus</marker>: booting from cdrom.</example>
             <example>Bonus: booting from CD-ROM.</example>
         </rule>
+        <rule id="ADEQUATE_ENOUGH" name="adequate enough (adequate)">
+        <pattern>
+        <token>adequate</token>
+        <token>enough</token>
+        </pattern>
+        <message>This phrase might be redundant. Consider using <suggestion>\1</suggestion>.</message>
+        <url>http://www.dailywritingtips.com/adequate-is-adequate/</url>
+        <short>Redundant phrase</short>
+        <example correction="adequate">The Allen test is not <marker>adequate enough</marker> for the screening of hand circulation.</example>
+        </rule>      
         <rule default="off" id="ARE_ABLE_TO" name="are able to (can)">
             <pattern>
                 <token>are</token>
@@ -13966,6 +14397,25 @@ USA
             <short>Redundant phrase</short>
             <example correction="best">Top ten <marker>best ever</marker> beer names.</example>
             <example>Top ten best beer names.</example>
+        </rule>
+        <rule id="TEMPORARY_BIVOUAC_BIVOUAC" name="temporary bivouac (bivouac)">
+         <pattern>
+          <token>temporary</token>
+          <token>bivouac</token>
+         </pattern>
+         <message>This phrase may be redundant. Consider writing <suggestion><match no="2"/></suggestion>.</message>
+         <short>Redundant phrase</short>
+         <example correction='bivouac'>In <marker>temporary bivouac</marker> areas (1 to 3 days), the straddle trench latrine is used unless more permanent facilities are provided for the unit.</example>         
+        </rule>
+        <rule id="BIVOUAC_CAMP_BIVOUAC" name="bivouac camp (bivouac)">
+         <pattern>
+          <token>bivouac</token>
+          <token>camp</token>
+         </pattern>
+         <message>This phrase is redundant. Consider writing <suggestion><match no="1"/></suggestion>.</message>
+         <short>Redundant phrase</short>
+         <example correction='bivouac'>A rock climber leaves a hanging <marker>bivouac camp</marker> on an Arctic cliff</example>
+         <example>A rock climber leaves a hanging bivouac on an Arctic cliff</example>
         </rule>
         <rule id="ADJECTIVE_IN_ATTRIBUTE" name="Big in size, yellow in color, etc.">
             <pattern>
@@ -14083,7 +14533,40 @@ USA
             <example correction="CD-ROM">I ordered a <marker>Cdrom</marker> with their software.</example>
             <example>I ordered a <marker>CD-ROM</marker>with their software.</example>
         </rule>
-        <rule id="CLOSE_SCRUTINY" name="close scrutiny/proximity (scrutiny/proximity)">
+        <rule id="ACCUSED_OF_A_CHARGE_CHARGED_WITH" name="accused of a charge (charged with)">
+         <pattern>
+          <token>accused</token>
+          <token>of</token>
+          <token>a</token>
+          <token>charge</token>
+          <token>of</token>
+         </pattern>
+         <message>This phrase may be redundant. Consider writing: <suggestion>charged with</suggestion> instead.</message>
+         <short>Redundant phrase</short>
+         <example correction='charged with'>The Magistrate's Court in Kuala Lumpur today decided that a former model <marker>accused of a charge of</marker> public indecency is fit to stand trial.</example>
+        </rule>
+        <rule id="CIRCUMSTANCES_SURROUNDING" name="circumstances surrounding (circumstances of)">
+         <pattern>
+          <token>circumstances</token>
+          <token>surrounding</token>
+         </pattern>
+         <message>This phrase is redundant. Consider writing <suggestion><match no="1"/> of</suggestion>.</message>
+         <short>Redundant phrase</short>
+         <example correction='circumstances of'>Based upon this discussion, the OIG expanded the scope of its investigation to analyze the <marker>circumstances surrounding</marker> the settlement rejected by Judge Rakoff.</example>         
+        </rule>
+        <rulegroup id="CLOSE_SCRUTINY" name="close scrutiny/proximity (scrutiny/proximity)">
+        <rule>
+        <pattern>
+            <token>within</token>
+            <token>close</token>
+            <token>proximity</token>
+            <token>to</token>
+        </pattern>
+        <message>This is verbose. Cosider writing: <suggestion>close to</suggestion>.</message>
+        <short>Redundant phrase</short>
+        <example correction="close to">The majority of Jannali's enterprises are located <marker>within close proximity to</marker> the suburb's railway station.</example>
+        </rule>
+        <rule>            
             <pattern>
                 <token>close</token>
                 <token regexp="yes">scrutiny|proximity</token>
@@ -14092,6 +14575,7 @@ USA
             <short>Redundant phrase</short>
             <example correction="scrutiny">Their manifesto yesterday received the same <marker>close scrutiny</marker> as the other two big parties — and it was an uncomfortable experience.</example>
         </rule>
+        </rulegroup>
         <rule id="COMFORTABLE_WITH_VBG" name="comfortable with doing (comfortable doing)">
             <pattern>
                 <token>comfortable</token>
@@ -14292,6 +14776,15 @@ USA
             <short>Redundant phrase</short>
             <example correction="all the">She is going to <marker>all of the</marker> parks.</example>
             <example>She is going some or all of the parks.</example>
+        </rule>
+        <rule id="SELF_ADMITTED" name="self-admitted (admitted)">
+        <pattern>
+        <token>self-admitted</token>
+        </pattern>
+        <message>This phrase is redundant. Consider using <suggestion>admitted</suggestion>.</message>
+        <url>http://www.oxfordreference.com/view/10.1093/acref/9780195135084.001.0001/acref-9780195135084-e-1937</url>
+        <short>Redundant phrase</short>
+        <example correction="admitted">Springfield police arrest 'very dangerous, <marker>self-admitted</marker> gang member.'</example>
         </rule>
         <rule id="SOME_OF_THE" name="some of the (some)">
             <pattern>
@@ -15146,6 +15639,15 @@ USA
     <!-- Style -->
     <!-- ====================================================================== -->
     <category id="STYLE" name="Style" type="style">
+        <rule id="FILTHY_WORDS" name="Filthy words">
+        <pattern>
+          <token inflected="yes" regexp="yes">shit|piss|fuck|cunt|cocksucker|motherfucker|tits|fart|turd|twat</token>
+        </pattern>
+        <message>This word is considered offensive.</message>
+        <url>https://youtu.be/kyBH5oNQOS0</url>
+        <short>Taboo word</short>
+        <example correction=""><marker>Fuck</marker> you!</example>
+        </rule>
         <rule id="NEEDS_FIXED" name="'Needs fixed' type construction">
             <pattern>
                 <token regexp='yes'>(needs|wants|requires|needed|wanted|required)</token>
@@ -15582,7 +16084,7 @@ USA
                 <token>lines</token>
                 <token>of</token>
             </pattern>
-            <message>Did you mean <suggestion>like</suggestion>?.</message>
+            <message>Did you mean <suggestion>like</suggestion>?</message>
             <example correction="like">I think my point is very much <marker>along the lines of</marker> his.</example>
             <example>I think my point is very much <marker>like</marker> his.</example>
         </rule>
@@ -15941,7 +16443,6 @@ USA
             <example>We have arrived.</example>
         </rule>
 
-        <!-- close proximity – near -->
         <!-- combat environment – combat -->
         <!-- combined – joint -->
         <!-- commence – Begin or start -->
@@ -17209,64 +17710,203 @@ USA
             </rule>
         </rulegroup>
     </category>
-    
-    <!-- This rule is useful only for lowercase only text after machine translation. I leave it in the
-    file because it's not so bad for such input but it shouldn't be even visible in the config dialog.
-    Maybe it should go some repository online?
-    <category id="CASING" name="Capitalization" type="typographical">
-        <rulegroup default="off" id="EN_CAPITALIZE" name="Capitalize lowercase words ('i am')">
+
+  <category id="TYPOGRAPHY" name="Typography" type="typographical">
+  <rule id="TRADEMARK" name="(TM) instead of ™">
+     <pattern case_sensitive='yes'>
+      <token regexp='yes'>\p{Lu}.*</token>
+      <marker>
+      <token>(</token>
+      <token>TM</token>
+      <token>)</token>
+      </marker>
+     </pattern>
+     <message>Did you mean <suggestion>™</suggestion>?</message>
+     <short>Nonstandard notation of ™</short>
+     <example correction='™'>The new product is Executive Choice<marker>(TM)</marker> Plus.</example>
+    </rule>
+    <rule id="R_SYMBOL" name="(R) instead of ®">
+		<antipattern case_sensitive="yes">
+		    <marker>
+		    <token>(</token>        
+        <token>R</token>
+        <token skip="-1">)</token>        
+        </marker>
+        <token regexp="yes">[\p{Lu}^R]<exception scope="previous" negate="yes">(</exception></token>
+        <token skip="-1">)</token>
+		</antipattern>
+		<antipattern case_sensitive="yes">
+		    <token>(</token>        
+        <token regexp="yes">[\p{Lu}^R]</token>
+        <token skip="-1">)</token>        
+        <marker>
+        <token>R<exception scope="previous" negate="yes">(</exception></token>
+        <token skip="-1">)</token>
+        </marker>
+		</antipattern>
+     <pattern case_sensitive='yes'>
+      <token regexp='yes'>\p{Lu}.*</token>
+      <marker>
+      <token>(</token>
+      <token>R</token>
+      <token>)</token>
+      </marker>
+     </pattern>
+     <message>Did you mean <suggestion>®</suggestion>?</message>
+     <short>Nonstandard notation of ®</short>
+     <example correction='®'>Windows <marker>(R)</marker></example>
+     <example>These are Richard Burr (D) and Kay Hagan (R).</example>
+    </rule>
+    <rule id="COPYRIGHT" name="(c) instead of ©" type="typographical">
+    <antipattern>
+        <token>(</token>        
+        <token>a</token>
+        <token skip="-1">)</token>        
+        <token>b<exception scope="previous" negate="yes">(</exception></token>
+        <token skip="-1">)</token>
+        <marker>        
+        <token>c<exception scope="previous" negate="yes">(</exception></token>
+        <token>)</token>
+        </marker>
+		</antipattern>    
+      <pattern>
+      <marker>
+        <token>(</token>        
+        <token>c</token>
+        <token>)</token>
+        </marker>
+        <token regexp="yes">\d{4}|\p{Lu}\p{Ll}+</token>
+      </pattern>
+      <message>This notation is nonstandard, use this symbol instead: <suggestion>©</suggestion></message>
+      <short>Nonstandard notation of ©</short>
+      <example correction="©">Copyright <marker>(C)</marker> Joanna Bator, 2012</example>
+      <example correction="©">Copyright <marker>(C)</marker> 2010 The Estate of Ezra Pound</example>
+      <example>This is a list: (a) item, (b) 2 items, (c) 2014 items.</example>
+		</rule>
+        <rulegroup type="locale-violation" id="CURRENCY" name="Position of currency symbols: '100$' ($100)">
             <rule>
-                <pattern case_sensitive="yes">
-                    <and>
-                        <token inflected="yes" regexp="yes">[A-Z][a-z]+</token>
-                        <token regexp="yes">[a-z]+</token>
-                    </and>
+                <pattern>
+                    <token regexp="yes">\d+[$€£¥\u8371]</token>
                 </pattern>
-                <message>The word \1 probably should be uppercase: <suggestion><match case_conversion="startupper" no="1"></match></suggestion>.</message>
-                <example correction="Susan">My name is <marker>susan</marker>.</example>
-                <example>My name is Susan.</example>
+                <message>The currency mark is usually put at the beginning of the number: <suggestion><match no="1" regexp_match="(\d+)([$€£¥\u8371])" regexp_replace="$2$1"/></suggestion>.</message>
+                <short>Put currency at the beginning</short>
+                <example correction="$100">You owe me <marker>100$</marker>.</example>
             </rule>
             <rule>
-                <pattern case_sensitive="yes">
-                    <token>i</token>
+                <pattern>
+                    <token regexp="yes">\d+</token>
+                    <token regexp="yes">[$€£¥\u8371]</token>
                 </pattern>
-                <message>This should be written in uppercase: <suggestion>I</suggestion>.</message>
-                <example correction="I">Who do you think <marker>i</marker> am?</example>
-                <example>Who do you think I am?</example>
-            </rule>
-            <rule>
-                <pattern case_sensitive="yes">
-                    <token regexp="yes">&quot;|“</token>
-                    <and>
-                        <token inflected="yes" regexp="yes">[A-Z][a-z]+</token>
-                        <token regexp="yes">[a-z]+</token>
-                    </and>
-                    <marker>
-                        <token postag="NN" regexp="yes">[a-z]+</token>
-                    </marker>
-                </pattern>
-                <message>The word \3 should probably be written in uppercase: <suggestion><match case_conversion="startupper" no="3"></match></suggestion>.</message>
-                <example correction="Monthly">This is a story from “atlantic <marker>monthly</marker>”.</example>
-                <example>This is a story from “The Atlantic Monthly”.</example>
-            </rule>
-            <rule>
-                <pattern case_sensitive="yes">
-                    <token postag="UNKNOWN" regexp="yes">[a-z]+</token>
-                </pattern>
-                <message>The word \1 should probably be uppercase:<suggestion><match case_conversion="startupper" no="1"></match></suggestion>.</message>
-                <example correction="Sobol">Eve <marker>sobol</marker>, Indiana</example>
-                <example>Eve Sobol, Indiana</example>
-            </rule>
-            <rule>
-                <pattern case_sensitive="yes">
-                    <token postag="NNP" regexp="yes">[a-z]+</token>
-                </pattern>
-                <message>The word \1 should probably be uppercase: <suggestion><match case_conversion="startupper" no="1"></match></suggestion>.</message>
-                <example correction="Susan">This is <marker>susan</marker>.</example>
-                <example>This is Susan.</example>
+                <message>The currency mark is usually put at the beginning of the number: <suggestion>\2\1</suggestion>.</message>
+                <short>Put currency at the beginning</short>
+                <example correction="$100">You owe me <marker>100 $</marker>.</example>
             </rule>
         </rulegroup>
-    </category>
-    -->
+        <rule type="whitespace" id="CURRENCY_SPACE" name="Whitespace after currency symbols: '$ 100' ($100)">
+            <pattern>
+                <token regexp="yes">[$€£¥\u8371]</token>
+                <token regexp="yes" spacebefore="yes">\d+</token>
+            </pattern>
+            <message>The currency mark is usually written without any whitespace: <suggestion>\1\2</suggestion>.</message>
+            <short>Remove whitespace</short>
+            <example correction="$100">You owe me <marker>$ 100</marker>.</example>
+        </rule>
+        <rulegroup id="EN_QUOTES" name="Smart quotes (“”)">
+            <rule>
+                <pattern>
+                    <token postag="``"/>
+                </pattern>
+                <message>Use a smart opening quote here: <suggestion>“</suggestion>.</message>
+                <url>https://en.wikipedia.org/wiki/Smart_quote#Electronic_documents</url>
+                <short>Use smart quotes</short>
+                <example correction="“">This is a (<marker>&quot;</marker>test&quot;).</example>
+                <example correction="“"><marker>&quot;</marker>Test&quot;!</example>
+                <example>“Test”!</example>
+                <example correction="“">This is another <marker>&quot;</marker>test&quot;.</example>
+            </rule>
+            <rule>
+                <antipattern> <!-- don't beautify inches -->
+                    <token postag_regexp="yes" postag="''|SENT_START" skip="-1"><exception scope="next" postag="``"/></token>
+                    <token regexp="yes">\d{1,2}(?:[-\.]\d{1,2})?</token>
+                    <marker><token postag="''"/></marker>
+                </antipattern>
+                <pattern>
+                    <token postag="''"/>
+                </pattern>
+                <message>Use a smart closing quote here: <suggestion>”</suggestion>.</message>
+                <url>https://en.wikipedia.org/wiki/Smart_quote#Electronic_documents</url>
+                <short>Use smart quotes</short>
+                <example correction="”">This is a (&quot;test<marker>&quot;</marker>)</example>
+                <example correction="”">Use a quote &quot;here<marker>&quot;</marker> to say something.</example>
+                <example correction="”">This is another &quot;test<marker>&quot;</marker>.</example>
+                <example correction="”">Achilles is mentioned in the song &quot;57821<marker>&quot;</marker>, by Janelle Monáe ft.</example>
+                <example>“Test”!</example>
+                <example>Economy class seats have a seat pitch of 31-33&quot;</example>
+                <example correction="”">American baseball player nicknamed &quot;The Animal<marker>&quot;</marker></example>
+            </rule>
+            <rule>
+                <pattern>
+                    <token>`</token>
+                    <token spacebefore="no">`</token>
+                </pattern>
+                <message>Use a smart opening quote here: <suggestion>“</suggestion>.</message>
+                <url>https://en.wikipedia.org/wiki/Smart_quote#Electronic_documents</url>
+                <short>Use smart quotes</short>
+                <example correction="“"><marker>``</marker>Test”.</example>
+            </rule>
+            <rule>
+                <pattern>
+                    <token>„</token>
+                </pattern>
+                <message>Possibly wrong smart opening quote: <suggestion>“</suggestion>.</message>
+                <url>https://en.wikipedia.org/wiki/„</url>
+                <example correction="“"><marker>„</marker>Test”.</example>
+            </rule>
+        </rulegroup>
+        <rule default="off" id="ELLIPSIS" name="Smart ellipsis (…)">
+            <pattern>
+                <token>.</token>
+                <token>.</token>
+                <token>.</token>
+            </pattern>
+            <message>Use typographical ellipsis character here instead: <suggestion>…</suggestion>.</message>
+            <example correction="…">This is important <marker>. . .</marker> as far as I know.</example>
+            <example>This is important – as far as I know.</example>
+            <example correction="…">This is important<marker>...</marker> as far as I know.</example>
+        </rule>
+        <rulegroup id="WRONG_APOSTROPHE" name="Wrong apostrophe character">
+            <rule>
+                <pattern>
+                    <token regexp="yes">ain|aren|can|couldn|didn|doesn|don|hadn|hasn|haven|isn|mayn|mightn|mustn|needn|oughtn|shan|shouldn|wasn|weren|won|wouldn</token>
+                    <token regexp="yes">[´`]</token>
+                    <token>t</token>
+                </pattern>
+                <message>You used an accent character instead of an apostrophe. Please use either <suggestion>\1'\3</suggestion> or <suggestion>\1’\3</suggestion>.</message>
+                <short>Accent character misused as apostrophe</short>
+                <example correction="shouldn't|shouldn’t">You <marker>shouldn´t</marker> do it!</example>
+            </rule>
+            <rule>
+                <pattern>
+                    <token regexp="yes">ain|aren|can|couldn|didn|doesn|don|hadn|hasn|haven|isn|mayn|mightn|mustn|needn|oughtn|shan|shouldn|wasn|weren|won|wouldn</token>
+                    <token regexp="yes">[;:"]</token>
+                    <token>t</token>
+                </pattern>
+                <message>Did you mean <suggestion>\1'\3</suggestion> or <suggestion>\1’\3</suggestion>?</message>
+                <example correction="shouldn't|shouldn’t">You <marker>shouldn;t</marker> do it!</example>
+            </rule>
+        </rulegroup>   
+        <rule id="APOSTROPHE_IN_DATES" name="Apostrophe in dates">
+         <pattern>
+          <token regexp='yes'>(:?[1-2]\d)?\d0<exception regexp='yes'>2[1-9]\d0</exception></token>
+          <token>'</token>
+          <token>s</token>
+         </pattern>
+         <message>Apostrophes aren't needed for decades: <suggestion><match no="1"/><match no="3"/></suggestion>.</message>
+         <url>http://www.monash.edu/about/editorialstyle/editing/apostrophes</url>
+         <short>Apostrophe in a decade date</short>
+         <example correction='1990s'>Hillary Clinton asked where Bernie Sanders was in the <marker>1990's</marker>.</example>         
+         <example correction='90s'>Hillary Clinton asked where Bernie Sanders was in the <marker>90's</marker>.</example>         
+        </rule> 
+  </category>
 
 </rules>

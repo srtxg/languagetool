@@ -118,12 +118,21 @@ class LanguageToolSupport {
     listenerList.remove(LanguageToolListener.class, ltListener);
   }
 
+  private void fireEvent(LanguageToolEvent.Type type, Object caller, long elapsedTime) {
+    LanguageToolEvent event = new LanguageToolEvent(this, type, caller, elapsedTime);
+    fireEvent(event);
+  }
+
   private void fireEvent(LanguageToolEvent.Type type, Object caller) {
+    LanguageToolEvent event = new LanguageToolEvent(this, type, caller);
+    fireEvent(event);
+  }
+
+  private void fireEvent(LanguageToolEvent event) {
     // Guaranteed to return a non-null array
     Object[] listeners = listenerList.getListenerList();
     // Process the listeners last to first, notifying
     // those that are interested in this event
-    LanguageToolEvent event = new LanguageToolEvent(this, type, caller);
     for (int i = listeners.length - 2; i >= 0; i -= 2) {
       if (listeners[i] == LanguageToolListener.class) {
         // Lazily create the event:
@@ -142,7 +151,7 @@ class LanguageToolSupport {
 
   ConfigurationDialog getCurrentConfigDialog() {
     Language language = this.languageTool.getLanguage();
-    final ConfigurationDialog configDialog;
+    ConfigurationDialog configDialog;
     if (configDialogs.containsKey(language)) {
       configDialog = configDialogs.get(language);
     } else {
@@ -170,11 +179,11 @@ class LanguageToolSupport {
     Set<String> toEnable = new HashSet<>(languageTool.getDisabledRules());
     toEnable.removeAll(common);
     
-    for (final String ruleId : toDisable) {
+    for (String ruleId : toDisable) {
       languageTool.disableRule(ruleId);
       update = true;
     }
-    for (final String ruleId : toEnable) {
+    for (String ruleId : toEnable) {
       languageTool.enableRule(ruleId);
       update = true;
     }
@@ -450,7 +459,7 @@ class LanguageToolSupport {
 
   @Nullable
   private Span getSpan(int offset) {
-    for (final Span cur : documentSpans) {
+    for (Span cur : documentSpans) {
       if (cur.end > cur.start && cur.start <= offset && offset < cur.end) {
         return cur;
       }
@@ -465,7 +474,7 @@ class LanguageToolSupport {
     }
 
     int offset = this.textComponent.viewToModel(event.getPoint());
-    final Span span = getSpan(offset);
+    Span span = getSpan(offset);
     JPopupMenu popup = new JPopupMenu("Grammar Menu");
     if (span != null) {
       JLabel msgItem = new JLabel("<html>"
@@ -595,7 +604,7 @@ class LanguageToolSupport {
 
     for (Rule rule : rules) {
       count++;
-      final String id = rule.getId();
+      String id = rule.getId();
       JMenuItem ruleItem = new JMenuItem(rule.getDescription());
       ruleItem.addActionListener(new ActionListener() {
         @Override
@@ -622,7 +631,7 @@ class LanguageToolSupport {
 
   @Nullable
   Rule getRuleForId(String ruleId) {
-    final List<Rule> allRules = languageTool.getAllRules();
+    List<Rule> allRules = languageTool.getAllRules();
     for (Rule rule : allRules) {
       if (rule.getId().equals(ruleId)) {
         return rule;
@@ -694,7 +703,7 @@ class LanguageToolSupport {
     return lang;
   }
 
-  private synchronized List<RuleMatch> checkText(final Object caller) throws IOException {
+  private synchronized List<RuleMatch> checkText(Object caller) throws IOException {
     if (this.mustDetectLanguage) {
       mustDetectLanguage = false;
       if (!this.textComponent.getText().isEmpty()) {
@@ -736,7 +745,11 @@ class LanguageToolSupport {
         throw new RuntimeException(ex);
       }
     }
-    final List<RuleMatch> matches = this.languageTool.check(this.textComponent.getText());
+
+    long startTime = System.currentTimeMillis();
+    List<RuleMatch> matches = this.languageTool.check(this.textComponent.getText());
+    long elapsedTime = System.currentTimeMillis() - startTime;
+
     int v = check.get();
     if (v == 0) {
       if (!SwingUtilities.isEventDispatchThread()) {
@@ -744,12 +757,12 @@ class LanguageToolSupport {
           @Override
           public void run() {
             updateHighlights(matches);
-            fireEvent(LanguageToolEvent.Type.CHECKING_FINISHED, caller);
+            fireEvent(LanguageToolEvent.Type.CHECKING_FINISHED, caller, elapsedTime);
           }
         });
       } else {
         updateHighlights(matches);
-        fireEvent(LanguageToolEvent.Type.CHECKING_FINISHED, caller);
+        fireEvent(LanguageToolEvent.Type.CHECKING_FINISHED, caller, elapsedTime);
       }
     }
     return matches;

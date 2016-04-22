@@ -48,7 +48,7 @@ though, and has since been slightly modified)-->
         <token>hui</token>
       </pattern>
       <message>« Au jour d’aujourd’hui » est un pléonasme. Employez <suggestion>à ce jour</suggestion> ou <suggestion>aujourd\6hui</suggestion>.</message>
-      <url>http://www.academie-francaise.fr/langue/questions.html#au_jour</url>
+      <url>http://www.academie-francaise.fr/au-jour-daujourdhui</url>
       <example correction="à ce jour|aujourd’hui"><marker>au jour d’aujourd’hui</marker>.</example>
       <example><marker>à ce jour</marker>.</example>
     </rule>
@@ -1347,11 +1347,15 @@ though, and has since been slightly modified)-->
           <marker>
             <token>A</token>
           </marker>
-          <token><exception regexp="yes">contrario|fortiori|posteriori|priori</exception></token>
+          <token>
+            <exception regexp="yes">contrario|fortiori|posteriori|priori</exception>
+            <exception spacebefore="no">)</exception>
+          </token>
         </pattern>
         <message>Voulez-vous écrire <suggestion>À</suggestion> ?</message>
         <example correction="À"><marker>A</marker> quelle heure arrive-t-il ?</example>
         <example>A priori, il devrait arriver à l’heure.</example>
+        <example>a) Introduction.</example>
       </rule>
       <rule>
         <pattern>
@@ -1398,7 +1402,7 @@ though, and has since been slightly modified)-->
           <token>l</token>
           <token regexp="yes">[’´'‛′‘]</token>
           <or>
-            <token regexp="yes">aise|armoricaine|avance|aveuglette|accoutumée|amiable|emporte-pièce|évidence|improviste|inverse</token>
+            <token regexp="yes">aise|apogée|arrivée|armoricaine|atterrissage|aune|avenant|avance|aveuglette|accoutumée|amiable|écart|égard|emporte-pièce|encontre|époque|étranger|évidence|extérieur|improviste|instar|insu|intérieur|inverse|ombre|opposé|unanimité|unisson</token>
             <token postag="V inf"/>
           </or>
         </pattern>
@@ -1582,7 +1586,7 @@ though, and has since been slightly modified)-->
             <token>à</token>
           </marker>
           <token postag="V.*ppa.*" postag_regexp="yes">
-            <exception regexp="yes">fait|forfait|partie|pointe?s?|issue|coté|portée|prise|mort|vue|revenus?|tapis|(?-i)Vitré</exception>
+            <exception regexp="yes">croisées?|fait|forfaits?|partie|pointe?s?|issues?|coté|partis?|portées?|prises?|mort|vue|revenus?|tapis|visées?|(?-i)Vitré</exception>
           </token>
         </pattern>
         <message>Voulez-vous écrire <suggestion>a</suggestion> ?</message>
@@ -1596,7 +1600,7 @@ though, and has since been slightly modified)-->
         <example>Une tapette à tapis.</example>
         <example>Une maladie à issue fatale.</example>
         <example>Du béton à prise rapide.</example>
-        <example>Il habite à Vitré..</example>
+        <example>Il habite à Vitré.</example>
       </rule>
     </rulegroup>
     <rulegroup id="OU" name="Ou au lieux de où">
@@ -1663,7 +1667,7 @@ though, and has since been slightly modified)-->
           <marker>
             <token regexp="yes">sure?s?</token>
           </marker>
-          <token regexp="yes">que?|et|[!;:.»…]</token>
+          <token regexp="yes">que?|et|[!;.»…]</token>
         </pattern>
         <message>Voulez-vous écrire <suggestion><match no="1" regexp_match="(.).(.*)" regexp_replace="$1û$2"/></suggestion> ?</message>
         <example correction="sûr">J’en suis <marker>sur</marker>.</example>
@@ -1671,6 +1675,7 @@ though, and has since been slightly modified)-->
         <example correction="Sûr"><marker>Sur</marker> et certain.</example>
         <example>Sûr et certain.</example>
         <example correction="sûre">Je suis <marker>sure</marker> que tu réussiras.</example>
+        <example>Il fut invité sur : TF1, France 2 et Arte.</example>
       </rule>
       <rule>
         <pattern>
@@ -1976,7 +1981,7 @@ though, and has since been slightly modified)-->
         <token regexp="yes">d[eu]</token>
       </pattern>
       <message>Voulez-vous écrire <suggestion>\1 termes \3</suggestion> ?</message>
-      <url>http://www.academie-francaise.fr/la-langue-francaise/questions-de-langue#32_strong-em-en-termes-de-au-terme-de-em-strong</url>
+      <url>http://www.academie-francaise.fr/en-termes-de</url>
       <example correction="En termes de"><marker>En terme de</marker> rémunération</example>
       <example>En termes de rémunération</example>
     </rule>
@@ -4423,6 +4428,24 @@ though, and has since been slightly modified)-->
         <example correction="Ban Ki-moon"><marker>Ban Ki Moon</marker></example>
       </rule>
       <rule>
+        <regexp>(?-i)(?!Cédric Villani\b)(?i)\bC[ée]drick? Vill?ann?[iy]e?\b</regexp>
+        <message>Écrivez <suggestion>Cédric Villani</suggestion> s’il s’agit du mathématicien français.</message>
+        <url>https://fr.wikipedia.org/wiki/Cédric_Villani</url>
+        <example correction="Cédric Villani"><marker>Cédric Vilani</marker></example>
+      </rule>
+      <rule>
+        <regexp>(?-i)(?!Artur Avila\b)(?i)\bArth?ur Avv?ill?a?\b</regexp>
+        <message>Écrivez <suggestion>Artur Avila</suggestion> s’il s’agit du mathématicien brazilo-français.</message>
+        <url>https://fr.wikipedia.org/wiki/Artur_Avila</url>
+        <example correction="Artur Avila"><marker>Arthur Avila</marker></example>
+      </rule>
+      <rule>
+        <regexp>(?-i)(?!Pierre-Gilles de Gennes\b)(?i)\bPi[eêè]rr?es?[- ]Gill?es? de G[eêè]nn?es?\b</regexp>
+        <message>Écrivez <suggestion>Pierre-Gilles de Gennes</suggestion> s’il s’agit du physicien française.</message>
+        <url>https://fr.wikipedia.org/wiki/Pierre-Gilles_de_Gennes</url>
+        <example correction="Pierre-Gilles de Gennes"><marker>Pierre-Gilles de Genne</marker></example>
+      </rule>
+      <rule>
         <pattern>
           <token>Ban</token>
           <token regexp="yes" case_sensitive="yes">Ki[-‑‐]Moon</token>
@@ -4597,6 +4620,15 @@ though, and has since been slightly modified)-->
         <message>Écrivez <suggestion>Gustav Mahler</suggestion> s’il s’agit du compositeur autrichien.</message>
         <url>https://fr.wikipedia.org/wiki/Gustav_Mahler</url>
         <example correction="Gustav Mahler"><marker>Gustav Malher</marker>.</example>
+      </rule>
+      <rule>
+        <pattern>
+          <token>Lee</token>
+          <token regexp="yes">S[ée]e?dd?oll?e?<exception>Sedol</exception></token>
+        </pattern>
+        <message>Écrivez <suggestion>Lee Sedol</suggestion> s’il s’agit du joueur de go professionnel coréen.</message>
+        <url>https://fr.wikipedia.org/wiki/Lee_Sedol</url>
+        <example correction="Lee Sedol"><marker>Lee Seedol</marker>.</example>
       </rule>
     </rulegroup>
     <rule id="WIKIPEDIA" name="Wikipedia → Wikipédia">
@@ -6146,7 +6178,7 @@ though, and has since been slightly modified)-->
       <url>http://tempsreel.nouvelobs.com/abc-lettres/accroc-accro-a-croc/A/homophone.html</url>
       <rule>
         <pattern>
-          <token regexp="yes" inflected="yes">devenir|être|rendre|sembler|para[îi]tre</token>
+          <token regexp="yes" inflected="yes">devenir|être|para[îi]tre|rendre|rester|sembler</token>
           <token regexp="yes" min="0" max="1">une?</token>
           <marker><token regexp="yes">accrocs?</token></marker>
         </pattern>
@@ -6156,7 +6188,7 @@ though, and has since been slightly modified)-->
       </rule>
       <rule>
         <pattern>
-          <token regexp="yes" inflected="yes">devenir|être|rendre|sembler|para[îi]tre</token>
+          <token regexp="yes" inflected="yes">devenir|être|para[îi]tre|rendre|rester|sembler</token>
           <token regexp="yes" min="0" max="1">une?</token>
           <marker>
             <token regexp="yes">[àa]</token>
@@ -7400,7 +7432,7 @@ though, and has since been slightly modified)-->
     <rule id="ELISION" name="Élision de le, la…">
       <pattern>
         <token regexp="yes">[dljmnst]e|la|jusque|que</token>
-        <token regexp="yes">[àâaéêèeiîou]\D.*|à<exception regexp="yes">onze|onzièmes?|une?|au?|oui|ouistiti|ouï[-‑‐]dire|énième|Iouri|ouate|Ouacif|Ouagadougou|Ouarzazate|Ouidah|one(-.*)?|o[ùu]|(?-i)[IVXLCM]+e?|Ier|Ire</exception></token>
+        <token regexp="yes">[àâaéêèeiîou]\D.*|à<exception regexp="yes">onze|onzièmes?|une?|au?|oui|ouistiti|ouï[-‑‐]dire|énième|Iouri|ouate|Ouacif|Ouagadougou|Ouarzazate|Ouémo|Ouidah|one(-.*)?|o[ùu]|(?-i)[IVXLCM]+e?|Ier|Ire</exception></token>
       </pattern>
       <message>« \1 \2 » s’élide en <suggestion><match no="1" regexp_match=".$" regexp_replace=""/>’\2</suggestion>.</message>
       <url>http://66.46.185.79/bdl/gabarit_bdl.asp?id=1737</url>
@@ -7666,7 +7698,7 @@ though, and has since been slightly modified)-->
           <token postag="[DJN] .* s" postag_regexp="yes" skip="1">
             <!-- Following exception skip words both singular/plural as well as adverbs -->
             <exception negate_pos="yes" postag="A|[JNZ] .* s?p|SENT_END" postag_regexp="yes" scope="next"/>
-            <exception postag="V inf|[DJNZ] .* s?p" postag_regexp="yes" scope="current"/>
+            <exception postag="V (inf|con|ind|sub).*|[DJNZ] .* s?p" postag_regexp="yes" scope="current"/>
             <exception postag="&lt;/DE&gt;" scope="previous"/>
             <exception regexp="yes" scope="previous">et|de|du</exception>
             <exception regexp="yes">air|car|juste|même|neuf</exception>
@@ -7714,6 +7746,7 @@ though, and has since been slightly modified)-->
         <example>Certaines grenouilles peuvent <marker>même être</marker> mortelles.</example>
         <example>Le CAPES de mathématiques.</example>
         <example>Combien de fois avez-vous été amoureuses dans votre vie.</example>
+        <example>La couronne périphérique alterne falaises abruptes et plages.</example>
       </rule>
       <rule name="pluriel suivi du singulier">
         <antipattern>
@@ -7961,7 +7994,9 @@ though, and has since been slightly modified)-->
             <exception postag="Z [em] .*" postag_regexp="yes" regexp="yes">(?-i)\p{Lu}.*</exception>
             <exception postag="V.*" postag_regexp="yes"/>
           </token>
-          <token min="0" max="1" postag="A"><exception>mais</exception></token>
+          <token min="0" max="1" postag="A">
+            <exception regexp="yes">mais|lundi|mardi|mercredi|jeudi|vendredi|samedi|dimanche</exception>
+          </token>
           <token postag="J m .*|V .* m .*" postag_regexp="yes">
             <exception postag="[JNZ] [fe] .*|V .*(inf|ppr|ind|con|sub).*" postag_regexp="yes"/>
             <exception>amateur</exception>
@@ -7996,6 +8031,7 @@ though, and has since been slightly modified)-->
         <example>Non seulement ma <marker>fille mais certains</marker> de ses camarades.</example>
         <example>Une ceinture marron.</example>
         <example>L’astronomie amateur.</example>
+        <example>Je suis allé à l’école lundi passé.</example>
       </rule>
     </rulegroup>
     <rulegroup id="ACCORD_CENTAINE_DE" name="centaine de">
@@ -8042,7 +8078,7 @@ though, and has since been slightly modified)-->
       <rule>
         <pattern>
           <token postag="D . s?p" postag_regexp="yes"/>
-          <token postag="N . p" postag_regexp="yes"><exception regexp="yes">grosses|premières</exception></token>
+          <token postag="N . p" postag_regexp="yes"><exception regexp="yes">grosses|dernières|premières</exception></token>
           <marker><token regexp="yes">abricots|acajous|anthracites|argents|aubergines|azurs|bistres|briques|bronzes|cachous|caramels|carmins|cerises|chocolats|corails|crèmes|cuivres|ébènes|émeraudes|fraises|garances|grenats|indigos|isabelles|ivoires|lavandes|magentas|marrons|moutardes|nacres|noisettes|ocres|olives|ors|oranges|outremers|pailles|pastels|pervenches|pies|pistaches|pivoines|rouilles|sables|safrans|sépias|tabacs|taupes|tomates|turquoises|vermillons</token></marker>
         </pattern>
         <message>Quand la couleur est exprimée par un nom de plante, de fruit, d’animal, de pierre ou de personne, l’invariabilité est alors de rigueur, car il s’agit de tours elliptique (de la couleur de). Voulez-vous écrire <suggestion><match no="3" regexp_match="s$" regexp_replace=""/></suggestion> ?</message>
@@ -8541,6 +8577,33 @@ though, and has since been slightly modified)-->
       <example correction="">Je suis en retard <marker>parce</marker> j’ai raté mon bus.</example>
       <example>Je suis en retard parce que j’ai raté mon bus.</example>
     </rule>
+    <rule id="A_LE" name="à la nom">
+      <pattern>
+        <marker>
+          <token>à</token>
+          <token regexp="yes">les?</token>
+        </marker>
+        <token><exception postag="V inf|UNKNOWN" postag_regexp="yes"/></token>
+      </pattern>
+      <message>Incohérence : « à \2 » ne peut se touver que devant un infinitif.</message>
+      <example correction="">Il a gagné <marker>à le</marker> championnat.</example>
+      <example>Je n’arrive pas à le déplacer.</example>
+    </rule>
+    <rule id="DU_LE" name="du le">
+      <pattern>
+        <token>du</token>
+        <token>
+          <exception postag="[KNJY].*|UNKNOWN" postag_regexp="yes"/>
+          <exception regexp="yes">bien|fort|ou|même|mieux|moins|peu|plus|tout|très|(?-i)[A-Z].*|:</exception>
+        </token>
+      </pattern>
+      <message>Incohérence : « \1 » ne peut pas se touver devant « \2 ».</message>
+      <example correction="">Je vais acheter <marker>du le</marker> jambon.</example>
+      <example>Je vais acheter du jambon.</example>
+      <example>Du bon jambon.</example>
+      <example>Du très bon jambon.</example>
+      <example>Il écoute du Chopin.</example>
+    </rule>
     <rulegroup id="N_V" name="pas de verbe après : au, de, du…">
       <rule>
         <antipattern>
@@ -8596,7 +8659,7 @@ though, and has since been slightly modified)-->
         <example>Au sortir de la guerre.</example>
       </rule>
     </rulegroup>
-    <rulegroup id="ETRE_VPPA_OU_ADJ" name="être + participe présent">
+    <rulegroup id="ETRE_VPPA_OU_ADJ" name="être + participe passé">
       <rule>
         <pattern>
           <token postag="SENT_START" skip="-1">
@@ -8606,7 +8669,7 @@ though, and has since been slightly modified)-->
             <exception>on</exception>
             <exception postag="[NZ] [fe] .*" postag_regexp="yes"/>
           </token>
-          <token postag="V.* 3 .*" postag_regexp="yes" regexp="yes" inflected="yes">être|devenir|sembler|para[îi]tre</token>
+          <token postag="V.* 3 .*" postag_regexp="yes" regexp="yes" inflected="yes">demeurer|devenir|être|para[îi]tre|rester|sembler</token>
           <token min="0" max="1" postag="A"/>
           <marker>
             <token postag="V.* ppa f .*|J f .*" postag_regexp="yes">
@@ -8632,6 +8695,8 @@ though, and has since been slightly modified)-->
         <example>Dominique est peut-être <marker>fatiguée</marker>.</example>
         <example>Dominique est peut-être <marker>fatigué</marker>.</example>
         <example>Ils sont très <marker>avares</marker>.</example>
+        <example correction="">Ils restent <marker>dernières</marker>.</example>
+        <example>Ils restent <marker>derniers</marker>.</example>
       </rule>
       <rule>
         <pattern>
@@ -8666,7 +8731,7 @@ though, and has since been slightly modified)-->
             <exception postag="[NZ] [fe] .*" postag_regexp="yes"/>
           </token>
           <token regexp="yes" skip="1">ne?</token>
-          <token postag="V.* 3 .*" postag_regexp="yes" regexp="yes" inflected="yes">être|devenir|sembler|para[îi]tre</token>
+          <token postag="V.* 3 .*" postag_regexp="yes" regexp="yes" inflected="yes">demeurer|devenir|être|para[îi]tre|rester|sembler</token>
           <token regexp="yes">pas|point|guère|plus|jamais</token>
           <token min="0" max="1" postag="A"/>
           <marker>
@@ -8695,7 +8760,7 @@ though, and has since been slightly modified)-->
           <token postag="[NZ] f .*|R pers suj 3 f .*|R dem f .*" postag_regexp="yes">
             <exception postag="[NZ] [me] .*" postag_regexp="yes"/>
           </token>
-          <token postag="V.* 3 .*" postag_regexp="yes" regexp="yes" inflected="yes">être|devenir|sembler|para[îi]tre</token>
+          <token postag="V.* 3 .*" postag_regexp="yes" regexp="yes" inflected="yes">demeurer|être|devenir|para[îi]tre|rester|sembler</token>
           <token min="0" max="1" postag="A"/>
           <marker>
             <token postag="V.* ppa m .*|J m .*" postag_regexp="yes">
@@ -8755,7 +8820,7 @@ though, and has since been slightly modified)-->
             <exception postag="[NZ] [me] .*" postag_regexp="yes"/>
           </token>
           <token regexp="yes" skip="1">ne?</token>
-          <token postag="V.* 3 .*" postag_regexp="yes" regexp="yes" inflected="yes">être|devenir|sembler|para[îi]tre</token>
+          <token postag="V.* 3 .*" postag_regexp="yes" regexp="yes" inflected="yes">demeurer|devenir|être|para[îi]tre|rester|sembler</token>
           <token regexp="yes">pas|point|guère|plus|jamais</token>
           <token min="0" max="1" postag="A"/>
           <marker>
@@ -8782,7 +8847,7 @@ though, and has since been slightly modified)-->
             <exception>on</exception>
             <exception postag="N . s?p" postag_regexp="yes"/>
           </token>
-          <token postag="V .*s" postag_regexp="yes" regexp="yes" inflected="yes">être|devenir|sembler|para[îi]tre</token>
+          <token postag="V .*s" postag_regexp="yes" regexp="yes" inflected="yes">demeurer|devenir|être|para[îi]tre|rester|sembler</token>
           <token min="0" max="1" postag="A"/>
           <marker>
             <token postag="V.* ppa .* p|J . p" postag_regexp="yes">
@@ -8864,7 +8929,7 @@ though, and has since been slightly modified)-->
             <exception>on</exception>
           </token>
           <token regexp="yes" skip="1">ne?</token>
-          <token postag="V .*s" postag_regexp="yes" regexp="yes" inflected="yes">être|devenir|sembler|para[îi]tre</token>
+          <token postag="V .*s" postag_regexp="yes" regexp="yes" inflected="yes">demeurer|devenir|être|para[îi]tre|rester|sembler</token>
           <token regexp="yes">pas|point|guère|plus|jamais</token>
           <token min="0" max="1" postag="A"/>
           <marker>
@@ -8896,7 +8961,7 @@ though, and has since been slightly modified)-->
           <token postag="N . p|R pers suj [13].* p|R dem.* p" postag_regexp="yes">
             <exception postag="N . sp?" postag_regexp="yes"/>
           </token>
-          <token postag="V .*p" postag_regexp="yes" regexp="yes" inflected="yes">être|devenir|sembler|para[îi]tre</token>
+          <token postag="V .*p" postag_regexp="yes" regexp="yes" inflected="yes">demeurer|devenir|être|para[îi]tre|rester|sembler</token>
           <token min="0" max="1" postag="A"/>
           <marker>
             <token postag="V.* ppa .* s|J . s" postag_regexp="yes">
@@ -8946,7 +9011,7 @@ though, and has since been slightly modified)-->
             </token>
           </marker>
         </pattern>
-        <message>Le mot pluriel « \6 » n’est pas accordé en nombre avec le mot pluriel « \2 ».</message>
+        <message>Le mot singulier « \6 » n’est pas accordé en nombre avec le mot pluriel « \2 ».</message>
         <example correction="">Des orages avaient été <marker>annoncé</marker>.</example>
         <example>Des orages avaient été annoncés.</example>
         <example correction="">Ils avaient été <marker>dénoncé</marker>.</example>
@@ -8968,7 +9033,7 @@ though, and has since been slightly modified)-->
             <exception postag="[NZ] . sp?" postag_regexp="yes"/>
           </token>
           <token regexp="yes" skip="1">ne?</token>
-          <token postag="V .*p" postag_regexp="yes" regexp="yes" inflected="yes">être|devenir|sembler|para[îi]tre</token>
+          <token postag="V .*p" postag_regexp="yes" regexp="yes" inflected="yes">demeurer|devenir|être|para[îi]tre|rester|sembler</token>
           <token regexp="yes">pas|point|guère|plus|jamais</token>
           <token min="0" max="1" postag="A"/>
           <marker>
@@ -9249,7 +9314,7 @@ though, and has since been slightly modified)-->
             </token>
           </marker>
         </pattern>
-        <message>« \1 » et « \3 » ne sont pas accordés en genre ou en nombre.</message>
+        <message>« \1 » et « \3 » ne sont pas bien accordés.</message>
         <example correction="">Sommes-nous déjà <marker>arrivé</marker> ?</example>
         <example correction="">Sommes-nous déjà <marker>arrivée</marker> ?</example>
         <example correction="">Sommes-nous déjà <marker>arriver</marker> ?</example>
@@ -9258,6 +9323,321 @@ though, and has since been slightly modified)-->
         <example>Sommes-nous déjà <marker>arrivées</marker> ?</example>
         <example correction="">Ne sommes-nous pas <marker>aveugle</marker> ?</example>
         <example>Ne sommes-nous pas <marker>aveugles</marker> ?</example>
+      </rule>
+    </rulegroup>
+    <rulegroup id="AVOIR_L_AIR_VPPA_OU_ADJ" name="avoir l’air + participe passé">
+      <rule>
+        <pattern>
+          <token postag="SENT_START" skip="-1">
+            <exception scope="next" postag="[NRZ].* [fe] .*" postag_regexp="yes"/>
+          </token>
+          <token postag="[NZ] m .*|R pers suj 3 m .*|R dem m .*" postag_regexp="yes">
+            <exception>on</exception>
+            <exception postag="[NZ] [fe] .*" postag_regexp="yes"/>
+          </token>
+          <token postag="V avoir.*" postag_regexp="yes"/>
+          <token>l</token>
+          <token regexp="yes">['´‘’′]</token>
+          <token>air</token>
+          <token min="0" max="1" postag="A"/>
+          <marker>
+            <token postag="V.* ppa f .*|J f .*" postag_regexp="yes">
+              <exception>même</exception>
+              <exception postag="[JN] [me].*|V ppa [me].*" postag_regexp="yes"/>
+            </token>
+          </marker>
+        </pattern>
+        <message>Le mot féminin « \8 » n’est pas accordé en genre avec le mot masculin « \2 ».</message>
+        <example correction="">Le ciel avait l’air <marker>dégagée</marker>.</example>
+        <example>Le ciel avait l’air <marker>dégagé</marker>.</example>
+        <example correction="">Il a l’air <marker>fatiguée</marker>.</example>
+        <example correction="">Il a l’air très <marker>fatiguée</marker>.</example>
+        <example>Il a l’air <marker>fatiqué</marker>.</example>
+        <example>Elle a l’air <marker>fatiguée</marker>.</example>
+        <example>On a l’air <marker>fatiguée</marker>.</example>
+      </rule>
+      <rule>
+        <pattern>
+          <token postag="SENT_START" skip="-1">
+            <exception scope="next" postag="[NRZ].* [fe] .*" postag_regexp="yes"/>
+          </token>
+          <token postag="[NZ] m .*|R pers suj 3 m .*|R dem m .*" postag_regexp="yes">
+            <exception>on</exception>
+            <exception postag="[NZ] [fe] .*" postag_regexp="yes"/>
+          </token>
+          <token>n</token>
+          <token regexp="yes">['´‘’′]</token>
+          <token postag="V avoir.*" postag_regexp="yes"/>
+          <token regexp="yes">pas|point|guère|plus|jamais</token>
+          <token>l</token>
+          <token regexp="yes">['´‘’′]</token>
+          <token>air</token>
+          <token min="0" max="1" postag="A"/>
+          <marker>
+            <token postag="V.* ppa f .*|J f .*" postag_regexp="yes">
+              <exception>même</exception>
+              <exception postag="[JN] [me].*|V ppa [me].*" postag_regexp="yes"/>
+            </token>
+          </marker>
+        </pattern>
+        <message>Le mot féminin « \11 » n’est pas accordé en genre avec le mot masculin « \2 ».</message>
+        <example correction="">Le ciel n’avait pas l’air <marker>dégagée</marker>.</example>
+        <example>Le ciel n’avait pas l’air <marker>dégagé</marker>.</example>
+        <example correction="">Il n’a plus l’air <marker>fatiguée</marker>.</example>
+        <example correction="">Il n’a plus l’air très <marker>fatiguée</marker>.</example>
+        <example correction="">Il n‘a plus l’air très <marker>fatiguée</marker>.</example>
+        <example>Il n’a jamais l’air <marker>fatiqué</marker>.</example>
+        <example>Elle n’a jamais l’air <marker>fatiguée</marker>.</example>
+        <example>On n’a jamais l’air <marker>fatiguée</marker>.</example>
+      </rule>
+      <rule>
+        <pattern>
+          <token postag="SENT_START" skip="-1">
+            <exception scope="next" postag="[NRZ].* [me] .*|V inf" postag_regexp="yes"/>
+          </token>
+          <token postag="[NZ] f .*|R pers suj 3 f .*|R dem f .*" postag_regexp="yes">
+            <exception postag="[NZ] [me] .*" postag_regexp="yes"/>
+          </token>
+          <token postag="V avoir.*" postag_regexp="yes"/>
+          <token>l</token>
+          <token regexp="yes">['´‘’′]</token>
+          <token>air</token>
+          <token min="0" max="1" postag="A"/>
+          <marker>
+            <token postag="V.* ppa m .*|J m .*" postag_regexp="yes">
+              <exception>pendant</exception>
+              <exception postag="V.* ppa [fe] .*|J [fe] .*" postag_regexp="yes"/>
+            </token>
+          </marker>
+        </pattern>
+        <message>Le mot masculin « \8 » n’est pas accordé en genre avec le mot féminin « \2 ».</message>
+        <example correction="">Martine a l’air <marker>fatigué</marker>.</example>
+        <example>Martine a l’air <marker>fatiguée</marker>.</example>
+      </rule>
+      <rule>
+        <pattern>
+          <token postag="SENT_START" skip="-1">
+            <exception scope="next" postag="[NRZ].* [me] .*|V inf" postag_regexp="yes"/>
+          </token>
+          <token postag="[NZ] f .*|R pers suj 3 f .*|R dem f .*" postag_regexp="yes">
+            <exception postag="[NZ] [me] .*" postag_regexp="yes"/>
+          </token>
+          <token>n</token>
+          <token regexp="yes">['´‘’′]</token>
+          <token postag="V avoir.*" postag_regexp="yes"/>
+          <token regexp="yes">pas|point|guère|plus|jamais</token>
+          <token>l</token>
+          <token regexp="yes">['´‘’′]</token>
+          <token>air</token>
+          <token min="0" max="1" postag="A"/>
+          <marker>
+            <token postag="V.* ppa m .*|J m .*" postag_regexp="yes">
+              <exception postag="V.* ppa [fe] .*|J [fe] .*" postag_regexp="yes"/>
+            </token>
+          </marker>
+        </pattern>
+        <message>Le mot masculin « \11 » n’est pas accordé en genre avec le mot féminin « \2 ».</message>
+        <example correction="">Martine n’avait pas l’air <marker>fatigué</marker>.</example>
+        <example>Martine n’avait pas l’air <marker>fatiguée</marker>.</example>
+      </rule>
+      <rule>
+        <pattern>
+          <token postag="SENT_START" skip="-1">
+            <exception scope="next" postag="[NR].*p" postag_regexp="yes"/>
+            <exception scope="next">et</exception>
+          </token>
+          <token postag="Z . sp?|N . s|R pers suj.* s|R dem.* s" postag_regexp="yes">
+            <exception>on</exception>
+            <exception postag="N . s?p" postag_regexp="yes"/>
+          </token>
+          <token postag="V avoir.*" postag_regexp="yes"/>
+          <token>l</token>
+          <token regexp="yes">['´‘’′]</token>
+          <token>air</token>
+          <token min="0" max="1" postag="A"/>
+          <marker>
+            <token postag="V.* ppa .* p|J . p" postag_regexp="yes">
+              <exception postag="V.* ppa .* sp?|J . sp?" postag_regexp="yes"/>
+            </token>
+          </marker>
+        </pattern>
+        <message>Le mot pluriel « \8 » n’est pas accordé en nombre avec le mot singulier « \2 ».</message>
+        <example correction="">Elle a l’air <marker>contentes</marker>.</example>
+        <example>Elle a l’air <marker>contente</marker>.</example>
+      </rule>
+      <rule>
+        <pattern>
+          <token>j</token>
+          <token regexp="yes">[’´'‛′‘]</token>
+          <token regexp="yes">ai|aurais|avais|aurai|aie|eus|eusse</token>
+          <token>l</token>
+          <token regexp="yes">[’´'‛′‘]</token>
+          <token>air</token>
+          <token min="0" max="1" postag="A"/>
+          <marker>
+            <token postag="V.* ppa .* p|J . p" postag_regexp="yes">
+              <exception postag="V.* ppa .* sp?|J . sp?" postag_regexp="yes"/>
+            </token>
+          </marker>
+        </pattern>
+        <message>Le mot pluriel « \8 » n’est pas accordé en nombre avec le pronom singulier « \1 ».</message>
+        <example correction="">J’avais l’air <marker>contents</marker>.</example>
+        <example>J’avais l’air <marker>content</marker>.</example>
+      </rule>
+      <rule>
+        <pattern>
+          <token postag="SENT_START" skip="-1">
+            <exception scope="next" postag="[NR].*p" postag_regexp="yes"/>
+            <exception scope="next">et</exception>
+          </token>
+          <token postag="Z . sp?|N . s|R pers suj.* s|R dem.* s" postag_regexp="yes">
+            <exception postag="N . s?p" postag_regexp="yes"/>
+            <exception>on</exception>
+          </token>
+          <token>n</token>
+          <token regexp="yes">[’´'‛′‘]</token>
+          <token postag="V avoir.*" postag_regexp="yes"/>
+          <token regexp="yes">pas|point|guère|plus|jamais</token>
+          <token min="0" max="1" postag="A"/>
+          <token>l</token>
+          <token regexp="yes">[’´'‛′‘]</token>
+          <token>air</token>
+          <token min="0" max="1" postag="A"/>
+          <marker>
+            <token postag="V.* ppa .* p|J . p" postag_regexp="yes">
+              <exception postag="V.* ppa .* sp?|J . sp?" postag_regexp="yes"/>
+            </token>
+          </marker>
+        </pattern>
+        <message>Le mot pluriel « \12 » n’est pas accordé en nombre avec le mot singulier « \2 ».</message>
+        <example correction="">Elle n’a pas l’air <marker>contentes</marker>.</example>
+        <example correction="">Elle n’a pas l’air très <marker>contentes</marker>.</example>
+        <example correction="">Elle n’a pas toujours l’air <marker>contentes</marker>.</example>
+        <example>Elles n’a pas l’air <marker>contentes</marker>.</example>
+        <example>Elle n’a pas l’air <marker>contente</marker>.</example>
+      </rule>
+      <rule>
+        <pattern>
+          <token postag="SENT_START" skip="-1">
+            <exception scope="next" postag="[NR].*sp?|V inf" postag_regexp="yes"/>
+          </token>
+          <token postag="N . p|R pers suj [13].* p|R dem.* p" postag_regexp="yes">
+            <exception postag="N . sp?" postag_regexp="yes"/>
+          </token>
+          <token postag="V avoir.*" postag_regexp="yes"/>
+          <token>l</token>
+          <token regexp="yes">['´‘’′]</token>
+          <token>air</token>
+          <token min="0" max="1" postag="A"/>
+          <marker>
+            <token postag="V.* ppa .* s|J . s" postag_regexp="yes">
+              <exception regexp="yes">juste|même|vite</exception>
+              <exception postag="V.* ppa .* s?p|J . s?p" postag_regexp="yes"/>
+            </token>
+          </marker>
+        </pattern>
+        <message>Le mot singulier « \8 » n’est pas accordé en nombre avec le mot pluriel « \2 ».</message>
+        <example correction="">Nous avions l'air <marker>fatigué</marker>.</example>
+        <example>Nous avions l'air <marker>fatigués</marker>.</example>
+      </rule>
+      <rule>
+        <pattern>
+          <token postag="SENT_START" skip="-1">
+            <exception scope="next" postag="[NR].*sp?|V inf" postag_regexp="yes"/>
+          </token>
+          <token postag="[NZ] . p|R pers suj [13].* p|R dem.* p" postag_regexp="yes">
+            <exception postag="[NZ] . sp?" postag_regexp="yes"/>
+          </token>
+          <token>n</token>
+          <token regexp="yes">[’´'‛′‘]</token>
+          <token postag="V avoir.*" postag_regexp="yes"/>
+          <token regexp="yes">pas|point|guère|plus|jamais</token>
+          <token min="0" max="1" postag="A"/>
+          <token>l</token>
+          <token regexp="yes">[’´'‛′‘]</token>
+          <token>air</token>
+          <token min="0" max="1" postag="A"/>
+          <marker>
+            <token postag="V.* ppa .* s|J . s" postag_regexp="yes">
+              <exception>juste</exception>
+              <exception postag="V.*  ppa .* s?p|J . s?p" postag_regexp="yes"/>
+            </token>
+          </marker>
+        </pattern>
+        <message>Le mot singulier « \12 » n’est pas accordé en nombre avec le mot pluriel « \2 ».</message>
+        <example correction="">Elles n’ont pas l’air <marker>fatiguée</marker>.</example>
+        <example correction="">Elles n’ont pas l’air très <marker>fatiguée</marker>.</example>
+        <example correction="">Elles n’ont pas encore l’air <marker>fatiguée</marker>.</example>
+        <example correction="">Elles n’ont pas encore l’air très <marker>fatiguée</marker>.</example>
+        <example>Elles n’ont pas l’air <marker>fatiguées</marker>.</example>
+      </rule>
+      <rule>
+        <pattern>
+          <token regexp="yes">ai-je|(avais|aurais?)-(je|tu)|(a-t|aura-t|eut|avait|aurait)-(il|elle)</token>
+          <token>l</token>
+          <token regexp="yes">['´‘’′]</token>
+          <token>air</token>
+          <token min="0" max="1" postag="A"/>
+          <marker>
+            <token postag="[VJ] .*" postag_regexp="yes">
+              <exception postag="V ppa . sp?|[JNZ] . sp?" postag_regexp="yes"/>
+            </token>
+          </marker>
+        </pattern>
+        <message>« \1 » et « \6 » ne sont pas bien accordés en nombre.</message>
+        <example correction="">Avais-tu l’air <marker>fatigués</marker> ?</example>
+        <example>Avais-tu l’air fatigué ?</example>
+      </rule>
+      <rule>
+        <pattern>
+          <token regexp="yes">(ont|avaient|auront|auraient)-(ils|elles)|(avi?ons|auri?ons)-nous</token>
+          <token>l</token>
+          <token regexp="yes">['´‘’′]</token>
+          <token>air</token>
+          <token min="0" max="1" postag="A"/>
+          <marker>
+            <token postag="[VJ] .*" postag_regexp="yes">
+              <exception postag="V ppa . s?p|[JNZ] . s?p" postag_regexp="yes"/>
+            </token>
+          </marker>
+        </pattern>
+        <message>« \1 » et « \6 » ne sont pas bien accordés en nombre.</message>
+        <example correction="">Avaient-ils l’air <marker>fatigué</marker> ?</example>
+        <example>Avaient-ils l’air fatigués ?</example>
+      </rule>
+      <rule>
+        <pattern>
+          <token regexp="yes">(ont|avaient|auront|auraient)-ils|(a-t|avait|aurait|aura-t|eut)-il</token>
+          <token>l</token>
+          <token regexp="yes">['´‘’′]</token>
+          <token>air</token>
+          <token min="0" max="1" postag="A"/>
+          <marker>
+            <token postag="[VJ] .*" postag_regexp="yes">
+              <exception postag="V ppa [me] .*|[JNZ] [me] .*" postag_regexp="yes"/>
+            </token>
+          </marker>
+        </pattern>
+        <message>« \1 » et « \6 » ne sont pas bien accordés en genre.</message>
+        <example correction="">Avait-il l’air <marker>fatiguée</marker> ?</example>
+        <example>Avait-il l’air fatigué ?</example>
+      </rule>
+      <rule>
+        <pattern>
+          <token regexp="yes">(ont|avaient|auront|auraient)-elles|(a-t|avait|aurait|aura-t|eut)-elle</token>
+          <token>l</token>
+          <token regexp="yes">['´‘’′]</token>
+          <token>air</token>
+          <token min="0" max="1" postag="A"/>
+          <marker>
+            <token postag="[VJ] .*" postag_regexp="yes">
+              <exception postag="V ppa [fe] .*|[JNZ] [fe] .*" postag_regexp="yes"/>
+            </token>
+          </marker>
+        </pattern>
+        <message>« \1 » et « \6 » ne sont pas bien accordés en genre.</message>
+        <example correction="">Avait-elle l’air <marker>fatigué</marker> ?</example>
+        <example>Avait-elle l’air fatiguée ?</example>
       </rule>
     </rulegroup>
     <rulegroup id="IL_NOUS_A_VPPA" name="il nous a informé → il nous a informés">
@@ -9314,7 +9694,7 @@ though, and has since been slightly modified)-->
       <example>Je suis sûr de les avoir vus, de mes yeux <marker>vus</marker>.</example>
       <example>Je suis sûr de les avoir vus de mes yeux <marker>vus</marker>.</example>
     </rule>
-    <rulegroup id="PEUT_ETRE_VPPA_OU_ADJ" name="peut être + participe présent">
+    <rulegroup id="PEUT_ETRE_VPPA_OU_ADJ" name="peut être + participe passé">
       <rule>
         <pattern>
           <token postag="SENT_START" skip="-1">
@@ -9978,6 +10358,9 @@ though, and has since been slightly modified)-->
         <example correction=""><marker>Nous ne perds</marker> pas.</example>
         <example>Nous ne perdons pas.</example>
         <example>Nous ne sommes pas perdus.</example>
+        <example correction="">Les erreurs que <marker>nous feront</marker>.</example>
+        <example correction="">Les erreurs que <marker>nous ne feront</marker> plus.</example>
+        <example>Les erreurs que nous ferons.</example>
       </rule>
       <rule name="nous + pronom obj + Verbe">
         <pattern>
@@ -13643,16 +14026,6 @@ though, and has since been slightly modified)-->
       <message>« Demander une question » est un régionalisme (Québec), un anglicisme (to ask a question) et un archaïsme. Employez <suggestion>poser une question</suggestion>.</message>
       <example correction="poser une question"><marker>demander une question</marker></example>
       <example><marker>poser une question</marker></example>
-    </rule>
-    <rule id="PASSER_AU_FEU" name="passer au feu">
-      <pattern>
-        <token inflected="yes" skip="6">passer</token>
-        <token regexp="yes">aux?</token>
-        <token regexp="yes">feux?</token>
-      </pattern>
-      <message>« Passer au feu » est un régionalisme (Québec). Employez <suggestion>brûler</suggestion>, <suggestion>être incendié</suggestion>, <suggestion>être détruit par un incendie</suggestion>.</message>
-      <example correction="brûler|être incendié|être détruit par un incendie"><marker>passer au feu</marker></example>
-      <example><marker>brûler</marker></example>
     </rule>
     <rule id="A_LENDOS" name="à l’endos">
       <pattern>
@@ -20180,16 +20553,6 @@ though, and has since been slightly modified)-->
       </pattern>
       <message>« Vente semi-annuelle » est un anglicisme (semi-annual sale). Employez <suggestion>solde semestriel</suggestion>.</message>
       <example correction="solde semestriel"><marker>vente semi-annuelle</marker></example>
-    </rule>
-    <rule id="SYSTEME_DE_SON" name="système de son">
-      <pattern>
-        <token regexp="yes">systèmes?</token>
-        <token>de</token>
-        <token>son</token>
-      </pattern>
-      <message>« Système de son » est un anglicisme (sound system). Employez <suggestion>chaîne stéréo</suggestion>, <suggestion>chaîne stéréophonique</suggestion>.</message>
-      <example correction="chaîne stéréo|chaîne stéréophonique"><marker>système de son</marker></example>
-      <example><marker>chaîne stéréo</marker></example>
     </rule>
     <rulegroup id="PINCE-GRIP" name="pince-grip">
       <rule>
@@ -27844,7 +28207,7 @@ though, and has since been slightly modified)-->
             <token>du</token>
           </marker>
         </pattern>
-        <message>On ne doit en aucun cas utiliser la préposition « auprès » avec le verbe « adresser ».</message>
+        <message>On ne doit en aucun cas utiliser la préposition « auprès » avec le verbe « adresser ».</message>
         <suggestion>au</suggestion>
         <example correction="au">Vous devez vous adresser <marker>auprès du</marker> responsable.</example>
         <example correction="au">Adressez-vous <marker>auprès du</marker> responsable.</example>
@@ -27859,7 +28222,7 @@ though, and has since been slightly modified)-->
             <token regexp="yes">['´‘’′]</token>
           </marker>
         </pattern>
-        <message>On ne doit en aucun cas utiliser la préposition « auprès » avec le verbe « adresser ».</message>
+        <message>On ne doit en aucun cas utiliser la préposition « auprès » avec le verbe « adresser ».</message>
         <suggestion>à</suggestion>
         <example correction="à">Le médecin m’a adressé <marker>auprès d’</marker> une de ses collègues.</example>
         <example correction="à">Le médecin m’a adressé immédiatement <marker>auprès d’</marker> une de ses collègues.</example>
@@ -27873,7 +28236,7 @@ though, and has since been slightly modified)-->
             <token>de</token>
           </marker>
         </pattern>
-        <message>On ne doit en aucun cas utiliser la préposition « auprès » avec le verbe « adresser ».</message>
+        <message>On ne doit en aucun cas utiliser la préposition « auprès » avec le verbe « adresser ».</message>
         <suggestion>à</suggestion>
         <example correction="à">Vous devez vous adresser directement <marker>auprès de</marker> votre professeur.</example>
       </rule>
@@ -27886,7 +28249,7 @@ though, and has since been slightly modified)-->
             <token>des</token>
           </marker>
         </pattern>
-        <message>On ne doit en aucun cas utiliser la préposition « auprès » avec le verbe « adresser ».</message>
+        <message>On ne doit en aucun cas utiliser la préposition « auprès » avec le verbe « adresser ».</message>
         <suggestion>aux</suggestion>
         <example correction="aux">Adressez-vous <marker>auprès des</marker> agents de sécurité.</example>
         <example correction="aux">Adressez-vous directement <marker>auprès des</marker> agents de sécurité.</example>
@@ -27900,7 +28263,7 @@ though, and has since been slightly modified)-->
           <token skip="3">qui</token>
           <token inflected="yes">adresser</token>
         </pattern>
-        <message>On ne doit en aucun cas utiliser la préposition « auprès » avec le verbe « adresser ».</message>
+        <message>On ne doit en aucun cas utiliser la préposition « auprès » avec le verbe « adresser ».</message>
         <suggestion>à</suggestion>
         <example correction="À"><marker>Auprès de</marker> qui dois-je m‘adresser ?</example>
         <example correction="à">Il ne sait pas <marker>auprès de</marker> qui s'adresser.</example>
@@ -28078,6 +28441,7 @@ though, and has since been slightly modified)-->
       <example>Mars était le <marker>dieu</marker> de la guerre.</example>
     </rule>
     <rulegroup id="MOIS" name="mois de l’année">
+      <url>http://www.academie-francaise.fr/questions-de-langue#42_strong-em-jours-de-la-semaine-pluriel-et-majuscules-em-strong</url>
       <rule>
         <antipattern>
           <token case_sensitive="yes">Mai</token>
@@ -28101,7 +28465,6 @@ though, and has since been slightly modified)-->
           </marker>
         </pattern>
         <message>Les mois de l’année n’ont pas de majuscule. Voulez-vous écrire <suggestion><match no="2" case_conversion="startlower"/></suggestion> ?</message>
-        <url>http://www.academie-francaise.fr/la-langue-francaise/questions-de-langue#42_strong-em-jours-de-la-semaine-pluriel-et-majuscules-em-strong</url>
         <example correction="avril">Cette année, <marker>Avril</marker> a été chaud.</example>
         <example>Février est le mois le plus froid.</example>
         <example>La monarchie de Juillet.</example>
@@ -28113,7 +28476,6 @@ though, and has since been slightly modified)-->
           <marker><token>Juin</token></marker>
         </pattern>
         <message>Les mois de l’année n’ont pas de majuscule. Voulez-vous écrire <suggestion><match no="3" case_conversion="startlower"/></suggestion> ?</message>
-        <url>http://www.academie-francaise.fr/la-langue-francaise/questions-de-langue#42_strong-em-jours-de-la-semaine-pluriel-et-majuscules-em-strong</url>
         <example correction="juin">Cette année, <marker>Juin</marker> a été chaud.</example>
         <example>Cette année, juin a été chaud.</example>
         <example>Juin est le sixième mois.</example>
@@ -28142,7 +28504,7 @@ though, and has since been slightly modified)-->
         </marker>
       </pattern>
       <message>Les jours de la semaine n’ont pas de majuscule. Voulez-vous écrire <suggestion><match no="2" case_conversion="startlower"/></suggestion> ?</message>
-      <url>http://www.academie-francaise.fr/la-langue-francaise/questions-de-langue#42_strong-em-jours-de-la-semaine-pluriel-et-majuscules-em-strong</url>
+        <url>http://www.academie-francaise.fr/questions-de-langue#42_strong-em-jours-de-la-semaine-pluriel-et-majuscules-em-strong</url>
       <example correction="lundi">Je viendrai <marker>Lundi</marker>.</example>
       <example>Je viendrai lundi.</example>
       <example>Lundi est le premier jour de la semaine.</example>
@@ -28183,6 +28545,7 @@ though, and has since been slightly modified)-->
       <example correction="fermeture Éclair">J’ai cassé ma <marker>fermeture éclair</marker>.</example>
     </rule>
     <rulegroup id="GENTILE" name="gentilés">
+      <url>http://www.academie-francaise.fr/questions-de-langue#6_strong-em-adjectif-ou-nom-de-nationalit-il-est-franais-ou-il-est-franais-em-strong</url>
       <rule>
         <pattern>
           <!-- Obviously, the list of gentilés could be expanded here. -->
@@ -28193,7 +28556,6 @@ though, and has since been slightly modified)-->
           <token><exception regexp="yes">approximatif|argotique|correct|courant|facile|fluide|littéraire|parfait|universel</exception></token>
         </pattern>
         <message>Les gentilés (noms des habitants) ont une majuscule (mais pas les noms des langues). Voulez-vous écrire <suggestion><match no="2" case_conversion="startupper"/></suggestion> ?</message>
-        <url>http://www.academie-francaise.fr/la-langue-francaise/questions-de-langue#6_strong-em-adjectif-ou-nom-de-nationalit-il-est-franais-ou-il-est-franais-em-strong</url>
         <example correction="Anglais">Je travaille en anglais avec des <marker>anglais</marker>.</example>
         <example correction="Anglaises">Je travaille en anglais avec des <marker>anglaises</marker>.</example>
         <example>Je travaille en anglais avec des Anglais.</example>
@@ -28215,7 +28577,6 @@ though, and has since been slightly modified)-->
           </marker>
         </pattern>
         <message>Les gentilés (noms des habitants) ont une majuscule (mais pas les noms des langues). Voulez-vous écrire <suggestion><match no="3" case_conversion="startupper"/></suggestion> ?</message>
-        <url>http://www.academie-francaise.fr/la-langue-francaise/questions-de-langue#6_strong-em-adjectif-ou-nom-de-nationalit-il-est-franais-ou-il-est-franais-em-strong</url>
         <example correction="Suisses">Beaucoup de <marker>suisses</marker> partent en vacances à l’étranger.</example>
         <example>Une leçon de français.</example>
         <example>J’ai appris un peu de français ici et là.</example>
@@ -28232,7 +28593,6 @@ though, and has since been slightly modified)-->
           </marker>
         </pattern>
         <message>Les gentilés (noms des habitants) ont une majuscule (mais pas les noms des langues). Voulez-vous écrire <suggestion><match no="4" case_conversion="startupper"/></suggestion> ?</message>
-        <url>http://www.academie-francaise.fr/la-langue-francaise/questions-de-langue#6_strong-em-adjectif-ou-nom-de-nationalit-il-est-franais-ou-il-est-franais-em-strong</url>
         <example correction="Anglais">Beaucoup d’<marker>anglais</marker> partent en vacances à l’étranger.</example>
       </rule>
     </rulegroup>

@@ -26,20 +26,23 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
-import java.util.ArrayList;
+import java.io.Writer;
+import java.nio.file.Files;
+import java.nio.file.StandardCopyOption;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.Properties;
+import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import org.jetbrains.annotations.Nullable;
 
-import morfologik.tools.FSABuildTool;
-import morfologik.tools.Launcher;
+import morfologik.tools.DictCompile;
+import morfologik.tools.FSACompile;
+import morfologik.tools.SerializationFormat;
 
 /**
  * Create a Morfologik binary dictionary from plain text data.
@@ -51,6 +54,7 @@ class DictionaryBuilder {
   private static final int FREQ_RANGES_IN = 256;
   private static final int FREQ_RANGES_OUT = 26; // (A-Z)
   private static final int FIRST_RANGE_CODE = 65; // character 'A', less frequent words
+  private static final SerializationFormat serializationFormat = SerializationFormat.CFSA2;
 
   private final Map<String, Integer> freqList = new HashMap<>();
   private final Pattern pFreqEntry = Pattern.compile(".*<w f=\"(\\d+)\" flags=\"(.*)\">(.+)</w>.*");
@@ -66,50 +70,39 @@ class DictionaryBuilder {
     this.outputFilename = outputFilename;
   }
 
-  protected List<String> getTab2MorphOptions(File dictFile, File outputFile) throws IOException {
-    List<String> tab2morphOptions = new ArrayList<>();
-    String separator = getOption("fsa.dict.separator");
-    if (separator != null && !separator.trim().isEmpty()) {
-      tab2morphOptions.add("--annotation");
-      tab2morphOptions.add(separator);
-    }
-    
-    if ((isOptionTrue("fsa.dict.uses-prefixes") || isOptionTrue("fsa.dict.uses-infixes")) &&
-         hasOption("fsa.dict.encoder")) {
-      throw new IOException(".info file must specify either fsa.dict.encoder (preferred) or fsa.dict.uses-* properties.");
-    }
-
-    if (hasOption("fsa.dict.encoder")) {
-      tab2morphOptions.add("--encoder");
-      tab2morphOptions.add(getOption("fsa.dict.encoder"));
-    } else {
-      if (isOptionTrue("fsa.dict.uses-prefixes")) {
-        tab2morphOptions.add("--encoder");
-        tab2morphOptions.add("prefix");
-      } else if (isOptionTrue("fsa.dict.uses-infixes")) {
-        tab2morphOptions.add("--encoder");
-        tab2morphOptions.add("infix");
-      }
-    }
-
-    tab2morphOptions.add("-i");
-    tab2morphOptions.add(dictFile.getAbsolutePath());
-    tab2morphOptions.add("-o");
-    tab2morphOptions.add(outputFile.getAbsolutePath());
-    return tab2morphOptions;
+  protected String getOutputFilename() {
+    return outputFilename;
   }
-
-  protected void prepare(List<String> tab2morphOptions) throws Exception {
-    System.out.println("Running Morfologik Launcher.main with these options: " + tab2morphOptions);
-    Launcher.main(tab2morphOptions.toArray(new String[tab2morphOptions.size()]));
+  
+  protected File buildDict(File inputFile) throws Exception {
+    File outputFile = new File(outputFilename);
+    String infoPath = inputFile.toString().replaceAll("\\.txt$", ".info");
+    File resultFile = new File (inputFile.toString().replaceAll("\\.txt$", ".dict"));
+    File infoFile = new File(infoPath);
+    // save info file in the same path of input text file and with the same name
+    props.store(new FileOutputStream(infoFile), "");
+    String[] buildOptions = {"--exit", "false",
+        "-i", inputFile.toString(), 
+        "-f", serializationFormat.toString(), 
+        "--overwrite"};
+    System.out.println("Running Morfologik DictCompile.main with these options: " + Arrays.toString(buildOptions));
+    DictCompile.main(buildOptions);
+    // move output file to the desired path and name
+    Files.move(resultFile.toPath(), outputFile.toPath(), StandardCopyOption.REPLACE_EXISTING);
+    System.out.println("Done. The binary dictionary has been written to " + outputFile.getAbsolutePath());
+    return outputFile;
   }
-
-  protected File buildDict(File tempFile) throws Exception {
+  
+  protected File buildFSA(File inputFile) throws Exception {
     File resultFile = new File(outputFilename);
-        
-    String[] buildToolOptions = {"-f", "cfsa2", "-i", tempFile.getAbsolutePath(), "-o", resultFile.getAbsolutePath()};
-    System.out.println("Running Morfologik FSABuildTool.main with these options: " + Arrays.toString(buildToolOptions));
-    FSABuildTool.main(buildToolOptions);
+    String[] buildOptions = {
+        "--exit", "false",
+        "-i", inputFile.toString(), 
+        "-o", resultFile.toString(),
+        "-f", serializationFormat.toString(), 
+        "--overwrite"};
+    System.out.println("Running Morfologik FSACompile.main with these options: " + Arrays.toString(buildOptions));
+    FSACompile.main(buildOptions);
     System.out.println("Done. The binary dictionary has been written to " + resultFile.getAbsolutePath());
     return resultFile;
   }
@@ -127,7 +120,7 @@ class DictionaryBuilder {
     return props.getProperty(option) != null; 
   }
   
-  private boolean isOptionTrue(String option) {
+  protected boolean isOptionTrue(String option) {
     return hasOption(option) && "true".equals(getOption(option));
   }
   
@@ -149,7 +142,7 @@ class DictionaryBuilder {
     }
   }
   
-  protected File addFreqData(File dictFile) throws IOException {
+  protected File addFreqData(File dictFile, boolean useSeparator) throws IOException {
     if (!isOptionTrue("fsa.dict.frequency-included")) {
       throw new IOException("In order to use frequency data add the line 'fsa.dict.frequency-included=true' to the dictionary info file.");
     }
@@ -188,7 +181,12 @@ class DictionaryBuilder {
           }
           // Convert integers 0-255 to ranges A-Z, and write output 
           String freqChar = Character.toString((char) (FIRST_RANGE_CODE + normalizedFreq*FREQ_RANGES_OUT/FREQ_RANGES_IN));
-          bw.write(line + separator + freqChar + "\n");
+          //add separator only in speller dictionaries
+          if (useSeparator) { 
+            bw.write(line + separator + freqChar + "\n");  
+          } else {
+            bw.write(line + freqChar + "\n");
+          }
         }
       }
       br.close();
@@ -201,4 +199,32 @@ class DictionaryBuilder {
     return tempFile;
   }
   
+  protected File convertTabToSeparator(File inputFile) throws RuntimeException, IOException {
+    File outputFile = File.createTempFile(
+        DictionaryBuilder.class.getSimpleName() + "_separator", ".txt");
+    String separator = getOption("fsa.dict.separator");
+    if (separator == null || separator.trim().isEmpty()) {
+      throw new IOException(
+          "A separator character (fsa.dict.separator) must be defined in the dictionary info file.");
+    }
+    String encoding = getOption("fsa.dict.encoding");
+    try (Scanner scanner = new Scanner(inputFile, encoding);
+         Writer out = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(outputFile), encoding))) {
+      while (scanner.hasNextLine()) {
+        String line = scanner.nextLine();
+        String[] parts = line.split("\t");
+        if (parts.length == 3) {
+          out.write(parts[1] + separator + parts[0] + separator + parts[2]);
+          out.write("\n");
+        } else {
+          System.err
+              .println("Invalid input, expected three tab-separated columns in "
+                  + inputFile + ": " + line + " => ignoring");
+        }
+      }
+      scanner.close();
+    }
+    return outputFile;
+  }
 }
+

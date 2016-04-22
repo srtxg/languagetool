@@ -556,10 +556,28 @@ RB => Règles Brutes
       </pattern>
       <disambig postag="R pers suj 1 p"/>
     </rule>
+    <rule name="que nous">
+      <pattern>
+        <token>que</token>
+        <marker>
+          <token>nous</token>
+        </marker>
+      </pattern>
+      <disambig postag="R pers suj 1 p"/>
+    </rule>
 
     <rule name="Vous">
       <pattern>
         <token postag="SENT_START"/>
+        <marker>
+          <token>vous</token>
+        </marker>
+      </pattern>
+      <disambig postag="R pers suj 2 p"/>
+    </rule>
+    <rule name="que vous">
+      <pattern>
+        <token>que</token>
         <marker>
           <token>vous</token>
         </marker>
@@ -615,7 +633,7 @@ RB => Règles Brutes
   <rulegroup id="SON" name="non (nom)">
     <rule>
       <pattern>
-        <token regexp="yes">le|un|au|[mts]on</token>
+        <token regexp="yes">le|un|au|du|[mts]on</token>
         <marker>
           <token>son</token>
         </marker>
@@ -659,7 +677,7 @@ RB => Règles Brutes
     <rule name="mon">
       <pattern>
         <marker>
-          <token regexp="yes" postag="N m s" negate_pos="yes">mon|ton|son</token>
+          <token regexp="yes" postag="N m s" negate_pos="yes">[mts]on</token>
         </marker>
       </pattern>
       <disambig postag="D e s"/>
@@ -930,38 +948,6 @@ RB => Règles Brutes
       <disambig postag="V avoir inf"/>
     </rule>
   </rulegroup>
-
-  <rulegroup name="RP : a - est" id="RP-A_EST">
-    <rule name="a">
-      <pattern>
-        <marker>
-          <token>a</token>
-        </marker>
-        <token><exception>priori</exception></token>
-      </pattern>
-      <disambig postag="V avoir ind pres 3 s"/>
-    </rule>
-    <rule name="est">
-      <pattern>
-        <marker>
-          <token postag="V.*" postag_regexp="yes">est</token>
-        </marker>
-      </pattern>
-      <disambig postag="V etre ind pres 3 s"/>
-    </rule>
-  </rulegroup>
-  <!--
-  <rule name="RD : ambig Adv/N" id="RD-ADV_NOM">
-    <pattern>
-      <marker>
-        <and>
-          <token postag="A"/>
-          <token postag="N.*" postag_regexp="yes"><exception postag="J.*" postag_regexp="yes"/></token>
-        </and>
-      </marker>
-    </pattern>
-    <disambig postag="A"/>
-  </rule> -->
 
   <rulegroup name="RB : Pro pers + V" id="RB-PRO_PERS_V">
     <rule name="je + verbe">

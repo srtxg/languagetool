@@ -20,7 +20,6 @@ package org.languagetool.tools;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.List;
 
 import org.apache.commons.cli.CommandLine;
 
@@ -29,37 +28,35 @@ import org.apache.commons.cli.CommandLine;
  * @since public since 2.8
  */
 public final class POSDictionaryBuilder extends DictionaryBuilder {
-
+  
   public POSDictionaryBuilder(File infoFile) throws IOException {
     super(infoFile);
   }
 
   public static void main(String[] args) throws Exception {
-    CommandLine cmdLine = new BuilderWithFreqOptions().parseArguments(args, POSDictionaryBuilder.class);
+    BuilderOptions builderOptions = new BuilderOptions();
+    builderOptions.addOption(BuilderOptions.INPUT_OPTION, true, 
+        BuilderOptions.TAB_INPUT_HELP, true);
+    builderOptions.addOption(BuilderOptions.INFO_OPTION, true, 
+        BuilderOptions.INFO_HELP, true);
+    builderOptions.addOption(BuilderOptions.FREQ_OPTION, true, 
+        BuilderOptions.FREQ_HELP, false);
+    CommandLine cmdLine = builderOptions.parseArguments(args, POSDictionaryBuilder.class);
     
     POSDictionaryBuilder builder = new POSDictionaryBuilder(new File(cmdLine.getOptionValue(BuilderOptions.INFO_OPTION)));
 
     builder.setOutputFilename(cmdLine.getOptionValue(BuilderOptions.OUTPUT_OPTION));
     File inputFile = new File(cmdLine.getOptionValue(BuilderOptions.INPUT_OPTION));
 
-    if ( cmdLine.hasOption(BuilderWithFreqOptions.FREQ_OPTION) ) {
-      builder.readFreqList(new File(cmdLine.getOptionValue(BuilderWithFreqOptions.FREQ_OPTION)));
-      inputFile = builder.addFreqData(inputFile);
+    if (cmdLine.hasOption(BuilderOptions.FREQ_OPTION)) {
+      builder.readFreqList(new File(cmdLine.getOptionValue(BuilderOptions.FREQ_OPTION)));
+      inputFile = builder.addFreqData(inputFile, false);
     } 
-
     builder.build(inputFile);
   }
 
   public File build(File dictFile) throws Exception {
-    File tempFile = File.createTempFile(POSDictionaryBuilder.class.getSimpleName(), ".txt");
-    try {
-      List<String> tab2morphOptions = getTab2MorphOptions(dictFile, tempFile);
-      tab2morphOptions.add(0, "tab2morph");
-      prepare(tab2morphOptions);
-      return buildDict(tempFile);
-    } finally {
-      tempFile.delete();
-    }
+      return buildDict(convertTabToSeparator(dictFile));
   }
 
 }

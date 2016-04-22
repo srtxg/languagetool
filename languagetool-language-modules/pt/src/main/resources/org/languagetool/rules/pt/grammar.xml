@@ -22,7 +22,7 @@ You should have received a copy of the GNU Lesser General Public
 License along with this library; if not, write to the Free Software
 Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301, USA
 
-$Id: grammar.xml,v 1.147 2016-03-09 11:00:00 marcoagpinto Exp $
+$Id: grammar.xml,v 1.152 2016-04-22 13:50:00 marcoagpinto Exp $
 -->
 <rules lang="pt" xsi:noNamespaceSchemaLocation="../rules.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xs="http://www.w3.org/2001/XMLSchema">
 
@@ -202,7 +202,55 @@ $Id: grammar.xml,v 1.147 2016-03-09 11:00:00 marcoagpinto Exp $
      <example correction="Os"><marker>O</marker> cães estão no pasto.</example>
     </rule> 	
 	
+
+
+	<!-- Concordance error plural - PROCURA-SE > PROCURAM-SE -->
+    <rule id="PROCURA_SE-PROCURAM_SE" name="Erro de concordânica do plural PROCURA-SE > PROCURAM-SE">
+      <pattern>
+		<marker>
+			<token>procura-se</token>	  
+		</marker>
+		<token postag_regexp="yes"  postag="NCFP000|NCMP000|AQ0FP0|AQ0MP0"></token> 	
+     </pattern>	 	 
+     <message>Erro de concordância do plural.</message>
+     <suggestion>procuram-se</suggestion>
+     <example correction="procuram-se">Aqui <marker>procura-se</marker> pessoas sérias.</example>	 	 
+    </rule> 
+
 	
+	
+    <!-- Concordance gender - NECESSÁRIO > NECESSÁRIA -->
+    <rule id="NECESSÁRIO_NECESSÁRIA" name="Erro de concordância NECESSÁRIO-NECESSÁRIA">
+      <pattern>
+		<token regexp="yes">é|foi|era|fora|será|seria|seja|fosse|for</token>
+        <marker>
+			<token>necessário</token>	
+        </marker>
+		<token>uma</token>
+		<token postag="NCFS000"><exception postag_regexp="yes" postag="AQ0CS0|PI0FS000|PI0MS000|NCMS000"></exception><exception>uma</exception></token>
+     </pattern>
+	 <message>Erro de género. Usar: <suggestion>necessária</suggestion>.</message>
+     <example correction="necessária">É <marker>necessário</marker> uma festa.</example>
+    </rule> 	
+
+
+
+    <!-- Concordance gender - NECESSÁRIO > NECESSÁRIA + UMA + ADJ + NOUN -->
+    <rule id="NECESSÁRIO_NECESSÁRIA_ADJ_NOUN" name="Erro de concordância NECESSÁRIO-NECESSÁRIA + UMA + ADJ + NOUN">
+      <pattern>
+		<token regexp="yes">é|foi|era|fora|será|seria|seja|fosse|for</token>
+        <marker>
+            <token>necessário</token>
+        </marker>
+		<token>uma</token>
+		<token postag_regexp="yes" postag="AQ0CS0|PI0FS000|PI0MS000|NCFS000"><exception>uma</exception></token>
+		<token postag="NCFS000"><exception postag="NCMS000"></exception><exception>uma</exception></token>
+     </pattern>
+	 <message>Erro de género. Usar: <suggestion>necessária</suggestion>.</message>
+     <example correction="necessária">É <marker>necessário</marker> uma grande festa.</example>
+    </rule> 	
+	
+
 	
     <!-- Concordance gender - UM > UMA -->
     <rule id="UM_UMA" name="Erro de concordância UM-UMA">
@@ -1877,7 +1925,7 @@ $Id: grammar.xml,v 1.147 2016-03-09 11:00:00 marcoagpinto Exp $
       <example correction="guarda-chuvas">Abram os <marker>guardas-chuvas</marker>.</example>
     </rule>
 
-	
+
 
     <!-- HÁ n SEGUNDOS/MINUTOS/HORAS/DIAS/MESES/ANOS ATRÁS (remove "ATRÁS") -->
     <rule id="HÁ-ATRÁS" name="há n tempo atrás">
@@ -1890,6 +1938,22 @@ $Id: grammar.xml,v 1.147 2016-03-09 11:00:00 marcoagpinto Exp $
 	  <message>Com o verbo haver não é necessário usar "atrás": <suggestion>\1 \2 \3</suggestion>.</message>
 	  <example correction="Há n segundos"><marker>Há n segundos atrás</marker>.</example>
     </rule>
+
+
+	
+    <!-- À QUASE há quase -->
+    <rule id="À_QUASE" name="há quase">
+      <pattern>
+		<marker>
+			<token>à</token>		
+			<token>quase</token>
+		</marker>	
+		<token></token>
+        <token regexp="yes">segundos?|minutos?|horas?|dias?|mês|meses|anos?</token>
+      </pattern>
+	  <message>Substituir «à quase» por <suggestion>há quase</suggestion>.</message>
+	  <example correction="há quase">Conheço a Ana <marker>à quase</marker> 30 anos.</example>
+    </rule>	
 
 	
 
@@ -2509,7 +2573,21 @@ $Id: grammar.xml,v 1.147 2016-03-09 11:00:00 marcoagpinto Exp $
     </rule>
 
 
+	
+    <!-- POR AI por aí -->
+    <rule id="POR_AI" name="por aí">
+      <pattern>
+        <token>por</token>
+		<marker>
+			<token>ai</token>
+        </marker>
+      </pattern>
+      <message>Substituir «ai» por <suggestion>aí</suggestion>.</message>
+      <example correction="aí">Vou por <marker>ai</marker> fora a cantar.</example>
+    </rule>
 
+
+	
     <!-- POR CAUSA QUE porque -->
     <rule id="POR_CAUSA_QUE" name="porque">
       <pattern>
@@ -3096,7 +3174,7 @@ $Id: grammar.xml,v 1.147 2016-03-09 11:00:00 marcoagpinto Exp $
         <token>mais</token>
         <token>pior</token>
       </pattern>
-      <message>Substituir «mais pior por <suggestion>pior</suggestion>.</message>
+      <message>Substituir «mais pior» por <suggestion>pior</suggestion>.</message>
       <example correction="pior">Esta escola é <marker>mais pior</marker>.</example>
     </rule>
 	
@@ -3116,5 +3194,41 @@ $Id: grammar.xml,v 1.147 2016-03-09 11:00:00 marcoagpinto Exp $
 	
 </category>
 
+
+
+<category id="CONFUSED_WORDS" name="Confusão Palavras">
+
+<!-- TRÁS/TRAZ - POSSIBLE REPLACEMENT SUGGESTIONS ****START**** -->
+<!-- ********************************************************** -->
+    <!-- Confusion TRAZ > TRÁS -->
+    <rule id="TRAZ_TRÁS" name="Confusão traz-trás">
+		<pattern>
+			<token regexp="yes">de|para|por</token>
+			<marker>
+				<token>traz</token>	  
+			</marker>			
+		</pattern>	 	 
+		<message>Substituir «traz» por <suggestion>trás</suggestion>.</message>
+		<example correction="trás">A Ana deve viajar no banco de <marker>traz</marker>.</example>	 	 
+    </rule> 
+	
+
+	
+    <!-- Confusion TRÁS > TRAZ -->
+    <rule id="TRÁS_TRAZ" name="Confusão trás-traz">
+		<pattern>
+			<token negate="yes" regexp="yes">de|para|por</token>
+			<marker>
+				<token>trás</token>	  
+			</marker>			
+		</pattern>	 	 
+		<message>Substituir «trás» por <suggestion>traz</suggestion>.</message>
+		<example correction="traz">O Rui <marker>trás</marker> o material.</example>	 	 
+    </rule> 	
+
+<!-- TRÁS/TRAZ - POSSIBLE REPLACEMENT SUGGESTIONS *****END***** -->
+<!-- ********************************************************** -->	
+
+</category>
 
 </rules>

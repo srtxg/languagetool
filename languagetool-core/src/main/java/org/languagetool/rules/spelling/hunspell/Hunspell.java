@@ -189,8 +189,20 @@ public class Hunspell {
         } else if (os.startsWith("sunos")) {
             //if (arch.equals("sparc")) { 
             //	return "hunspell-sunos-sparc-64";
-            //}			
-        }
+            //}		
+            
+        } else if (os.startsWith("freebsd")) {
+            // Patch by Koen Vervloesem - FreeBSD is not supported yet, but: "... not a real solution, but
+            // having this fixed makes it easier for me to build new LanguageTool releases without always
+            // having to apply a local patch first."
+            if (x86) {
+                return "hunspell-freebsd-x86-32";
+            }
+            if (amd64) {
+                return "hunspell-freebsd-x86-64";
+            }
+
+        } 
 
         throw new UnsupportedOperationException("Unknown OS/arch: "+os+"/"+arch);
     }    
@@ -310,6 +322,7 @@ public class Hunspell {
          * Check if a word is spelled correctly
          *
          * @param word The word to check.
+         * @return true if the <code>word<code> is not correctly spelled
          */
         public boolean misspelled(String word) {
             try {

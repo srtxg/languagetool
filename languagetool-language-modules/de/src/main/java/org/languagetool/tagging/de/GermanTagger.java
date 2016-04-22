@@ -86,7 +86,7 @@ public class GermanTagger extends BaseTagger {
       List<TaggedWord> taggerTokens = getWordTagger().tag(word);
       if (firstWord && taggerTokens.size() == 0 && ignoreCase) { // e.g. "Das" -> "das" at start of sentence
         taggerTokens = getWordTagger().tag(word.toLowerCase());
-        firstWord = false;
+        firstWord = word.matches("^\\W?$");
       }
       if (taggerTokens.size() > 0) {
         l.addAll(getAnalyzedTokens(taggerTokens, word));

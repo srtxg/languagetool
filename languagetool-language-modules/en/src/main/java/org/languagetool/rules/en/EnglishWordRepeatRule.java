@@ -30,7 +30,7 @@ import org.languagetool.rules.WordRepeatRule;
  */
 public class EnglishWordRepeatRule extends WordRepeatRule {
 
-  public EnglishWordRepeatRule(final ResourceBundle messages, final Language language) {
+  public EnglishWordRepeatRule(ResourceBundle messages, Language language) {
     super(messages, language);
     addExamplePair(Example.wrong("This <marker>is is</marker> just an example sentence."),
                    Example.fixed("This <marker>is</marker> just an example sentence."));
@@ -51,6 +51,12 @@ public class EnglishWordRepeatRule extends WordRepeatRule {
     }
     if (wordRepetitionOf("can", tokens, position) && posIsIn(tokens, position-1, "NN")) {
       return true; // "The can can hold the water."
+    }
+    if (wordRepetitionOf("blah", tokens, position)) {
+      return true;   // "blah blah"
+    }
+    if (wordRepetitionOf("yadda", tokens, position)) {
+      return true;   // "yadda yadda"
     }
     if (wordRepetitionOf("Pago", tokens, position)) {
       return true;   // "Pago Pago"

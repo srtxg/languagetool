@@ -47,6 +47,15 @@ public class MorfologikTagger implements WordTagger {
   MorfologikTagger(URL dictUrl) {
     this.dictUrl = Objects.requireNonNull(dictUrl);
   }
+  
+  /**
+   * Constructs a MorfologikTagger with the given morfologik dictionary.
+   * @since 3.4
+   */
+  public MorfologikTagger(Dictionary dictionary) {
+    this.dictUrl = null;
+    this.dictionary = dictionary;
+  }
 
   private synchronized Dictionary getDictionary() throws IOException {
     if (dictionary == null) {
@@ -64,9 +73,9 @@ public class MorfologikTagger implements WordTagger {
       for (WordData wordData : lookup) {
         String tag = wordData.getTag() == null ? null : wordData.getTag().toString();
         // Remove frequency data from tags (if exists)
-        // The frequency data is in the last byte after a separator
-        if (dictionary.metadata.isFrequencyIncluded() && tag != null && tag.length() > 2) {
-          tag = tag.substring(0, tag.length() - 2);
+        // The frequency data is in the last byte (without a separator)
+        if (dictionary.metadata.isFrequencyIncluded() && tag != null && tag.length() > 1) {
+          tag = tag.substring(0, tag.length() - 1);
         }
         String stem = wordData.getStem() == null ? null : wordData.getStem().toString();
         TaggedWord taggedWord = new TaggedWord(stem, tag);

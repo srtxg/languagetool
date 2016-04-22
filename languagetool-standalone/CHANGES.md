@@ -1,15 +1,75 @@
 # LanguageTool Change Log
 
-## 3.3 (release planned for 2016-03-28)
+## 3.4 (release planned for 2016-06-27)
 
 #### Catalan
   * added and improved rules
+  * added words suggested by users
+ 
+#### English
+  * added about 21 confusion pairs like throe/throw, raps/wraps (works only with ngram data,
+    see http://wiki.languagetool.org/finding-errors-using-n-gram-data) 
+
+#### French
+  * upgraded dictionaries to Dicollecte-5.6
+  * added 32 confusion pairs like pris/prix, quand/quant (works only with ngram data,
+    see http://wiki.languagetool.org/finding-errors-using-n-gram-data) 
+
+#### German
+  * added some rules
+  
+#### Polish
+  * added and improved rules
+  * removed some false alarms
+  
+#### Portuguese
+  * added some rules
+
+#### Spanish
+  * added 14 confusion pairs like tubo/tuvo, ciento/siento (works only with ngram data,
+    see http://wiki.languagetool.org/finding-errors-using-n-gram-data) 
+
+#### Java API
+  * some formerly deprecated code has been removed
+  * all rules have now a category ("Misc" if the rule doesn't specify a category)
+  * a new module `languagetool-http-client` has been added with a class
+    `RemoteLanguageTool` that you can use to query a remote LanguageTool server
+    via HTTP or HTTPS
+
+#### Embedded HTTPS server
+  * changed behaviour for OutOfMemory situations: the server
+    process now stops instead of being in an unstable state
+  * missing parameters (like `text`) now cause a `400 Bad Request`
+    response (it used to produce `500 Internal Server Error`)
+  * to turn on language auto-detection, `autodetect=yes` can now be
+    used instead of `autodetect=1` (to be consistent with `enabledOnly=yes`)
+ 
+
+## 3.3 (2016-03-28)
+
+#### Breton
+  * small rule improvements
+
+#### Catalan
+  * added and improved rules
+  * added words suggested by users
+  * minor change in the format of the binary dictionary: POS tag and frequency data are no 
+    longer separated by a separator character.
+
+#### Dutch
+  * small rule improvements and URL updates, thanks to Koen Vervloesem
 
 #### English
   * added and improved rules, improved categorization of rules
   * added checks on date ranges
-  * added about 210 confusion pairs like best/bets, wand/want (works only with ngram data,
+  * added about 215 confusion pairs like best/bets, wand/want (works only with ngram data,
     see http://wiki.languagetool.org/finding-errors-using-n-gram-data) 
+
+#### Esperanto
+  * improved several rules
+
+#### French
+  * added and improved rules
 
 #### German
   * added and improved rules, improved categorization of rules
@@ -20,7 +80,7 @@
 
 #### Greek
   * new rule for checking correct spell of ordinal numerals
-  * added new xml rules
+  * added new XML rules
 
 #### Polish
   * added and improved a large number of rules, largely improved disambiguation
@@ -32,10 +92,22 @@
   * added and improved rules, improved categorization of rules 
     
 #### Russian
-  * added new rules
+  * added and improved rules, improved categorization of rules
+  * added words suggested by users
   
 #### Spanish
   * added German false friends
+
+#### Ukrainian
+  * big dictionary update:
+    * more than 202K lemmas
+    * homonyms have been properly split
+    * vocative case for inanimates has be added
+    * list of barbarism has been updated
+  * improved some rules
+  * improved sentence tokenization
+  * improved dynamic tagging for compounds
+  * some improvements for disambiguation
 
 #### Java API
   * some formerly deprecated code has been removed
@@ -48,6 +120,11 @@
   * Added new parameters `enabledCategories` and `disabledCategories`
     that take a comma-separated list of categories to enable/disable.
     Fixes https://github.com/languagetool-org/languagetool/pull/326.
+  * The output now contains a `shortmsg` attribute if available, which
+    is a short version of the `msg` attribute.
+  * The output now contains a `categoryid` attribute if available. It's
+    supposed not to change in future versions (while `category` might
+    change).
 
 #### Command-line
   * new parameters `--enablecategories` and `--disablecategories`
@@ -72,6 +149,12 @@
     disambiguation.
   * Fixed a bug with a possible `NullPointerException` for tokens containing
     soft hyphens that might be disambiguated.
+
+#### Morfologik binary dictionaries
+  * Updated Morfologik library to version 2.1.0. The tools for building 
+    dictionaries (languagetool-tools) have been adapted to the new version. 
+    The format of the dictionaries has not changed, except for a minor 
+    change only in Catalan.
 
 
 
@@ -119,6 +202,9 @@
     where the determiner is indefinite but the adjective fits only for a definite determiner
   * added `de/removed.txt` so incorrect readings of the POS tagger can be avoided without
     rebuilding the binary dictionary
+
+#### Italian
+  * added an agreement rule
 
 #### Portuguese
   * added/improved several rules

@@ -87,13 +87,9 @@ public class MorfologikSpeller {
   }
 
   public List<String> getSuggestions(String word) {
-    final List<String> suggestions = new ArrayList<>();
-    try {
-      suggestions.addAll(speller.findReplacements(word));
-      suggestions.addAll(speller.replaceRunOnWords(word));
-    } catch (CharacterCodingException e) {
-      throw new RuntimeException(e);
-    }
+    List<String> suggestions = new ArrayList<>();
+    suggestions.addAll(speller.findReplacements(word));
+    suggestions.addAll(speller.replaceRunOnWords(word));
     // capitalize suggestions if necessary
     if (dictionary.metadata.isConvertingCase() && StringTools.startsWithUppercase(word)) {
       for (int i = 0; i < suggestions.size(); i++) {

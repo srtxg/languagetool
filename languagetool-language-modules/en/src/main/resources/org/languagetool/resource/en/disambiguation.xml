@@ -811,6 +811,39 @@
       <example type="ambiguous" inputform="present[present/JJ,present/NN:UN,present/VB,present/VBP]" outputform="present[present/JJ]">Those <marker>present</marker> were all moved to tears.</example>
     </rule>
     </rulegroup>
+    <rule id="THESE_NNS_VBZ" name="these + vbz/nns => nns">
+        <pattern>
+            <token regexp="yes">th[eo]se</token>
+            <marker>
+                <and>
+                    <token postag="VBZ"/>
+                    <token postag="NNS"/>
+                </and>
+            </marker>
+        </pattern>
+        <disambig postag="NNS"/>
+        <example type="untouched">These includes a razor blade.</example>
+        <example type="ambiguous"
+                 inputform="clothes[clothe/VBZ,clothes/NNS]"
+        outputform="clothes[clothes/NNS]">Those <marker>clothes</marker> suit you well.</example>
+    </rule>
+    <rule id="THESE_NNS_VBP" name="these + vbz/nns => nns">
+        <pattern>
+            <token regexp="yes">th[eo]se</token>
+            <token postag="NNS"/>
+            <marker>
+                <and>
+                    <token postag="VBP"/>
+                    <token postag="NN:.*" postag_regexp="yes"/>
+                </and>
+            </marker>
+        </pattern>
+        <disambig postag="VBP"/>
+        <example type="untouched">These includes a razor blade.</example>
+        <example type="ambiguous"
+                 inputform="suit[suit/NN:UN,suit/VB,suit/VBP]"
+                 outputform="suit[suit/VBP]">Those clothes <marker>suit</marker> you well.</example>
+    </rule>
     <rule name="AM as NNP" id="AM_NNP">
       <pattern case_sensitive="yes">
         <marker>
@@ -849,6 +882,20 @@
             </marker>
         </pattern>
         <disambig><match no="2" postag="VBP" postag_regexp="yes"/></disambig>
+    </rule>
+    <rule name="NNS/VBZ + were/are" id="NNS_ARE_WERE">
+        <pattern>
+            <marker>
+                <and>
+                <token postag="VBZ"/>
+                <token postag="NNS"/>
+                </and>
+            </marker>
+            <token regexp="yes">were|are</token>
+        </pattern>
+        <disambig postag="NNS"/>
+        <example type="ambiguous" inputform="forces[force/NNS,force/VBZ]"
+                 outputform="forces[force/NNS]">The armed <marker>forces</marker> are here.</example>
     </rule>
     <rule name="are + we|you -&gt; are (verb)" id="ARE_PRP">
         <pattern>
@@ -1133,6 +1180,17 @@
       <example type="untouched">What it all means, I don't know.</example>
       <example type="ambiguous" inputform="means[mean/NNS,mean/VBZ,means/NN,means/NNS]" outputform="means[mean/VBZ]">To be a Christian <marker>means</marker> to say yes where I otherwise say no.</example>
     </rule>
+
+    <rule id="TO_VB_PRP" name="to + verb + prp => TO">
+        <pattern>
+            <marker>
+            <token postag="TO">to</token>
+            <token postag="VB"/>
+            </marker>
+            <token postag="PRP\$?|DT" postag_regexp="yes"/>
+        </pattern>
+        <disambig action="filterall"/>
+    </rule>
     
     <rule name="SENT_START + pronoun + verb/NN -&gt; verb" id="SENT_START_PRP_VB_NN">
         <pattern>
@@ -1157,6 +1215,16 @@
         <disambig action="add"><wd lemma="not" pos="RB">t</wd></disambig>
         <example type="untouched">I cannot do it.</example>
         <example type="ambiguous" inputform="t[t]" outputform="t[not/RB]">I can'<marker>t</marker> do it.</example>
+    </rule>
+    <rule name="haven't => verb only" id="HAVENT">
+        <pattern>
+            <marker>
+                <token>haven</token>
+            </marker>
+            <token regexp="yes">['’]</token>
+            <token>t</token>
+        </pattern>
+        <disambig action="filter" postag="MD|VBP"/>
     </rule>
     <rule name="re -> be" id="RE_VBP">
     	<pattern>
@@ -1496,7 +1564,7 @@
 
     <rule name="determiner + verb/NN -&gt; NN" id="DT_VB_NN">
         <pattern>
-            <token postag="DT"><exception postag="PDT"/><exception regexp="yes">th[eo]se|each|that</exception></token>
+            <token postag="DT"><exception postag="PDT"/><exception regexp="yes">th[eo]se|each|that|much</exception></token>
             <marker>
                 <and>
                     <token postag_regexp="yes" postag="VB[PZDN]?|MD"/>
@@ -2739,6 +2807,38 @@
             <example type="untouched">This is your's.</example>
             <example type="ambiguous" inputform="s[be/VBZ,s/POS]" outputform="s[be/VBZ]">Where'<marker>s</marker> Bill?</example>
         </rule>
+        <rule name="s = POS with NNS + are/were">
+            <pattern>
+                <token postag="NN:UN?" postag_regexp="yes"/>
+                <token spacebefore="no" regexp="yes">['’]</token>
+                <token spacebefore="no">s</token>
+                <marker>
+                    <and>
+                        <token postag="JJ"/>
+                        <token postag="VBN"/>
+                    </and>
+                </marker>
+                <token postag="NNS"/>
+                <token regexp="yes">are|were</token>
+            </pattern>
+            <disambig postag="JJ"/>
+        </rule>
+        <rule name="s = POS with NN + is/was">
+            <pattern>
+                <token postag="NN:UN?" postag_regexp="yes"/>
+                <token spacebefore="no" regexp="yes">['’]</token>
+                <token spacebefore="no">s</token>
+                <marker>
+                    <and>
+                        <token postag="JJ"/>
+                        <token postag="VBN"/>
+                    </and>
+                </marker>
+                <token postag="NNP?|NN:.*" postag_regexp="yes"/>
+                <token regexp="yes">is|was</token>
+            </pattern>
+            <disambig postag="JJ"/>
+        </rule>
         <rule name="s = has">
             <pattern>
                 <token postag="NN:UN?" postag_regexp="yes"/>
@@ -3909,46 +4009,6 @@
             <disambig action="filterall"/>
         </rule>
 
-        
-   <!--  the chunker fails for addresses, we need this for CD_NN -->
-    <rule name="Number + Uppercase word/no tag + uppercase word -&gt; immunize" id="CD_UPPER_UNKNOWN_NNP_UPPERCASE_SEQ">
-        <pattern case_sensitive="yes">
-        <marker>
-            <token regexp="yes">\d+<exception regexp="yes">[01]</exception></token>
-            <token postag="NNP"/>            
-            <token regexp="yes">Ave|Avenue|Street|Terrace|Square|St|Circle|Drive</token>
-         </marker>            
-        </pattern>
-        <disambig action="immunize"/>
-    </rule>        
-        
-    <rule name="Immunize votes" id="X_TO_X_VOTE">
-      <pattern>
-        <token regexp="yes">\d+</token>
-        <token>to</token>
-        <token regexp="yes">\d+</token>
-        <token>vote</token>
-      </pattern>
-      <disambig action="immunize"/>
-    </rule>
-    
-    <rule name="Immunize age" id="X_WAS_CD">
-      <pattern>
-        <token regexp="yes">s?he|you|I|we|they|it</token>
-        <token inflected="yes">be</token>
-        <token postag="CD"/>
-      </pattern>
-      <disambig action="immunize"/>
-    </rule>
-    
-    <rule name="Immunize decade" id="X0decade">
-      <pattern>
-        <token regexp="yes">\d+0</token>
-        <token>decade</token>
-      </pattern>
-      <disambig action="immunize"/>
-    </rule>
-    
     <rule name="Immunize 'no big deal'" id="NO_BIG_DEAL">
       <pattern>
       <token>no</token>

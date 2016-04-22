@@ -1,5 +1,6 @@
 package org.languagetool.rules;
 
+import java.util.Objects;
 import java.util.ResourceBundle;
 
 /**
@@ -10,6 +11,9 @@ public final class Categories {
 
   /** Rules about detecting uppercase words where lowercase is required and vice versa. */
   public static final Categories CASING = make("CASING", "category_case");
+
+  /** Rules about spelling terms as one word or as as separate words. */
+  public static final Categories COMPOUNDING = make("COMPOUNDING", "category_compounding");
 
   public static final Categories GRAMMAR = make("GRAMMAR", "category_grammar");
 
@@ -54,8 +58,8 @@ public final class Categories {
   private final String messageKey;
   
   private Categories(String id, String messageKey) {
-    this.id = id;
-    this.messageKey = messageKey;
+    this.id = Objects.requireNonNull(id);
+    this.messageKey = Objects.requireNonNull(messageKey);
   }
 
   public CategoryId getId() {
