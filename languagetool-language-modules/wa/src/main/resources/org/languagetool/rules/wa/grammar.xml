@@ -1,0 +1,409 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="../../../../../../../../../languagetool-core/src/main/resources/org/languagetool/rules/print.xsl" title="Pretty print" ?>
+<?xml-stylesheet type="text/css" href="../../../../../../../../../languagetool-core/src/main/resources/org/languagetool/rules/rules.css" title="Easy editing stylesheet" ?>
+<!--
+  Walloon Grammar and Typo Rules for LanguageTool
+  Copyright (C) 2006 Marcin Miłkowski
+  Copyright (C) 2016 Pablo Saratxaga
+
+  This library is free software; you can redistribute it and/or
+  modify it under the terms of the GNU Lesser General Public
+  License as published by the Free Software Foundation; either
+  version 2.1 of the License, or (at your option) any later version.
+
+  This library is distributed in the hope that it will be useful,
+  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+  Lesser General Public License for more details.
+
+  You should have received a copy of the GNU Lesser General Public
+  License along with this library; if not, write to the Free Software
+  Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301, USA
+-->
+<rules lang="wa" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../../../../languagetool-core/src/main/resources/org/languagetool/rules/rules.xsd">
+
+    <unification feature="number">
+        <equivalence type="singular">
+            <token postag="is:(sg|[123]sg)" postag_regexp="yes"></token>
+        </equivalence>
+
+        <equivalence type="plural">
+            <token postag="is:(pl|[123]pl)" postag_regexp="yes"></token>
+        </equivalence>
+    </unification>
+
+    <unification feature="gender">
+        <equivalence type="masc">
+            <token postag="is:o" postag_regexp="yes"></token>
+        </equivalence>
+
+        <equivalence type="fem">
+            <token postag="is:f" postag_regexp="yes"></token>
+        </equivalence>
+
+        <equivalence type="bikebok">
+            <token postag="is:b" postag_regexp="yes"></token>
+        </equivalence>
+    </unification>
+
+    <category name="Croejhete">
+
+    <rulegroup id="ADJECTIF_RECE" name="Aiddjectif -rece">
+      <rule name="addjectif -rece ni s' mete måy pa dvant">
+	      <!--
+        <pattern>
+		< ! - - <token min="1" regexp="yes" skip="-1">.*(rece|reces|recès)</token> - - >
+		<regexp>([^\s]+(rece|reces|recès)\s+)+</token>
+		<token postag="po:addj.*" postag_regexp="yes" regexp="yes" min="0" skip="3">.*(?!rec[eè]s?)</token>
+		<token postag="po:no.*" postag_regexp="yes" />
+        </pattern>
+	<message>Les addjectifs « -rece » ni s' metèt måy pa dvant; ça dvreut esse: <suggestion><match no="2"/
+					regexp_match="(.+)$" 
+					regexp_replace="$1 "></match><match no="3"/> <match no="1"
+					case_conversion="startlower" 
+					_regexp_match="(.*)rec[eè](s?)$" 
+					regexp_match="(([^\s]+)rec[eè](s?\s+))+$" 
+					regexp_replace="$2rece$3"></match></suggestion>.</message>
+		-->
+        <pattern>
+		<token min="1" regexp="yes">.*(rece|reces|recès)</token>
+		<token postag="po:addj.*" postag_regexp="yes" regexp="yes" min="0" skip="3">.*(?!rec[eè]s?)</token>
+		<token postag="po:no.*" postag_regexp="yes" />
+        </pattern>
+	<message>Les addjectifs « -rece » ni s' metèt måy pa dvant; ça dvreut esse: <suggestion><match no="2"
+					regexp_match="(.+)$" 
+					regexp_replace="$1 "></match><match no="3"/> <match no="1"
+					case_conversion="startlower" 
+					regexp_match="(.*)rec[eè](s?)$" 
+					regexp_replace="$1rece$2"></match></suggestion>.</message>
+	<example correction="grande"><marker>grand</marker> blanke måjhone.</example>
+	<example correction="blanke">grande <marker>blanc</marker> måjhone.</example>
+	<example correction="grandès"><marker>grands</marker> blankès måjhones.</example>
+      </rule>
+    </rulegroup>
+
+    <rulegroup id="ACOIRD_NOMBE" name="Acoird do nombe">
+      <rule _name="singulî no, pluriyal addjectif">
+        <pattern>
+		<marker>
+		<token postag="po:addj.*is:pl.*" postag_regexp="yes" skip="-1">
+			<exception scope="next" negate_pos="yes" postag="(po:addj.*is:pl.*|.*is:sg.*|.*is:inv.*|SENT_END)" postag_regexp="yes"/>
+		</token>
+		</marker>
+		<token postag="po:addj.*is:(sg|inv).*" postag_regexp="yes" min="0" skip="3"/>
+		<token postag="po:no.*is:sg.*" postag_regexp="yes">
+			<exception postag=".*is:inv.*" postag_regexp="yes"/>
+		</token>
+        </pattern>
+	<message>« \1 » et « \3 » ni sont nén bén acoirdés e nombe; « \1 » divreut esse å singulî.</message>
+      </rule>
+      <rule _name="puriyal no, singulî addjectif">
+        <pattern>
+		<marker>
+		<token postag="po:addj.*is:sg.*" postag_regexp="yes" skip="-1">
+			<exception scope="next" negate_pos="yes" postag="(po:addj.*is:sg.*|.*is:pl.*|.*is:inv.*|SENT_END)" postag_regexp="yes"/>
+		</token>
+		</marker>
+		<token postag="po:addj.*is:(pl|inv).*" postag_regexp="yes" min="0" skip="3"/>
+		<token postag="po:no.*is:pl.*" postag_regexp="yes">
+			<exception postag=".*is:inv.*" postag_regexp="yes"/>
+		</token>
+        </pattern>
+	<message>« \1 » et « \3 » ni sont nén bén acoirdés e nombe; « \1 » divreut esse å pluriyal.</message>
+      </rule>
+    </rulegroup>
+    
+    <rulegroup id="ACOIRD_DJINRE" name="Acoird do djinre">
+      <rule _name="femrin no, omrin addjectif">
+        <pattern>
+		<token postag="po:addj is:o.*" postag_regexp="yes" skip="-1">
+			<exception scope="next" negate_pos="yes" postag="(po:addj is:o.*|.*is:[fb].*|SENT_END)" postag_regexp="yes"/>
+		</token>
+		<token postag="po:addj is:[fb].*" postag_regexp="yes" min="0" skip="3"/>
+		<token postag="po:no is:f.*" postag_regexp="yes">
+			<exception postag=".*is:[ob].*" postag_regexp="yes"/>
+		</token>
+        </pattern>
+	<message>« \1 » et « \3 » ni sont nén bén acoirdés e djinre; « \1 » divreut esse å femrin.</message>
+	<example correction="grande"><marker>grand</marker> blanke måjhone.</example>
+	<example correction="blanke">grande <marker>blanc</marker> måjhone.</example>
+	<example correction="grandès"><marker>grands</marker> blankès måjhones.</example>
+      </rule>
+      <rule _name="omrin no, femrin addjectif">
+        <pattern>
+		<token postag="po:addj is:f.*" postag_regexp="yes" skip="-1">
+			<exception scope="next" negate_pos="yes" postag="(po:addj is:f.*|.*is:[ob].*|SENT_END)" postag_regexp="yes"/>
+		</token>
+		<token postag="po:addj is:[ob].*" postag_regexp="yes" min="0" skip="3"/>
+		<token postag="po:no is:o.*" postag_regexp="yes">
+			<exception postag=".*is:[fb].*" postag_regexp="yes"/>
+		</token>
+        </pattern>
+	<message>« \1 » et « \3 » ni sont nén bén acoirdés e djinre; « \1 » divreut esse a l' omrin.</message>
+	<example correction="grand"><marker>grande</marker> blanc ouxh.</example>
+	<example correction="blanc">grand <marker>blanke</marker> ouxh.</example>
+	<example correction="grands blancs"><marker>grandès blankès</marker> ouxhs.</example>
+      </rule>
+        </rulegroup>
+
+	<rulegroup id="LEU_LEUR" name="leu/leur">
+	   /*
+	    * Li mot «leur» egzistêye, mins seulmint come prono d' apårtinance
+	    * dins les ratourneures «li leur», «les leurs».
+	    * Po tos ls ôtes cas, ça doet esse replaecî pa «leu» (divant cossoune)
+	    * ou «leu-z» (divant voyale).
+	    *
+	    */
+	    <rule _id="LEU" _name="leur -> leu (divant cossoune)">
+                <pattern>
+		    <marker><token>leur<exception regexp="yes" scope="previous">(li|l'|'|da)</exception></token></marker>
+		    <token regexp="yes">[^aâåeéèêiîoôuû].*</token>
+                </pattern>
+		<message>Li cogne avou «r» al fén ni s' eploye ki dins les ratourneures «li leur, da leur». ça dvreut purade esse <suggestion>leu</suggestion>?</message>
+                <example correction="leu">c' est <marker>leur</marker> vweteure.</example>
+            </rule>
+	    <rule _id="LEUZ" _name="leur -> leu-z (divant voyale)">
+                <pattern>
+		    <marker><token>leur<exception regexp="yes" scope="previous">(li|l'|'|da)</exception></token></marker>
+		    <token regexp="yes">[aâåeéèêiîoôuû].*</token>
+                </pattern>
+		<message>Li cogne avou «r» al fén ni s' eploye ki dins les ratourneures «li leur, da leur». ça dvreut purade esse <suggestion>leu-z</suggestion>?</message>
+                <example correction="leu-z"><marker>leur</marker> efant.</example>
+            </rule>
+	    <rule _id="LEUS" _name="leurs -> leus (pluriyal)">
+                <pattern>
+		    <token>leurs<exception regexp="yes" scope="previous">(les|des)</exception></token>
+                </pattern>
+		<message>Li cogne avou «r» al fén ni s' eploye ki dins l' ratourneure «les leurs». ça dvreut purade esse <suggestion>leus</suggestion>?</message>
+                <example correction="leus"><marker>leurs</marker> efants.</example>
+                <example correction="leus">c' est <marker>leurs</marker> vweteures.</example>
+            </rule>
+        </rulegroup>
+
+	<rulegroup id="VOLA" name="(prono) vola -> vo (prono) la">
+	   /*
+	    * Les mots «voci«, «vola» rotèt diferinnmint k' e francès:
+	    * les pronos s' î vnèt stitchî etur les deus sillabes.
+	    * Cwand i gn a on sfwait ristitchaedje, li rdoblaedje si vént mete
+	    * pa dvant li 2inme boket:
+	    * 	mi vola => vo m' la
+	    * 	li rvola => vo l' rila
+	    * 	m' î vla => vo m' î la
+	    * Li manire ki languagetool rote fwait k' i fåt-st ene rîle a pårt
+	    * po les coron-croles (li ricnohance des mots («token») si fwait foû des «'»)
+	    *
+	    */
+	    <rule _id="VO_X'_LA" _name="mi vola (prono sins apostrofe) -> vo m' la">
+                <pattern>
+                    <token regexp="yes">([mtl][i']|[èÈ][mt]|[eE]l)</token>
+                    <token regexp="yes" min="0">(î|e?ndè?|è)</token>
+                    <token regexp="yes">vo?(la|ci|cial|chal)</token>
+                </pattern>
+		<message>E walon «<match no="3"></match>» si dispårtixh eyet l' pronon s' î vént stitchî. ça dvreut purade esse <suggestion>vo <match no="1" case_conversion="startlower" 
+					regexp_match="[èeÈE]?([mtlMTL])[i']?$" 
+					regexp_replace="$1'"></match> <match no="2" 
+					regexp_match="e?ndè?$" 
+					regexp_replace="endè"></match> <match no="3" 
+					regexp_match="vo?(la|ci|cial|chal)$" 
+					regexp_replace="$1"></match></suggestion>?</message>
+                <example correction="vo m' la"><marker>mi vola</marker>.</example>
+                <example correction="vo m' endè la"><marker>m' endè vola</marker>.</example>
+            </rule>
+	    <rule _id="VO_X'_LA_2" _name="m' î vola (prono avou apostrofe) -> vo m' î la">
+                <pattern>
+                    <token regexp="yes">[mtl]<exception regexp="yes" scope="previous">(ni|èn)</exception></token>
+                    <token pacebefore="no">'</token>
+                    <token regexp="yes" min="0">(î|e?ndè?|è)</token>
+                    <token regexp="yes">vo?(la|ci|cial|chal)</token>
+                </pattern>
+		<message>E walon «<match no="4"></match>» si dispårtixh eyet l' pronon s' î vént stitchî. ça dvreut purade esse <suggestion>vo <match no="1" case_conversion="startlower" 
+					regexp_match="[èeÈE]?([mtlMTL])[i']?$" 
+					regexp_replace="$1'"></match> <match no="3" 
+					regexp_match="e?ndè?$" 
+					regexp_replace="endè"></match> <match no="4" 
+					regexp_match="vo?(la|ci|cial|chal)$" 
+					regexp_replace="$1"></match></suggestion>?</message>
+                <example correction="vo m' la"><marker>mi vola</marker>.</example>
+                <example correction="vo m' endè la"><marker>m' endè vola</marker>.</example>
+            </rule>
+	    <rule _id="VO_X'_RILA" _name="mi rvola (prono sins apostrofe) -> vo m' rila">
+                <pattern>
+                    <token regexp="yes">([mt][i']|è[mt]|el|l[i'])</token>
+                    <token regexp="yes">ri?vo?(la|ci|cial|chal)</token>
+                </pattern>
+		<message>E walon «<match no="2"></match>» si dispårtixh eyet l' pronon s' î vént stitchî. ça dvreut purade esse <suggestion>vo <match no="1" case_conversion="startlower"
+					regexp_match="[èeÈE]?([mtlMTL])[i']?$" 
+					regexp_replace="$1'"></match> <match no="2" 
+					regexp_match="ri?vo?(la|ci|cial|chal)$" 
+					regexp_replace="ri$1"></match></suggestion>?</message>
+                <example correction="vo m' rila"><marker>mi rvola</marker>.</example>
+            </rule>
+	    <rule _id="VO_X'_RILA_2" _name="m' rivla (prono avou apostrofe) -> vo m' rila">
+                <pattern>
+                    <token regexp="yes">[mtl]<exception regexp="yes" scope="previous">(ni|èn)</exception></token>
+                    <token pacebefore="no">'</token>
+                    <token regexp="yes">ri?vo?(la|ci|cial|chal)</token>
+                </pattern>
+		<message>E walon «<match no="2"></match>» si dispårtixh eyet l' pronon s' î vént stitchî. ça dvreut purade esse <suggestion>vo <match no="1" case_conversion="startlower"
+					regexp_match="[èeÈE]?([mtlMTL])[i']?$" 
+					regexp_replace="$1'"></match> <match no="3" 
+					regexp_match="ri?vo?(la|ci|cial|chal)$" 
+					regexp_replace="ri$1"></match></suggestion>?</message>
+                <example correction="vo m' rila"><marker>m' rivla</marker>.</example>
+            </rule>
+	    <rule _id="VO_X'_RILA_3" _name="m' î rvola (prono avou apostrofe) -> vo m' î rla">
+                <pattern>
+                    <token regexp="yes">[mtl]<exception regexp="yes" scope="previous">(ni|èn)</exception></token>
+                    <token pacebefore="no">'</token>
+                    <token regexp="yes" min="1">(î|e?ndè?|è)</token>
+                    <token regexp="yes">ri?vo?(la|ci|cial|chal)</token>
+                </pattern>
+		<message>E walon «<match no="2"></match>» si dispårtixh eyet l' pronon s' î vént stitchî. ça dvreut purade esse <suggestion>vo <match no="1" case_conversion="startlower"
+					regexp_match="[èeÈE]?([mtlMTL])[i']?$" 
+					regexp_replace="$1'"></match> <match no="3" 
+					regexp_match="e?ndè?$" 
+					regexp_replace="endè"></match> <match no="4" 
+					regexp_match="ri?vo?(la|ci|cial|chal)$" 
+					regexp_replace="r$1"></match></suggestion>?</message>
+                <example correction="vo m' î rla"><marker>m' î rvola</marker>.</example>
+            </rule>
+	    <rule _id="VO_XS_LA" _name="vos vola -> vo vs la">
+                <pattern>
+                    <token regexp="yes">([vn]o?s|le?s)</token>
+                    <token regexp="yes">vo?(la|ci|cial|chal)</token>
+                </pattern>
+		<message>E walon «<match no="2"></match>» si dispårtixh eyet l' pronon s' î vént stitchî. ça dvreut purade esse <suggestion>vo <match no="1" case_conversion="startlower"
+					regexp_match="([vV])o?s" 
+					regexp_replace="$1s"></match> <match no="3" 
+					regexp_match="vo?(la|ci|cial|chal)$" 
+					regexp_replace="$1"></match></suggestion>?</message>
+                <example correction="vo vs la"><marker>vos vla</marker>.</example>
+            </rule>
+	    <rule _id="VO_XS_LA_2" _name="nos î vla -> vos ns î la">
+                <pattern>
+                    <token regexp="yes">([vn]o?s|le?s)</token>
+                    <token regexp="yes" min="1">(î|e?ndè?|è)</token>
+                    <token regexp="yes">vo?(la|ci|cial|chal)</token>
+                </pattern>
+		<message>E walon «<match no="3"></match>» si dispårtixh eyet l' pronon s' î vént stitchî. ça dvreut purade esse <suggestion>vo <match no="1" case_conversion="startlower"
+					regexp_match="([vVnNlL])[oe]?s" 
+					regexp_replace="$1s"></match> <match no="2" 
+					regexp_match="e?ndè?$" 
+					regexp_replace="endè"></match> <match no="3" 
+					regexp_match="vo?(la|ci|cial|chal)$" 
+					regexp_replace="$1"></match></suggestion>?</message>
+                <example correction="vo vs î la"><marker>vos î vla</marker>.</example>
+                <example correction="vo ns endè la"><marker>nos ndè vla</marker>.</example>
+            </rule>
+	    <rule _id="VO_XS_RILA" _name="vos rivola -> vo vs rila">
+                <pattern>
+                    <token regexp="yes">([vV]o?s)</token>
+                    <token regexp="yes">ri?vo?(la|ci|cial|chal)</token>
+                </pattern>
+		<message>E walon «<match no="2"></match>» si dispårtixh eyet l' pronon s' î vént stitchî. ça dvreut purade esse <suggestion>vo <match no="1" case_conversion="startlower"
+					regexp_match="([vV])o?s" 
+					regexp_replace="$1s"></match> <match no="2" 
+					regexp_match="ri?vo?(la|ci|cial|chal)$" 
+					regexp_replace="ri$1"></match></suggestion>?</message>
+                <example correction="vo vs rila"><marker>vos rivla</marker>.</example>
+            </rule>
+	    <rule _id="VO_XS_RLA" _name="les rivola -> vo les rla">
+                <pattern>
+                    <token regexp="yes">([]nN]o?s|le?s)</token>
+                    <token regexp="yes">ri?vo?(la|ci|cial|chal)</token>
+                </pattern>
+		<message>E walon «<match no="2"></match>» si dispårtixh eyet l' pronon s' î vént stitchî. ça dvreut purade esse <suggestion>vo <match no="1" case_conversion="startlower" ></match> <match no="2" 
+					regexp_match="ri?vo?(la|ci|cial|chal)$" 
+					regexp_replace="r$1"></match></suggestion>?</message>
+                <example correction="vo les rla"><marker>les rvola</marker>.</example>
+            </rule>
+	    <rule _id="VO_XS_RLA_2" _name="les î rvola -> vo ls î rla">
+                <pattern>
+                    <token regexp="yes">([vn]o?s|le?s)</token>
+                    <token regexp="yes" min="1">(î|e?ndè?|è)</token>
+                    <token regexp="yes">ri?vo?(la|ci|cial|chal)</token>
+                </pattern>
+		<message>E walon «<match no="3"></match>» si dispårtixh eyet l' pronon s' î vént stitchî. ça dvreut purade esse <suggestion>vo <match no="1" case_conversion="startlower"
+					regexp_match="([vVnNlL])[oe]?s" 
+					regexp_replace="$1s"></match> <match no="2" 
+					regexp_match="e?ndè?$" 
+					regexp_replace="endè"></match> <match no="3" 
+					regexp_match="ri?vo?(la|ci|cial|chal)$" 
+					regexp_replace="r$1"></match></suggestion>?</message>
+                <example correction="vo ls î rla"><marker>les î rvola</marker>.</example>
+            </rule>
+
+	    <rule _id="VO_NDE_LA" _name="endè vola -> vo ndè la">
+                <pattern>
+                    <token regexp="yes">(î|e?ndè?)<exception regexp="yes" scope="previous">('|[mtln]i|è[mtn]|el|[vn]o?s|le?s)</exception></token>
+                    <token regexp="yes">(ri|r)?vo?(la|ci|cial|chal)</token>
+                </pattern>
+		<message>E walon «<match no="2"></match>» si dispårtixh eyet l' pronon s' î vént stitchî. ça dvreut purade esse <suggestion>vo <match no="1" case_conversion="startlower" 
+					regexp_match="([eE]?[nN]dè)$" 
+					regexp_replace="ndè"></match> <match no="2" 
+					regexp_match="(r|)i?vo?(la|ci|cial|chal)$" 
+					regexp_replace="$1$2"></match></suggestion>?</message>
+                <example correction="vo ndè la"><marker>endè vola</marker>.</example>
+                <example correction="vo ndè rla"><marker>endè rvla</marker>.</example>
+            </rule>
+	    <rule _id="VOZ_E_LA" _name="è vola -> vo-z è la">
+                <pattern>
+                    <token>è<exception regexp="yes" scope="previous">('|[mtl]i|è[mt]|el|[vn]o?s|le?s)</exception></token>
+                    <token regexp="yes">(ri|r)?vo?(la|ci|cial|chal)</token>
+                </pattern>
+		<message>E walon «<match no="2"></match>» si dispårtixh eyet l' pronon s' î vént stitchî. ça dvreut purade esse <suggestion>vo-z <match no="1" case_conversion="startlower" ></match> <match no="2" 
+					regexp_match="(r|)i?vo?(la|ci|cial|chal)$" 
+					regexp_replace="$1$2"></match></suggestion>?</message>
+                <example correction="vo-z è la"><marker>è vla</marker>.</example>
+                <example correction="vo-z è rla"><marker>è rvola</marker>.</example>
+            </rule>
+
+	    <rule _id="VO_N_E_LA" _name="n' è vola -> vo n' è la">
+                <regexp>([èÈ]n|[Nn]') (è|endè?) ((ri?|)vo?(la|ci|cial|chal))(-t i|-t ele|) nén</regexp>
+		<message>E walon «vola» si dispårtixh eyet l' pronon s' î vént stitchî. ça dvreut purade esse <suggestion><match no="1"
+					regexp_match="[èÈ]?[Nn]'?\s+(è|endè?) (ri?|)vo?(la|ci|cial|chal)(-t i|-t ele|) nén"
+					regexp_replace="vo n' $1 $2$3$4 nén"/></suggestion>.</message>	
+                <example correction="vo n' è la-t i nén"><marker>n' è vla-t i nén</marker> co.</example>
+            </rule>
+	    <rule _id="VO_NEL_LA" _name="nel vola -> vo nel la">
+                <regexp>[Nn](' el|el|i l') ((ri?|)vo?(la|ci|cial|chal))(-t i|-t ele|) nén</regexp>
+		<message>E walon «vola» si dispårtixh eyet l' pronon s' î vént stitchî. ça dvreut purade esse <suggestion>bai <match no="1" 
+					regexp_match="[Nn].* (ri?|)vo?(la|ci|cial|chal)(-t i|-t ele|) nén"
+					regexp_replace="vo nel $1$2$3 nén"/></suggestion>.</message>	
+                <example correction="vo nel la-t i nén"><marker>nel vola-t i nén</marker> co.</example>
+                <example correction="vo nel la nén"><marker>nel vla nén</marker> co evoye.</example>
+                <example correction="vo nel rila-t ele nén"><marker>n' el rivla-t ele nén</marker> co.</example>
+            </rule>
+        </rulegroup>
+    </category>
+
+    <category name="TEST">
+    <rulegroup id="TESTS" name="Rîles di saye">
+	    <rule id="TEST_01" name="xnel vola -> vo nel la">
+                <regexp>[Xx][Nn](' el|el|i l') ((ri?|)vo?(la|ci|cial|chal))(-t i|-t ele|) nén</regexp>
+		<message>Test 01: </message><suggestion>vo <match no="1" 
+					regexp_match="[Xx].* (ri?|)vo?(la|ci|cial|chal)(-t i|-t ele|) nén"
+					regexp_replace="nel $1$2$3 nén"/></suggestion>	
+                <example correction="foo nel la-t i nén"><marker>xnel vola-t i nén</marker> co.</example>
+            </rule>
+	    <rule id="TEST_02" name="ynel vola -> vo nel la">
+                <regexp>[Yy][Nn](' el|el|i l') ((ri?|)vo?(la|ci|cial|chal))(-t i|-t ele|) nén</regexp>
+		<message>Test 01: <suggestion>vo n\1 \3\4\5 nén</suggestion>.</message>	
+                <example correction="foo nel la-t i nén"><marker>ynel vola-t i nén</marker> co.</example>
+            </rule>
+	    <rule id="TEST_03" name="znel vola -> vo nel la">
+                <pattern>
+                    <token regexp="yes">znel</token>
+                    <token regexp="yes">(ri?)?vo?(la|ci|cial|chal)</token>
+                </pattern>
+		<message>Test 03: <suggestion>vo <match no="1" case_conversion="startlower"
+					regexp_match="[zZ](nel)" 
+					regexp_replace="$1"></match> <match no="2" 
+					regexp_match="(ri?|)vo?(la|ci|cial|chal)" 
+					regexp_replace="$1$2"></match></suggestion>?</message>
+		<example correction="vo nel rila"><marker>znel rvola</marker>-t i nén co.</example>
+            </rule>
+        </rulegroup>
+    </category>
+
+</rules>

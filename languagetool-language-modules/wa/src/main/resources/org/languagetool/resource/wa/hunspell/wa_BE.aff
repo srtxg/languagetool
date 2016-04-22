@@ -1,0 +1,1290 @@
+
+
+
+
+
+
+
+SET cp1252
+WORDCHARS -’'1234567890
+TRY ersainthocuxdlpéymbzîvjåfèwgkêôûçERSAINTHOCUXDLPÉYMBZÎVJÅFÈWGKÊÔÛ'Ç
+
+MAP 6
+MAP aàâäåAÀÂÄÅ
+MAP eéèêëEÉÈÊË
+MAP iîïyIÎÏY
+MAP oôöOÔÖ
+MAP uùûüUÙÛÜ
+MAP cçCÇ
+
+
+BREAK 7
+BREAK -
+BREAK .
+BREAK ·
+BREAK ^'
+BREAK ^‘
+BREAK '$
+BREAK ’$
+
+ICONV 1
+ICONV ’ '
+
+OCONV 1
+OCONV ' ’
+
+NEEDAFFIX *
+
+PFX L Y 2
+PFX L 0 l' [aàâeèéêiîoôuyhœæ]
+PFX L 0 k' [aàâeèéêiîoôuyhœæ]
+
+PFX i Y 65
+PFX i 0 0 er sp:plin sp:O
+PFX i   er r er sp:spotch
+PFX i   er ri er sp:plin sp:C sp:E
+PFX i 0 0 es sp:plin sp:O
+PFX i   es s es sp:spotch
+PFX i   es si es sp:plin sp:C sp:E
+PFX i   be b be sp:spotch
+PFX i   de d de sp:spotch
+PFX i   me m me sp:spotch
+PFX i   se s se sp:spotch
+PFX i   ve v ve sp:spotch
+PFX i   chi ch chi[^y] sp:spotch
+PFX i   di d di[^gsy] sp:spotch
+PFX i   di d dign sp:spotch
+PFX i   di d dis[^s] sp:spotch
+PFX i   dis d diss sp:spotch
+PFX i   di d diy[^iî] sp:spotch
+PFX i   dji dj dji sp:spotch
+PFX i   fi f fi[^y] sp:spotch
+PFX i   gni gn gni[^y] sp:spotch
+PFX i   0 0 ki sp:plin sp:E
+PFX i   ki co ki sp:plin sp:O sp:C
+PFX i   ki c ki[^eéèêhiîsy] sp:spotch
+PFX i   ki k ki[eéèêhiî] sp:spotch
+PFX i   ki c kis[^cs] sp:spotch
+PFX i   kis c kiss sp:spotch
+PFX i   kiy ki kiy[^iî] sp:spotch
+PFX i   ki k kiy[iî] sp:spotch
+PFX i   li l li[^y] sp:spotch
+PFX i   pi p pi[^y] sp:spotch
+PFX i   0 0 ri sp:plin sp:C sp:E
+PFX i   ri r ri[^sy] sp:spotch
+PFX i   ri r ris[^s] sp:spotch
+PFX i   ris r riss sp:spotch
+PFX i   riy ri riy[^iî] sp:spotch
+PFX i   ri r riy[iî] sp:spotch
+PFX i   ri er ri[^s] sp:plin sp:O
+PFX i   ri er ris[^s] sp:plin sp:O
+PFX i   ris er riss sp:plin sp:O
+PFX i   riy eri riy[^iî] sp:plin sp:O
+PFX i   ri er riy[iî] sp:plin sp:O
+PFX i   si s si[^y] sp:spotch
+PFX i   Si S Si[^y] sp:spotch
+PFX i   siy si siy[^iî] sp:spotch
+PFX i   si s siy[iî] sp:spotch
+PFX i   si es si[^y] sp:plin sp:O
+PFX i   tchi tch tchi[^y] sp:spotch
+PFX i   ti t ti[^y] sp:spotch
+PFX i   vi v vi[^y] sp:spotch
+PFX i   0 0 co sp:plin sp:O sp:C
+PFX i   co c co[^hseéèêiî] sp:spotch
+PFX i   co k co[heéèêiî] sp:spotch
+PFX i   co c cos[^cs] sp:spotch
+PFX i   cos c coss sp:spotch
+PFX i   co ki co sp:plin sp:E
+PFX i   po p po sp:spotch
+PFX i   to t to sp:spotch
+PFX i   vo v vo sp:spotch
+PFX i   du d du sp:spotch
+PFX i   lu l lu sp:spotch
+PFX i   mu m mu sp:spotch
+PFX i   pu p pu sp:spotch
+PFX i   ru r ru sp:spotch
+PFX i   vu v vu sp:spotch
+PFX i   sch esch sch sp:plin sp:O
+
+
+
+PFX P Y 8
+PFX P   0 ri [^aåâeéêèiîoôuûy]
+PFX P   0 r [^r]
+PFX P   0 ra [^aåâeéêèiîoôuûy]
+PFX P   0 raca [^aåâeéêèiîoôuûy]
+PFX P   0 dis .
+PFX P   0 co [^aåâeéêèiîoôuûy]
+PFX P   0 ki [^aåâeéêèiîoôuûy]
+PFX P   0 c [^ck]
+
+
+
+
+SFX j Y 25
+SFX j   é aedje/o* [^cku]é
+SFX j   cé çaedje/o* cé
+SFX j   ké caedje/o* ké
+SFX j   ué aedje/o* gué
+SFX j   î aedje/o* [^ckuy]î
+SFX j   cî çaedje/o* cî
+SFX j   kî caedje/o* kî
+SFX j   uî aedje/o* guî
+SFX j   yî iaedje/o* [^aåâeéêègiîoôuû]yî
+SFX j   yî yaedje/o* [aåâeéêèiîoôuû]yî
+SFX j   yî uiaedje/o* gyî
+SFX j   i aedje/o* [^cku]i
+SFX j   ci çaedje/o* ci
+SFX j   ki caedje/o* ki
+SFX j   ui aedje/o* gui
+SFX j   0 aedje/o* ixh
+SFX j   ou aedje/o* [^h]ou
+SFX j   ou aedje/o* [^j]hou
+SFX j   ou aedje/o* [^é]jhou
+SFX j   éjhou ijhaedje/o* éjhou
+SFX j   t jhaedje/o* [^îû]t
+SFX j   ît ijhaedje/o* ît
+SFX j   ût ujhaedje/o* ût
+SFX j ez aedje/o* ez
+SFX j oz aedje/o* oz
+
+
+SFX c Y 60
+SFX c   é ance [^cku]é
+SFX c   cé çance cé
+SFX c   ké cance ké
+SFX c   ué ance gué
+SFX c   î ance [^ckuy]î
+SFX c   cî çance cî
+SFX c   kî cance kî
+SFX c   uî ance guî
+SFX c   yî iance [^aåâeéêègiîoôuû]yî
+SFX c   yî yance [aåâeéêèiîoôuû]yî
+SFX c   yî uiance gyî
+SFX c   i ance [^cku]i
+SFX c   ci çance ci
+SFX c   ki cance ki
+SFX c   ui ance gui
+SFX c   0 ance ixh
+SFX c   ou ance [^h]ou
+SFX c   ou ance [^j]hou
+SFX c   ou ance [^é]jhou
+SFX c   éjhou ijhance éjhou
+SFX c   t jhance [^îû]t
+SFX c   ît ijhance ît
+SFX c   ût ujhance ût
+SFX c   é ances [^cku]é
+SFX c   cé çances cé
+SFX c   ké cances ké
+SFX c   ué ances gué
+SFX c   î ances [^ckuy]î
+SFX c   cî çances cî
+SFX c   kî cances kî
+SFX c   uî ances guî
+SFX c   yî iances [^aåâeéêègiîoôuû]yî
+SFX c   yî yances [aåâeéêèiîoôuû]yî
+SFX c   yî uiances gyî
+SFX c   i ances [^cku]i
+SFX c   ci çances ci
+SFX c   ki cances ki
+SFX c   ui ances gui
+SFX c   0 ances ixh
+SFX c   ou ances [^h]ou
+SFX c   ou ances [^j]hou
+SFX c   ou ances [^é]jhou
+SFX c   éjhou ijhances éjhou
+SFX c   t jhances [^îû]t
+SFX c   ît ijhances ît
+SFX c   ût ujhances ût
+SFX c es rece [^cksu]es
+SFX c ces çrece ces
+SFX c kes crece kes
+SFX c es rece [^g]ues
+SFX c gues grece gues
+SFX c es rece [^s]ses
+SFX c ses rece sses
+SFX c es reces [^cksu]es
+SFX c ces çreces ces
+SFX c kes creces kes
+SFX c es reces [^g]ues
+SFX c gues greces gues
+SFX c es reces [^s]ses
+SFX c ses reces sses
+
+
+SFX t Y 69
+SFX t   é ant/s* [^cku]é po:addj is:o
+SFX t   cé çant/s* cé po:addj is:o
+SFX t   ké cant/s* ké po:addj is:o
+SFX t   ué ant/s* gué po:addj is:o
+SFX t   î ant/s* [^ckuy]î po:addj is:o
+SFX t   cî çant/s* cî po:addj is:o
+SFX t   kî cant/s* kî po:addj is:o
+SFX t   uî ant/s* guî po:addj is:o
+SFX t   yî iant/s* [^aåâeéêègiîoôuû]yî po:addj is:o
+SFX t   yî yant/s* [aåâeéêèiîoôuû]yî po:addj is:o
+SFX t   yî uiant/s* gyî po:addj is:o
+SFX t   i ant/s* [^cku]i po:addj is:o
+SFX t   ci çant/s* ci po:addj is:o
+SFX t   ki cant/s* ki po:addj is:o
+SFX t   ui ant/s* gui po:addj is:o
+SFX t   0 ant/s* ixh po:addj is:o
+SFX t   ou ant/s* [^h]ou po:addj is:o
+SFX t   ou ant/s* [^j]hou po:addj is:o
+SFX t   ou ant/s* [^é]jhou po:addj is:o
+SFX t   éjhou ijhant/s* éjhou po:addj is:o
+SFX t   t jhant/s* [^îû]t po:addj is:o
+SFX t   ît ijhant/s* ît po:addj is:o
+SFX t   ût ujhant/s* ût po:addj is:o
+SFX t   é ante/s* [^cku]é po:addj is:f
+SFX t   cé çante/s* cé po:addj is:f
+SFX t   ké cante/s* ké po:addj is:f
+SFX t   ué ante/s* gué po:addj is:f
+SFX t   î ante/s* [^ckuy]î po:addj is:f
+SFX t   cî çante/s* cî po:addj is:f
+SFX t   kî cante/s* kî po:addj is:f
+SFX t   uî ante/s* guî po:addj is:f
+SFX t   yî iante/s* [^aåâeéêègiîoôuû]yî po:addj is:f
+SFX t   yî yante/s* [aåâeéêèiîoôuû]yî po:addj is:f
+SFX t   yî uiante/s* gyî po:addj is:f
+SFX t   i ante/s* [^cku]i po:addj is:f
+SFX t   ci çante/s* ci po:addj is:f
+SFX t   ki cante/s* ki po:addj is:f
+SFX t   ui ante/s* gui po:addj is:f
+SFX t   0 ante/s* ixh po:addj is:f
+SFX t   ou ante/s* [^h]ou po:addj is:f
+SFX t   ou ante/s* [^j]hou po:addj is:f
+SFX t   ou ante/s* [^é]jhou po:addj is:f
+SFX t   éjhou ijhante/s* éjhou po:addj is:f
+SFX t   t jhante/s* [^îû]t po:addj is:f
+SFX t   ît ijhante/s* ît po:addj is:f
+SFX t   ût ujhante/s* ût po:addj is:f
+SFX t   é ant/a* [^cku]é
+SFX t   cé çant/a* cé
+SFX t   ké cant/a* ké
+SFX t   ué ant/a* gué
+SFX t   î ant/a* [^ckuy]î
+SFX t   cî çant/a* cî
+SFX t   kî cant/a* kî
+SFX t   uî ant/a* guî
+SFX t   yî iant/a* [^aåâeéêègiîoôuû]yî
+SFX t   yî yant/a* [aåâeéêèiîoôuû]yî
+SFX t   yî uiant/a* gyî
+SFX t   i ant/a* [^cku]i
+SFX t   ci çant/a* ci
+SFX t   ki cant/a* ki
+SFX t   ui ant/a* gui
+SFX t   0 ant/a* ixh
+SFX t   ou ant/a* [^h]ou
+SFX t   ou ant/a* [^j]hou
+SFX t   ou ant/a* [^é]jhou
+SFX t   éjhou ijhant/a* éjhou
+SFX t   t jhant/a* [^îû]t
+SFX t   ît ijhant/a* ît
+SFX t   ût ujhant/a* ût
+
+
+SFX m Y 34
+SFX m   es mint/o* [^ckosu]es
+SFX m   ces çmint/o* ces
+SFX m   kes cmint/o* kes
+SFX m   s mint/o* oes
+SFX m   es mint/o* [^s]ses
+SFX m   ses mint/o* sses
+SFX m   ues mint/o* ues
+SFX m   s mint/o* [^eiuû]s
+SFX m   us mint/o* ous
+SFX m   oûs ômint/o* oûs
+SFX m   s mint/o* [^eo][uû]s
+SFX m   0 mint/o* ixh
+SFX m   rès mint/o* rès
+SFX m 0 0 mint po:adv
+SFX m   e mint [^bckosu]e po:adv
+SFX m   e mint [^å]be po:adv
+SFX m   e lumint åbe po:adv
+SFX m   ce çmint ce po:adv
+SFX m   ke cmint ke po:adv
+SFX m   0 mint oe po:adv
+SFX m   e mint [^s]se po:adv
+SFX m   se mint sse po:adv
+SFX m   ue mint gue po:adv
+SFX m   s zmint eus po:adv
+SFX m   0 lmint å po:adv
+SFX m   0 nmint in po:adv
+SFX m   f vmint f po:adv
+SFX m   k cmint k po:adv
+SFX m   é êymint é po:adv
+SFX m   i eymint i po:adv
+SFX m   î eymint î po:adv
+SFX m   0 mint [^åeéfhiîknst] po:adv
+SFX m   t mint ant po:adv
+SFX m   0 mint [^n]t po:adv
+
+
+
+SFX v Y 320
+SFX v   s 0 s po:v is:pr. is:1sg
+SFX v 0 0 ixh po:v is:pr. is:1sg sp:E
+SFX v xh 0 ixh po:v is:pr. is:1sg
+SFX v   0 0 s po:v is:pr. is:2sg
+SFX v   0 s ixh po:v is:pr. is:2sg sp:E
+SFX v   xh s ixh po:v is:pr. is:2sg
+SFX v   0 s [^e]s po:v is:pr. is:2sg is:dim
+SFX v   0 xh ss po:v is:pr. is:2sg is:dim
+SFX v   s t [^edt]s po:v is:pr. is:3sg
+SFX v   s 0 [dt]s po:v is:pr. is:3sg
+SFX v   s 0 [^o]es po:v is:pr. is:3sg
+SFX v   s t oes po:v is:pr. is:3sg
+SFX v 0 0 ixh po:v is:pr. is:3sg sp:E
+SFX v   xh t ixh po:v is:pr. is:3sg
+SFX v  é /1* é po:v
+SFX v  é /A* [^cu]é po:v
+SFX v  cé ç/A* cé po:v
+SFX v  ué /A* gué po:v
+SFX v  î /2* î po:v
+SFX v  î /A* [^cuy]î po:v
+SFX v  cî ç/A* cî po:v
+SFX v  uî /A* guî po:v
+SFX v  yî i/A* [^aåâeéêègiîoôuû]yî po:v
+SFX v  î /A* [aåâeéêèiîoôuû]yî po:v
+SFX v  0 /4* ixh po:v
+SFX v  0 /A* ixh po:v
+SFX v  ou /4* [^h]ou po:v
+SFX v  ou /A* [^ch]ou po:v
+SFX v  cou k/A* cou po:v
+SFX v  ou /4* [^j]hou po:v
+SFX v  ou /A* [^j]hou po:v
+SFX v  ou /4* [^é]jhou po:v
+SFX v  ou /A* [^é]jhou po:v
+SFX v  éjhou ijh/4* éjhou po:v
+SFX v  éjhou ijh/A* éjhou po:v
+SFX v  t jh/4* [^îû]t po:v
+SFX v  t jh/A* [^îû]t po:v
+SFX v  ît ijh/4* ît po:v
+SFX v  ît ijh/A* ît po:v
+SFX v  ût ujh/4* ût po:v
+SFX v  ût ujh/A* ût po:v
+SFX v   i oz [^cku]i # vos sintoz
+SFX v   ci çoz ci
+SFX v   ki coz ki
+SFX v   ui oz gui #
+SFX v   i èt i # i sintèt
+SFX v   es nut [^ckosu]es # i tchantnut
+SFX v   ces çnut ces # i cminçnut
+SFX v   kes cnut kes # i vicnut
+SFX v   es nut [^s]ses # 
+SFX v   ses nut sses # i pasnut
+SFX v   ues nut ues # il abagnut
+SFX v   0 nut ixh # i finixhnut
+SFX v   s nut [dt]s # i metnut
+SFX v   t jhnut [^îû]t # i dijhnut
+SFX v   ît ijhnut ît  
+SFX v   ût ujhnut ût 
+SFX v   es rè [^ckosu]es # dji/i tchantrè
+SFX v   ces çrè ces # dji/i cminçrè
+SFX v   kes crè kes # dji/i vicrè
+SFX v   s rè oes # dji/i boerès
+SFX v   es rè [^s]ses # 
+SFX v   ses rè sses # dji/i pasrè
+SFX v   ues rè ues # dji/il abagrè
+SFX v s rè [^eîuû]s # dji/i scrirè
+SFX v   us rè ous # dji/i porè
+SFX v   oûs ôrè oûs # dji/i pôrè
+SFX v   s rè [^o]us # dji/i curè
+SFX v   ûs urè [^o]ûs # dji/i curè
+SFX v   îs irè îs # dji/i scrirè
+SFX v   xh rè ixh # dji/i finirè
+SFX v   0 rè ixh # dji/i finixhrè
+SFX v   es rès [^ckosu]es # ti tchantrès
+SFX v   ces çrès ces # ti cminçrès
+SFX v   kes crès kes # ti vicrès
+SFX v   s rès oes # ti boerès
+SFX v   es rès [^s]ses # 
+SFX v   ses rès sses # ti pasrès
+SFX v   ues rès ues # ti abagrès
+SFX v s rès [^eîuû]s # ti scrirès
+SFX v   us rès ous # ti porès
+SFX v   oûs ôrès oûs # ti pôrès
+SFX v   s rès [^o]us # ti curès
+SFX v   ûs urès [^o]ûs # ti curès
+SFX v   îs irès îs # ti scrirès
+SFX v   xh rès ixh # ti finirès
+SFX v   0 rès ixh # ti finixhrès
+SFX v   es ress [^ckosu]es # tchantress ?
+SFX v   ces çress ces # kiminçress ?
+SFX v   kes cress kes # vicress ?
+SFX v   s ress oes # boeress ?
+SFX v   es ress [^s]ses # 
+SFX v   ses ress sses # pasress ?
+SFX v   ues ress ues # abagress ?
+SFX v s ress [^eîuû]s # sicriress ?
+SFX v   us ress ous # poress ?
+SFX v   oûs ôress oûs # pôress ?
+SFX v   s ress [^o]us # curess ?
+SFX v   ûs uress [^o]ûs # curess ?
+SFX v   îs iress îs # sicriress ?
+SFX v   xh ress ixh # finiress ?
+SFX v   0 ress ixh # finixhress ?
+SFX v   es rans [^ckosu]es # nos tchantrans
+SFX v   ces çrans ces # nos cminçrans
+SFX v   kes crans kes # nos vicrans
+SFX v   s rans oes # nos boerans
+SFX v   es rans [^s]ses # 
+SFX v   ses rans sses # nos pasrans
+SFX v   ues rans ues # nos abagrans
+SFX v s rans [^eîuû]s # nos scrirans
+SFX v   us rans ous # nos porans
+SFX v   oûs ôrans oûs # nos pôrans
+SFX v   s rans [^o]us # nos curans
+SFX v   ûs urans [^o]ûs # nos curans
+SFX v   îs irans îs # nos scrirans
+SFX v   xh rans ixh # nos finirans
+SFX v   0 rans ixh # nos finixhrans
+SFX v   es roz [^ckosu]es # vos tchantroz
+SFX v   ces çroz ces # vos cminçroz
+SFX v   kes croz kes # vos vicroz
+SFX v   s roz oes # vos boeroz
+SFX v   es roz [^s]ses # 
+SFX v   ses roz sses # vos pasroz
+SFX v   ues roz ues # vos abagroz
+SFX v s roz [^eîuû]s # vos scriroz
+SFX v   us roz ous # vos poroz
+SFX v   oûs ôroz oûs # vos pôroz
+SFX v   s roz [^o]us # vos curoz
+SFX v   ûs uroz [^o]ûs # vos curoz
+SFX v   îs iroz îs # vos scriroz
+SFX v   xh roz ixh # vos finiroz
+SFX v   0 roz ixh # vos finixhroz
+SFX v   es ront [^ckosu]es # i tchantront
+SFX v   ces çront ces # i cminçront
+SFX v   kes cront kes # i vicront
+SFX v   s ront oes # i boeront
+SFX v   es ront [^s]ses # 
+SFX v   ses ront sses # i pasront
+SFX v   ues ront ues # il abagront
+SFX v s ront [^eîuû]s # i scriront
+SFX v   us ront ous # i poront
+SFX v   oûs ôront oûs # i pôront
+SFX v   s ront [^o]us # i curont
+SFX v   ûs uront [^o]ûs # i curont
+SFX v   îs iront îs # i scriront
+SFX v   xh ront ixh # i finiront
+SFX v   0 ront ixh # i finixhront
+SFX v es e es # dji/i tchante
+SFX v 0 e ixh # dji/i finixhe
+SFX v t xhe t # dji/i dixhe
+SFX v ou e [^ro][^cçgir]ou # dji/i boeve
+SFX v cou ke cou #
+SFX v çou ce çou #
+SFX v ou ue gou #
+SFX v 0 es ixh # ti finixhes
+SFX v t xhes t # ti dixhes
+SFX v ou es [^or][^cçgir]ou # V-C-ou => V-C-es
+SFX v cou kes cou #
+SFX v çou ces çou #
+SFX v ou ues gou #
+SFX v   i anxhe [^cku]i # nos sintanxhe
+SFX v   ci çanxhe ci # 
+SFX v   ki canxhe ki #
+SFX v   ui anxhe gui #
+SFX v   t jhanxhe [^îû]t # nos djhanxhe
+SFX v   ît ijhanxhe ît # 
+SFX v   ût ujhanxhe ût # nos cujhanxhe
+SFX v   i oxhe [^cku]i # vos sintoxhe
+SFX v   ci çoxhe ci
+SFX v   ki coxhe ki
+SFX v   ui oxhe gui #
+SFX v   t jhoxhe [^îû]t # vos dijhoxhe
+SFX v   ît ijhoxhe ît  
+SFX v   ût ujhoxhe ût 
+SFX v   i exhe i # i sintexhe
+SFX v   t jhexhe [^îû]t # i dijhexhe
+SFX v   ît ijhexhe ît  
+SFX v   ût ujhexhe ût 
+SFX v   es nuxhe [^ckosu]es # i tchantnuxhe
+SFX v   ces çnuxhe ces # i cminçnuxhe
+SFX v   kes cnuxhe kes # i vicnuxhe
+SFX v   es nuxhe [^s]ses # 
+SFX v   ses nuxhe sses # i pasnuxhe
+SFX v   ues nuxhe ues # il abagnuxhe
+SFX v   0 nuxhe ixh # i finixhnuxhe
+SFX v   s nuxhe [dt]s # i metnuxhe
+SFX v   t jhnuxhe [^îû]t # i dijhnuxhe
+SFX v   ît ijhnuxhe ît  
+SFX v   ût ujhnuxhe ût 
+SFX v   i axhe [^cku]i # dji/i sintaxhe
+SFX v   ci çaxhe ci # 
+SFX v   ki caxhe ki #
+SFX v   ui axhe gui #
+SFX v   i axhes [^cku]i # ti sintaxhes
+SFX v   ci çaxhes ci # 
+SFX v   ki caxhes ki #
+SFX v   ui axhes gui #
+SFX v i énxhe i # nos/i sinténxhe
+SFX v i îxhe i # vos sintîxhe
+SFX v   es reu [^ckosu]es # dji tchantreu
+SFX v   ces çreu ces # dji cminçreu
+SFX v   kes creu kes # dji vicreu
+SFX v   s reu oes # dji boerès
+SFX v   es reu [^s]ses # 
+SFX v   ses reu sses # dji pasreu
+SFX v   ues reu ues # dj' abagreu
+SFX v s reu [^eîuû]s # dji scrireu
+SFX v   us reu ous # dji poreu
+SFX v   oûs ôreu oûs # dji pôreu
+SFX v   s reu [^o]us # dji cureu
+SFX v   ûs ureu [^o]ûs # dji cureu
+SFX v   îs ireu îs # dji scrireu
+SFX v   xh reu ixh # dji finireu
+SFX v   0 reu ixh # dji finixhreu
+SFX v   es reus [^ckosu]es # ti tchantreus
+SFX v   ces çreus ces # ti cminçreus
+SFX v   kes creus kes # ti vicreus
+SFX v   s reus oes # ti boereus
+SFX v   es reus [^s]ses # 
+SFX v   ses reus sses # ti pasreus
+SFX v   ues reus ues # ti abagreus
+SFX v s reus [^eîuû]s # ti scrireus
+SFX v   us reus ous # ti poreus
+SFX v   oûs ôreus oûs # ti pôreus
+SFX v   s reus [^o]us # ti cureus
+SFX v   ûs ureus [^o]ûs # ti cureus
+SFX v   îs ireus îs # ti scrireus
+SFX v   xh reus ixh # ti finireus
+SFX v   0 reus ixh # ti finixhreus
+SFX v   es reuss [^ckosu]es # tchantreuss ?
+SFX v   ces çreuss ces # kiminçreuss ?
+SFX v   kes creuss kes # vicreuss ?
+SFX v   s reuss oes # boereuss ?
+SFX v   es reuss [^s]ses # 
+SFX v   ses reuss sses # pasreuss ?
+SFX v   ues reuss ues # abagreuss ?
+SFX v s reuss [^eîuû]s # sicrireuss ?
+SFX v   us reuss ous # poreuss ?
+SFX v   oûs ôreuss oûs # pôreuss ?
+SFX v   s reuss [^o]us # cureuss ?
+SFX v   ûs ureuss [^o]ûs # cureuss ?
+SFX v   îs ireuss îs # sicrireuss ?
+SFX v   xh reuss ixh # finireuss ?
+SFX v   0 reuss ixh # finixhreuss ?
+SFX v   es reut [^ckosu]es # i tchantreut
+SFX v   ces çreut ces # i cminçreut
+SFX v   kes creut kes # i vicreut
+SFX v   s reut oes # i boerès
+SFX v   es reut [^s]ses # 
+SFX v   ses reut sses # i pasreut
+SFX v   ues reut ues # il abagreut
+SFX v s reut [^eîuû]s # i scrireut
+SFX v   us reut ous # i poreut
+SFX v   oûs ôreut oûs # i pôreut
+SFX v   s reut [^o]us # i cureut
+SFX v   ûs ureut [^o]ûs # i cureut
+SFX v   îs ireut îs # i scrireut
+SFX v   xh reut ixh # i finireut
+SFX v   0 reut ixh # i finixhreut
+SFX v   es réns [^ckosu]es # nos tchantréns
+SFX v   ces çréns ces # nos cminçréns
+SFX v   kes créns kes # nos vicréns
+SFX v   s réns oes # nos boeréns
+SFX v   es réns [^s]ses # 
+SFX v   ses réns sses # nos pasréns
+SFX v   ues réns ues # nos abagréns
+SFX v s réns [^eîuû]s # nos scriréns
+SFX v   us réns ous # nos poréns
+SFX v   oûs ôréns oûs # nos pôréns
+SFX v   s réns [^o]us # nos curéns
+SFX v   ûs uréns [^o]ûs # nos curéns
+SFX v   îs iréns îs # nos scriréns
+SFX v   xh réns ixh # nos finiréns
+SFX v   0 réns ixh # nos finixhréns
+SFX v   es rîz [^ckosu]es # vos tchantrîz
+SFX v   ces çrîz ces # vos cminçrîz
+SFX v   kes crîz kes # vos vicrîz
+SFX v   s rîz oes # vos boerîz
+SFX v   es rîz [^s]ses # 
+SFX v   ses rîz sses # vos pasrîz
+SFX v   ues rîz ues # vos abagrîz
+SFX v s rîz [^eîuû]s # vos scrirîz
+SFX v   us rîz ous # vos porîz
+SFX v   oûs ôrîz oûs # vos pôrîz
+SFX v   s rîz [^o]us # vos curîz
+SFX v   ûs urîz [^o]ûs # vos curîz
+SFX v   îs irîz îs # vos scrirîz
+SFX v   xh rîz ixh # vos finirîz
+SFX v   0 rîz ixh # vos finixhrîz
+SFX v   es rént [^ckosu]es # i tchantrént
+SFX v   ces çrént ces # i cminçrént
+SFX v   kes crént kes # i vicrént
+SFX v   s rént oes # i boerént
+SFX v   es rént [^s]ses # 
+SFX v   ses rént sses # i pasrént
+SFX v   ues rént ues # il abagrént
+SFX v s rént [^eîuû]s # i scrirént
+SFX v   us rént ous # i porént
+SFX v   oûs ôrént oûs # i pôrént
+SFX v   s rént [^o]us # i curént
+SFX v   ûs urént [^o]ûs # i curént
+SFX v   îs irént îs # i scrirént
+SFX v   xh rént ixh # i finirént
+SFX v   0 rént ixh # i finixhrént
+SFX v   i ant [^cku]i # sintant
+SFX v   ci çant ci # 
+SFX v   ki cant ki #
+SFX v   ui ant gui #
+SFX v xh 0 ixh is:p.p.
+SFX v   0 0 [éî] is:p.p.
+SFX v   0 0 ou is:p.p.
+SFX v   0 0 t is:p.p.
+SFX v   s e [dt]s is:inf
+SFX v ou i vnou is:inf
+SFX v s re oes is:inf
+SFX v t re [^iîû]t is:inf
+SFX v ît ire ît is:inf
+SFX v ût ure ût is:inf
+SFX v t re [^f]it is:inf
+SFX v xh 0 ixh is:inf
+
+
+SFX V Y 27
+SFX V   s 0 [^èô]s po:v is:pr. is:1sg
+SFX V 0 0 [^èô]s po:v is:pr. is:2sg
+SFX V   0 s [^ôèe]s po:v is:pr. is:2sg is:dem.
+SFX V   s t [^ôèedt]s po:v is:pr. is:3sg
+SFX V   s 0 [dt]s po:v is:pr. is:3sg
+SFX V   s 0 [^o]es po:v is:pr. is:3sg
+SFX V   s t oes po:v is:pr. is:3sg
+SFX V   0 0 [oe]u po:v is:p.p.
+SFX V   0 0 ôs po:v is:p.p.
+SFX V   rès /B* rès po:v
+SFX V   nut /C* [^oui][^c]nut po:v
+SFX V   cnut k/C* [^oui]cnut po:v
+SFX V   0 0 nut po:v is:bdjC is:pr. is:3pl sp:O sp:C
+SFX V   nut nuxhe nut po:v is:bdjC is:su.pr is:3pl sp:O sp:C
+SFX V  ez /1* ez po:v
+SFX V  ez /A* [^cu]ez po:v
+SFX V  cez ç/A* cez po:v
+SFX V uez /A* guez po:v
+SFX V  îz /2* îz po:v
+SFX V îz /A* [^cuy]îz po:v
+SFX V cîz ç/A* cîz po:v
+SFX V uîz /A* guîz po:v
+SFX V yîz i/A* [^aåâeéêègiîoôuû]yîz po:v
+SFX V îz /A* [aåâeéêèiîoôuû]yîz po:v
+SFX V yîz ui/A* gyîz po:v
+SFX V   oz /4* oz po:v
+SFX V   oz /A* oz po:v
+
+
+SFX n Y 21
+SFX n 0 /s* [^e] po:no is:o
+SFX n 0 /s* e po:no is:b
+SFX n 0 e/s* [^åceéfgiîsnu] po:no is:f
+SFX n 0 le/s* å po:no is:f
+SFX n c ke/s* c po:no is:f
+SFX n é êye/s* é po:no is:f
+SFX n f ve/s* f po:no is:f
+SFX n 0 ue/s* g po:no is:f
+SFX n i eye/s* i po:no is:f
+SFX n î eye/s* [^y]î po:no is:f
+SFX n yî ieye/s* [^aåâeéêègiîoôuû]yî po:no is:f
+SFX n î eye/s* [aåâeéêèiîoôuû]yî po:no is:f
+SFX n yî uieye/s* gyî po:no is:f
+SFX n 0 e/s* [^éi]n po:no is:f
+SFX n én ene/s* én po:no is:f
+SFX n 0 ne/s* in po:no is:f
+SFX n 0 se/s* [^èu]s po:no is:f
+SFX n ès esse/s* ès po:no is:f
+SFX n 0 we/s* [^eo]u po:no is:f
+SFX n 0 se/s* eu po:no is:f
+SFX n u we/s* ou po:no is:f
+
+
+SFX a Y 66
+SFX a 0 /s* [^x][^e] po:addj is:o
+SFX a xh /s* ixh po:addj is:o
+SFX a 0 /s* e po:addj is:b
+SFX a 0 e/s* [^aåcdeéèfghiînstu] po:addj is:f
+SFX a a le/s* ea po:addj is:f
+SFX a 0 le/s* å po:addj is:f
+SFX a c ke/s* c po:addj is:f
+SFX a é êye/s* é po:addj is:f
+SFX a f ve/s* f po:addj is:f
+SFX a 0 ue/s* g po:addj is:f
+SFX a 0 e/s* [^x]h po:addj is:f
+SFX a ixh eye/s* ixh po:addj is:f
+SFX a 0 e/s* [^i]xh po:addj is:f
+SFX a i eye/s* i po:addj is:f
+SFX a î eye/s* [^y]î po:addj is:f
+SFX a yî ieye/s* [^aåâeéêègiîoôuû]yî po:addj is:f
+SFX a î eye/s* [aåâeéêèiîoôuû]yî po:addj is:f
+SFX a yî uieye/s* gyî po:addj is:f
+SFX a 0 e/s* [^éi]n po:addj is:f
+SFX a én ene/s* én po:addj is:f
+SFX a 0 ne/s* in po:addj is:f
+SFX a rt te/s* oirt po:addj is:f
+SFX a urt ûte/s* urt po:addj is:f
+SFX a rt te/s* [^u]rt po:addj is:f
+SFX a rd de/s* [åu]rd po:addj is:f
+SFX a 0 e/s* [^r][dt] po:addj is:f
+SFX a 0 se/s* [^èiu]s po:addj is:f
+SFX a ès esse/s* ès po:addj is:f
+SFX a s jhe/s* is po:addj is:f
+SFX a 0 e/s* eus po:addj is:f
+SFX a 0 we/s* [^eo]u po:addj is:f
+SFX a 0 se/s* eu po:addj is:f
+SFX a r re/s* eur po:addj is:f
+SFX a u we/s* ou po:addj is:f
+SFX a 0 ès [^aåcdeéèfghiînstu] po:addj is:f is:pl is:dv
+SFX a a lès ea po:addj is:f is:pl is:dv
+SFX a 0 lès å po:addj is:f is:pl is:dv
+SFX a c kès c po:addj is:f is:pl is:dv
+SFX a e ès e po:addj is:f is:pl is:dv
+SFX a é êyès é po:addj is:f is:pl is:dv
+SFX a f vès f po:addj is:f is:pl is:dv
+SFX a 0 uès g po:addj is:f is:pl is:dv
+SFX a 0 ès [^x]h po:addj is:f is:pl is:dv
+SFX a ixh eyès ixh po:addj is:f is:pl is:dv
+SFX a 0 ès [^i]xh po:addj is:f is:pl is:dv
+SFX a i eyès i po:addj is:f is:pl is:dv
+SFX a î eyès [^y]î po:addj is:f is:pl is:dv
+SFX a yî ieyès [^aåâeéêègiîoôuû]yî po:addj is:f is:pl is:dv
+SFX a î eyès [aåâeéêèiîoôuû]yî po:addj is:f is:pl is:dv
+SFX a yî uieyès gyî po:addj is:f is:pl is:dv
+SFX a 0 ès [^éi]n po:addj is:f is:pl is:dv
+SFX a én enès én po:addj is:f is:pl is:dv
+SFX a 0 nès in po:addj is:f is:pl is:dv
+SFX a rt tès oirt po:addj is:f is:pl is:dv
+SFX a urt ûtès urt po:addj is:f is:pl is:dv
+SFX a rt tès [^u]rt po:addj is:f is:pl is:dv
+SFX a rd dès [åu]rd po:addj is:f is:pl is:dv
+SFX a 0 ès [^r][dt] po:addj is:f is:pl is:dv
+SFX a 0 sès [^èiu]s po:addj is:f is:pl is:dv
+SFX a ès essès ès po:addj is:f is:pl is:dv
+SFX a s jhès is po:addj is:f is:pl is:dv
+SFX a 0 ès eus po:addj is:f is:pl is:dv
+SFX a 0 wès [^eo]u po:addj is:f is:pl is:dv
+SFX a 0 sès eu po:addj is:f is:pl is:dv
+SFX a r rès eur po:addj is:f is:pl is:dv
+SFX a u wès ou po:addj is:f is:pl is:dv
+
+
+SFX s Y 3
+SFX s 0 0 s is:inv
+SFX s 0 0 [^s] is:sg
+SFX s 0 s [^s] is:pl
+
+SFX o Y 3
+SFX o 0 0 s po:no is:o is:inv
+SFX o 0 0 [^s] po:no is:o is:sg
+SFX o 0 s [^s] po:no is:o is:pl
+
+SFX f Y 3
+SFX f 0 0 s po:no is:f is:inv
+SFX f 0 0 [^s] po:no is:f is:sg
+SFX f 0 s [^s] po:no is:f is:pl
+
+SFX r Y 53
+SFX r 0 /s* î po:no is:m
+SFX r 0 /s* eu po:no is:m
+SFX r 0 /s* eur po:no is:m
+SFX r es resse/s* [^cksu]es po:no is:f
+SFX r ces çresse/s* ces po:no is:f
+SFX r kes cresse/s* kes po:no is:f
+SFX r es resse/s* [^g]ues po:no is:f
+SFX r gues gresse/s* gues po:no is:f
+SFX r es resse/s* [^s]ses po:no is:f
+SFX r ses resse/s* sses po:no is:f
+SFX r î resse/s* [^cklnru]î po:no is:f
+SFX r cî çresse/s* cî po:no is:f
+SFX r kî cresse/s* kî po:no is:f
+SFX r lî elresse/s* [^aåâeéêèiîoôuûçcg]lî po:no is:f
+SFX r î resse/s* [aåâeéêèiîoôuû]lî po:no is:f
+SFX r clî kelresse/s* clî po:no is:f
+SFX r çlî celresse/s* çlî po:no is:f
+SFX r glî guelresse/s* glî po:no is:f
+SFX r î resse/s* [^r]nî po:no is:f
+SFX r î eyresse/s* rnî po:no is:f
+SFX r î iresse/s* [^aeioôu]rî po:no is:f
+SFX r î resse/s* [aeioôu]rî po:no is:f
+SFX r î resse/s* [^g]uî po:no is:f
+SFX r uî resse/s* guî po:no is:f
+SFX r eu resse/s* [^ciklrsuy]eu po:no is:f
+SFX r ceu çresse/s* ceu po:no is:f
+SFX r ieu eyresse/s* ieu po:no is:f
+SFX r keu cresse/s* keu po:no is:f
+SFX r leu elresse/s* [^aåâeéêèiîoôuûçcg]leu po:no is:f
+SFX r eu resse/s* [aåâeéêèiîoôuû]leu po:no is:f
+SFX r cleu kelresse/s* cleu po:no is:f
+SFX r çleu celresse/s* çleu po:no is:f
+SFX r gleu guelresse/s* gleu po:no is:f
+SFX r reu erresse/s* [^aåâeéêèiîoôuûny]reu po:no is:f
+SFX r eu resse/s* [aåâeéêèiîoôuûny]reu po:no is:f
+SFX r seu resse/s* sseu po:no is:f
+SFX r eu resse/s* [^s]seu po:no is:f
+SFX r eu resse/s* [^g]ueu po:no is:f
+SFX r ueu resse/s* gueu po:no is:f
+SFX r iyeu eyresse/s* iyeu po:no is:f
+SFX r eu resse/s* [^aåâeéêèiîôuû]yeu po:no is:f
+SFX r 0 resse/s* [^eîlrsu] po:no is:f
+SFX r e resse/s* [^cu]e po:no is:f
+SFX r ue resse/s* gue po:no is:f
+SFX r ce çresse/s* ce po:no is:f
+SFX r eur oresse/s* [^cku]eur po:no is:f
+SFX r ceur çoresse/s* ceur po:no is:f
+SFX r keur coresse/s* keur po:no is:f
+SFX r eur oresse/s* [^g]ueur po:no is:f
+SFX r ueur oresse/s* gueur po:no is:f
+SFX r 0 resse/s* er po:no is:f
+SFX r 0 iresse/s* [^eu]r po:no is:f
+SFX r 0 iresse/s* l po:no is:f
+
+
+SFX l Y 3
+SFX l   ci cial ci
+SFX l   ci chal ci
+SFX l   ci la ci
+
+
+SFX S Y 4
+SFX S 0 "-t" [aåâeéêèiîoôuû] # a-t i schouté?
+SFX S 0 "-st" [^s][^t] # dj' a-st aresté
+SFX S 0 "-z" .
+SFX S 0 "-n" ^e
+
+SFX A Y 48 
+SFX A 0 ans [^k] is:bdjA is:pr. is:1pl
+SFX A k cans k is:bdjA is:pr. is:1pl
+SFX A 0 èt [^ç] is:bdjA is:pr. is:3pl sp:E
+SFX A ç cèt ç is:bdjA is:pr. is:3pl sp:E
+SFX A 0 a [^k] is:bdjA is:er. is:1sg is:3sg
+SFX A k ca k is:bdjA is:er. is:1sg is:3sg
+SFX A 0 as [^k] is:bdjA is:er. is:2sg
+SFX A k cas k is:bdjA is:er. is:2sg
+SFX A 0 ass [^k] is:bdjA is:er. is:2sg is:dem.
+SFX A k cass k is:bdjA is:er. is:2sg is:dem.
+SFX A 0 îs [^çi] is:bdjA is:er. is:1pl
+SFX A ç cîs ç is:bdjA is:er. is:1pl
+SFX A i yîs [^u]i is:bdjA is:er. is:1pl
+SFX A ui yîs gui is:bdjA is:er. is:1pl
+SFX A 0 îz [^çi] is:bdjA is:er. is:2pl
+SFX A ç cîz ç is:bdjA is:er. is:2pl
+SFX A i yîz [^u]i is:bdjA is:er. is:2pl
+SFX A ui yîz gui is:bdjA is:er. is:2pl
+SFX A 0 ît [^çi] is:bdjA is:er. is:3pl
+SFX A ç cît ç is:bdjA is:er. is:3pl
+SFX A i yît [^u]i is:bdjA is:er. is:3pl
+SFX A ui yît gui is:bdjA is:er. is:3pl
+SFX A 0 éns [^ç] is:bdjA is:er.d. is:1pl
+SFX A ç céns ç is:bdjA is:er.d. is:1pl
+SFX A 0 îz [^çi] is:bdjA is:er.d. is:2pl
+SFX A ç cîz ç is:bdjA is:er.d. is:2pl
+SFX A i yîz [^u]i is:bdjA is:er.d. is:2pl
+SFX A ui yîz gui is:bdjA is:er.d. is:2pl
+SFX A 0 ént [^ç] is:bdjA is:er.d. is:3pl
+SFX A ç cént ç is:bdjA is:er.d. is:3pl
+SFX A 0 anxhe [^k] is:bdjA is:su.pr. is:1pl
+SFX A k canxhe k is:bdjA is:su.pr. is:1pl
+SFX A 0 exhe [^ç] is:bdjA is:su.pr is:3pl sp:E
+SFX A ç cexhe ç is:bdjA is:su.pr is:3pl sp:E
+SFX A 0 axhe [^k] is:bdjA is:su.d. is:1sg is:3sg
+SFX A k caxhe k is:bdjA is:su.d. is:1sg is:3sg
+SFX A 0 axhes [^k] is:bdjA is:su.d. is:2sg
+SFX A k caxhes k is:bdjA is:su.d. is:2sg
+SFX A 0 énxhe [^ç] is:bdjA is:su.d. is:1pl is:3sg
+SFX A ç cénxhe ç is:bdjA is:su.d. is:1pl is:3sg
+SFX A 0 îxhe [^çi] is:bdjA is:su.d. is:2pl
+SFX A ç cîxhe ç is:bdjA is:su.d. is:2pl
+SFX A i yîxhe [^u]i is:bdjA is:su.d. is:2pl
+SFX A ui yîxhe gui is:bdjA is:su.d. is:2pl
+SFX A 0 ans [^k] is:bdjA is:imper is:1pl
+SFX A k cans k is:bdjA is:imper is:1pl
+SFX A 0 ant [^k] is:bdjA is:p.d.
+SFX A k cant k is:bdjA is:p.d.
+
+SFX B Y 13 
+SFX B 0 rè . is:bdjB is:fut. is:1sg is:3sg
+SFX B 0 rès . is:bdjB is:fut. is:2sg
+SFX B   0 ress . is:bdjB is:fut. is:2sg is:dem.
+SFX B   0 rans . is:bdjB is:fut. is:1pl
+SFX B   0 roz . is:bdjB is:fut. is:2pl
+SFX B   0 ront . is:bdjB is:fut. is:3pl
+SFX B 0 reu . is:bdjB is:cond. is:13sg
+SFX B 0 reus . is:bdjB is:cond. is:2sg
+SFX B 0 reuss . is:bdjB is:cond. is:2sg is:dem.
+SFX B 0 reut . is:bdjB is:cond. is:3sg
+SFX B  0 réns . is:bdjB is:cond. is:1pl
+SFX B  0 rîz . is:bdjB is:cond. is:2pl
+SFX B  0 rént . is:bdjB is:cond. is:3pl
+
+SFX C Y 12 
+SFX C 0 nut [^k] is:bdjC is:pr. is:3pl sp:O sp:C
+SFX C k cnut k is:bdjC is:pr. is:3pl sp:O sp:C
+SFX C 0 e [^çgs] is:bdjC is:su.pr is:1sg is:3sg
+SFX C ç ce ç is:bdjC is:su.pr is:1sg is:3sg
+SFX C 0 ue g is:bdjC is:su.pr is:1sg is:3sg
+SFX C 0 se g is:bdjC is:su.pr is:1sg is:3sg
+SFX C 0 es [^çgs] is:bdjC is:su.pr is:2sg
+SFX C ç ces ç is:bdjC is:su.pr is:2sg
+SFX C 0 ues g is:bdjC is:su.pr is:2sg
+SFX C 0 ses s is:bdjC is:su.pr is:2sg
+SFX C 0 nuxhe [^k] is:bdjC is:su.pr is:3pl sp:O sp:C
+SFX C k cnuxhe k is:bdjC is:su.pr is:3pl sp:O sp:C
+
+SFX 1 Y 10
+SFX 1 0 er . is:bdjA is:inf
+SFX 1 0 ez . is:bdjA is:pr. is:2pl
+SFX 1 0 ez . is:bdjA is:imper is:2pl
+SFX 1 0 éve . is:bdjA is:er.d. is:1sg is:3sg 
+SFX 1 0 éves . is:bdjA is:er.d. is:2sg 
+SFX 1 0 éxhe . is:bdjA is:su.pr is:3pl 
+SFX 1 0 é . is:bdjA is:p.p.
+SFX 1 0 /A* [^cu]
+SFX 1 c ç/A* c
+SFX 1 u /A* gu
+
+SFX 2 Y 13
+SFX 2 0 î . is:bdjA is:inf
+SFX 2 0 îz . is:bdjA is:pr. is:2pl
+SFX 2 0 îz . is:bdjA is:imper is:2pl
+SFX 2 0 ive . is:bdjA is:er.d. is:1sg is:3sg 
+SFX 2 0 ives . is:bdjA is:er.d. is:2sg 
+SFX 2 0 îxhe . is:bdjA is:su.pr is:3pl 
+SFX 2 0 î . is:bdjA is:p.p.
+SFX 2 0 /A* [^cuy]
+SFX 2 c ç/A* c
+SFX 2 u /A* gu
+SFX 2 y i/A* [^aåâeéêègiîoôuû]y
+SFX 2 0 /A* [aåâeéêèiîoôuû]y
+SFX 2 y ui/A* gy
+
+SFX 4 Y 8
+SFX 4 xh 0 ixh is:bdjA is:inf
+SFX 4 0 oz . is:bdjA is:pr. is:2pl
+SFX 4 0 oz . is:bdjA is:imper is:2pl
+SFX 4 0 eu . is:bdjA is:er.d. is:1sg
+SFX 4 0 eus . is:bdjA is:er.d. is:2sg 
+SFX 4 0 eut . is:bdjA is:er.d. is:3sg 
+SFX 4 0 oxhe . is:bdjA is:su.pr is:3pl 
+SFX 4 0 /A* .
+
+SFX W Y 21
+SFX W er /1* er 
+SFX W er /A* [^cu]er
+SFX W cer ç/A* cer
+SFX W uer /A* guer
+SFX W r s/V* er 
+SFX W er /B* [^cku]er
+SFX W cer ç/B* cer
+SFX W ker c/B* ker
+SFX W uer /B* guer
+SFX W er /C* [^cu]er
+SFX W cer ç/C* cer
+SFX W uer /C* guer
+SFX W î /2* î 
+SFX W î /A* [^cuy]î
+SFX W cî ç/A* cî
+SFX W uî /A* guî
+SFX W yî i/A* [^aåâeéêègiîoôuû]yî
+SFX W î /A* [aåâeéêèiîoôuû]yî
+SFX W yî ui/A* gyî
+SFX W 0 /4* ixh
+SFX W 0 /A* ixh
+
+
+REP 106
+REP qua cwa
+REP què ke
+REP qué ké
+REP quê kê
+REP que ke
+REP qui ki
+REP quo cwo
+REP quå cwå
+REP qw cw
+REP q k
+REP er$ î
+REP î$ er
+REP é$ î
+REP î$ é
+REP éve$ eu
+REP éve$ eus
+REP éve$ eut
+REP éve$ ive
+REP xa gza
+REP xe cse
+REP sse$ ce
+REP ce$ sse
+REP s'$ sse
+REP c'$ k
+REP c$ k
+REP cia$ cea
+REP cha$ cea
+REP cê$ cea
+REP tch k
+REP sch sch
+REP chon$ cion
+REP ^che sie
+REP ^chè sie
+REP ch xh
+REP ch sch
+REP ka ca
+REP ko co
+REP ku cu
+REP kw cw
+REP gngn djn
+REP gn.gn djn
+REP gue$ ke
+REP gues$ kes
+REP dg dj
+REP ge dje
+REP gi dji
+REP g$ k
+REP de$ te
+REP des$ tes
+REP djv tchv
+REP dj'v tchv
+REP dje$ tche
+REP tchf tchv
+REP tch'f tchv
+REP te$ de
+REP tes$ des
+REP onn oenn
+REP on.n oenn
+REP oe oi
+REP oe we
+REP oe eu
+REP oi oe
+REP oi we
+REP oir ôr
+REP ouwe$ owe
+REP oû ô
+REP ôy oy
+REP on ô
+REP sse$ ze
+REP sch sk
+REP sch xh
+REP sch ch
+REP sh ss
+REP ss sh
+REP ås åz
+REP ^o ho
+REP ^u hu
+REP ^u hou
+REP u ou
+REP wae oi
+REP oi wae
+REP wa oi
+REP wé oi
+REP ae e
+REP ae a
+REP au å
+REP å ô
+REP å o
+REP å a
+REP au å
+REP au ô
+REP è$ er
+REP è$ é
+REP éye êye
+REP îye eye
+REP ûwe owe
+REP ê ai
+REP ê ea
+REP aî ai
+REP ya$ ea
+REP ^fê fwai
+REP ^mê mwai
+REP ^maî mwai
+REP ^mai mwai
+REP ze$ sse
+REP antch ank
+
+PHONE 188
+PHONE QU(EIÈÉÊÎ)- K
+PHONE QU(AOUÅ)- KW
+PHONE QW KW
+PHONE Q K
+PHONE X(ABCDEÈÉÊÎFGIÎJKLMNOPRSTUVWYZ) KS
+PHONE XH X 
+PHONE XH H 
+PHONE CH X
+PHONE CW KW
+PHONE CE$ S
+PHONE CES$ S
+PHONE CEA XA 
+PHONE C(EÉÈÊÎ)- S
+PHONE CI(AEOUÅÉ)- X
+PHONE CI SI
+PHONE CY(AEOUÅÉ)- X
+PHONE CY SY
+PHONE C$ _
+PHONE C K
+PHONE Ç S
+PHONE GNGN NN
+PHONE GN.GN NN
+PHONE GN NY
+PHONE GUE$ K
+PHONE GUES$ K
+PHONE GU(EIÉÈÊÎ)- G
+PHONE G(EIÉÈÊÎ)- J
+PHONE G$ K
+PHONE G G
+PHONE DE$ T
+PHONE DES$ T
+PHONE DJN NN
+PHONE DJV TXV
+PHONE DJE$ TX
+PHONE DJES$ TX
+PHONE DJ$ TX
+PHONE DJ DJ
+PHONE DM NM
+PHONE DN NN
+PHONE D$ _
+PHONE D D
+PHONE TCHF TXV
+PHONE TCH TX
+PHONE TE$ T
+PHONE TES$ T
+PHONE T$ _
+PHONE T T
+PHONE OEN ON 
+PHONE OEN WIN 
+PHONE OES$ @ 
+PHONE OES$ WE 
+PHONE OE @ 
+PHONE OE WE 
+PHONE OI WE 
+PHONE OI WA 
+PHONE OI O 
+PHONE OS(AEIOUYÂÅÉÈÊÎÔÛ)-< OZ
+PHONE OU$ U 
+PHONE OUS$ U 
+PHONE OWE$ UW 
+PHONE OWES$ UW 
+PHONE O(UÛ) O
+PHONE O O
+PHONE ÔS(AEIOUYÂÅÉÈÊÎÔÛ)-< OZ
+PHONE Ô O
+PHONE Ö O
+PHONE SCH SK 
+PHONE SCH X 
+PHONE SCH H 
+PHONE SE$ S
+PHONE SES$ S
+PHONE SH X 
+PHONE SH S 
+PHONE SI(AEOUÅÉ)- X
+PHONE SY(AEOUÅÉ)- X
+PHONE SSE$ S
+PHONE SSES$ S
+PHONE SS S
+PHONE S$ _
+PHONE S S
+PHONE AE E 
+PHONE AE A 
+PHONE AI E
+PHONE AS(AEIOUYÂÅÉÈÊÎÔÛ)-< AZ
+PHONE AUXON$ AXON 
+PHONE AUXON$ OXON 
+PHONE AU O 
+PHONE AU A 
+PHONE AJH< OJ 
+PHONE AJH< OH 
+PHONE AJH< AJ 
+PHONE AJH(AIÎMNRTÛ)-< AH 
+PHONE AJHE$ AX 
+PHONE AJHES$ AX 
+PHONE ACION$ AXON 
+PHONE ACION$ OXON 
+PHONE A A
+PHONE ÂS(AEIOUYÂÅÉÈÊÎÔÛ)-< AZ
+PHONE Â A
+PHONE ÅS(AEIOUYÂÅÉÈÊÎÔÛ)-< AZ
+PHONE ÅCION$ AXON 
+PHONE ÅCION$ OXON 
+PHONE ÅJH< OJ 
+PHONE ÅJH< OH 
+PHONE ÅJH< AJ 
+PHONE ÅJH(AÉÈIÎMNRTÛ)-< AH 
+PHONE ÅJHE$ AX 
+PHONE ÅJHES$ AX 
+PHONE Å A 
+PHONE Å O 
+PHONE À A
+PHONE EA YA 
+PHONE EA E 
+PHONE ES(AEIOUYÂÅÉÈÊÎÔÛ)-< EZ
+PHONE EY IY 
+PHONE EY EY 
+PHONE E$ _
+PHONE ER$ E
+PHONE ES$ _
+PHONE E(UÛ) @ 
+PHONE E E
+PHONE ÉS(AEIOUYÂÅÉÈÊÎÔÛ)-< EZ
+PHONE ÉN IN
+PHONE É E
+PHONE ÈS(AEIOUYÂÅÉÈÊÎÔÛ)-< EZ
+PHONE È E
+PHONE ÊS(AEIOUYÂÅÉÈÊÎÔÛ)-< EZ
+PHONE ÊY EY
+PHONE Ê E
+PHONE Ë I
+PHONE I(AEOUÅÉ)- Y
+PHONE IS(AEIOUYÂÅÉÈÊÎÔÛ)-< IZ
+PHONE I I
+PHONE ÎS(AEIOUYÂÅÉÈÊÎÔÛ)-< IZ
+PHONE Î I
+PHONE US(AEIOUYÂÅÉÈÊÎÔÛ)-< UZ
+PHONE U U 
+PHONE U O 
+PHONE ÛS(AEIOUYÂÅÉÈÊÎÔÛ)-< UZ
+PHONE Û U
+PHONE Ù U
+PHONE BE$ P
+PHONE BES$ P
+PHONE B$ P
+PHONE B B
+PHONE FWAI FE
+PHONE F F
+PHONE H H 
+PHONE H _ 
+PHONE JHE$ X 
+PHONE JHE$ X 
+PHONE JHE$ H 
+PHONE JHE$ H 
+PHONE JHES$ X 
+PHONE JHES$ X 
+PHONE JHES$ H 
+PHONE JH$ X 
+PHONE JH$ X 
+PHONE JH$ H 
+PHONE JH J 
+PHONE JH H 
+PHONE JE$ X
+PHONE JES$ X
+PHONE J$ X
+PHONE J J
+PHONE K K
+PHONE L L
+PHONE MWAISS(E)- MES
+PHONE MWAIST MEST
+PHONE MWIN$ MIN
+PHONE MWINS$ MIN
+PHONE M M
+PHONE N N
+PHONE PH F
+PHONE P P
+PHONE R R
+PHONE VGN MNY
+PHONE VN MN
+PHONE VE$ F
+PHONE VES$ F
+PHONE V$ F
+PHONE V V
+PHONE W W
+PHONE Y Y
+PHONE ZE$ S
+PHONE ZES$ S
+PHONE Z$ _
+PHONE Z Z

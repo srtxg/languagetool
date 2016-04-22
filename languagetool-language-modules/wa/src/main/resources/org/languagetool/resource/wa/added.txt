@@ -1,0 +1,18 @@
+# A part-of-speech dictionary that's used additionally to the binary dictionary (*.dict).
+# This does not add words to the spell checker, see hunspell/spelling.txt for that.
+# File Encoding: UTF-8
+# Format: three tab-separated fields: fullform baseform postags
+blanc	blanc	po:addj is:o is:sg
+blancs	blanc	po:addj is:o is:pl
+blanke	blanc	po:addj is:f is:sg
+blankes	blanc	po:addj is:f is:pl
+blankès	blanc	po:addj is:f is:pl is:dev
+måjhone	måjhone	po:no is:f is:sg
+måjhones	måjhone	po:no is:f is:pl
+grand	grand	po:addj is:o is:sg
+grands	grand	po:addj is:o is:pl
+grande	grand	po:addj is:f is:sg
+grandes	grand	po:addj is:f is:pl
+grandès	grand	po:addj is:f is:pl is:dev
+ouxh	ouxh	po:no is:o is:sg
+ouxhs	ouxh	po:no is:o is:pl
